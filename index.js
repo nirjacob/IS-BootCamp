@@ -12,7 +12,6 @@ app.use(bodyParser.json())
 
 // Data layer
 const FILE_PATH = './DataLayer/podcasts.json'
-let podcastData = require(FILE_PATH)
 
 // Validator
 const joi = require('joi')
@@ -32,6 +31,7 @@ app.get('/podcast/:id', (req, res) => {
 })
 
 app.post('/podcast/new', async (req, res) => {
+  const podcastData = require(FILE_PATH)
   try {
     const { error } = validPodcastFormat(req.body)
     if (error) return res.status(400).send(error.details[0].message)
@@ -39,8 +39,8 @@ app.post('/podcast/new', async (req, res) => {
       return (prev.id > current.id) ? prev : current
     })
     const maxId = newestPodcast.id
-    req.body = { ...req.body, ...{ id: (maxId + 1) } }
-    await savePodcast(req.body)
+    const newPodcast = { ...req.body, ...{ id: (maxId + 1) } }
+    await savePodcast(newPodcast)
     return res.status(200).send('Podcast has been successfully added')
   } catch
   (err) {
@@ -56,7 +56,7 @@ app.delete('/podcast/:id', async (req, res) => {
   if (error) return res.status(400).send(error.details[0].message)
   try {
     const podcastInfo = getPodcastById(queryParams.id)
-    if (podcastInfo !== undefined) { // none empty array
+    if (podcastInfo !== undefined) {
       await deletePodcast(queryParams.id)
       return res.status(200).send('Podcast has been successfully removed')
     } else {
@@ -93,10 +93,28 @@ function validPodcastFormat (queryParams) {
       webUrl: joi.string().required(),
       imageUrl: joi.string().required(),
       language: joi.string().required(),
-      numberOfEpisodes: joi.number().required(),
-      avgEpisodeLength: joi.number().required(),
+      numberOfEpisodes: joi.number().integer().required(),
+      avgEpisodeLength: joi.number().integer().required(),
       author: joi.string().required(),
       category: joi.string().required()
+    })
+  return schema.validate(queryParams)
+}
+
+function validPodcastUpdateFormat (queryParams) {
+  const schema = joi.object().keys(
+    {
+      id: joi.number().integer(),
+      title: joi.string(),
+      description: joi.string(),
+      htmlDescription: joi.string(),
+      webUrl: joi.string(),
+      imageUrl: joi.string(),
+      language: joi.string(),
+      numberOfEpisodes: joi.number().integer(),
+      avgEpisodeLength: joi.number().integer(),
+      author: joi.string(),
+      category: joi.string()
     })
   return schema.validate(queryParams)
 }
@@ -110,47 +128,35 @@ function ValidateInput (queryParams) {
 }
 
 function getPodcastById (id) {
-  const podcastDataPreUpdate = podcastData
-  try { // added a try-catch block to each override of data, that restores the data to previous state in case of crash.
-    return podcastData.find(getPodcast => getPodcast.id == id)
-  } catch (err) {
-    podcastData = podcastDataPreUpdate
-    console.error(`Server Error: ${err.message}`)
-  }
+  const podcastData = require(FILE_PATH)
+  id = parseInt(id)
+  return podcastData.find(getPodcast => getPodcast.id === id)
 }
 
 async function deletePodcast (id) {
-  const podcastDataPreUpdate = podcastData
-  try { // added a try-catch block to each override of data, that restores the data to previous state in case of crash.
-    podcastData = podcastData.filter(getPodcast => getPodcast.id != id)
-  } catch (err) {
-    podcastData = podcastDataPreUpdate
-    console.error(`Server Error: ${err.message}`)
-  }
-  await fs.writeFile(FILE_PATH, JSON.stringify(podcastData), function (err) {
-    if (err) return console.error(err)
-  })
+  let podcastData = require(FILE_PATH)
+  id = parseInt(id)
+  podcastData = podcastData.filter(getPodcast => getPodcast.id !== id)
+  return await fs.promises.writeFile(FILE_PATH, JSON.stringify(podcastData))
 }
 
 async function savePodcast (podcast) {
+  const podcastData = require(FILE_PATH)
   const { error } = validPodcastFormat(podcast)
   if (error) throw error
   podcastData.push(podcast)
-  await fs.writeFile(FILE_PATH, JSON.stringify(podcastData), function (err) {
-    if (err) return console.error(err)
-  })
+  return await fs.promises.writeFile(FILE_PATH, JSON.stringify(podcastData))
 }
 
 async function updatePodcasts (updateDetails, id) {
-  let podcastToUpdate = podcastData.find(getPodcast => getPodcast.id == id)
+  let podcastData = require(FILE_PATH)
+  const { error } = validPodcastUpdateFormat(updateDetails)
+  if (error) throw error
+  id = parseInt(id)
+  let podcastToUpdate = podcastData.find(getPodcast => getPodcast.id === id)
   podcastToUpdate = { ...podcastToUpdate, ...updateDetails } // assign's new properties and updates existing one's
-  const podcastDataPreUpdate = podcastData
-  podcastData = podcastData.filter(getPodcast => getPodcast.id != id)
-  try {
-    await savePodcast(podcastToUpdate)
-  } catch (err) { // if the update include illegal fields, restore previous podcast list.
-    podcastData = podcastDataPreUpdate
-    console.error(err.message)
-    throw err
-  }
+  podcastData = podcastData.filter(getPodcast => getPodcast.id !== id)
+  podcastData.push(podcastToUpdate)
+
+  return await fs.promises.writeFile(FILE_PATH, JSON.stringify(podcastData))
 }
