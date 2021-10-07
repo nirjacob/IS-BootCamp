@@ -35,11 +35,9 @@ app.post('/podcast/new', async (req, res) => {
   try {
     const { error } = validPodcastFormat(req.body)
     if (error) return res.status(400).send(error.details[0].message)
-    const newestPodcast = podcastData.reduce(function (prev, current) {
-      return (prev.id > current.id) ? prev : current
-    })
-    const maxId = newestPodcast.id
-    const newPodcast = { ...req.body, ...{ id: (maxId + 1) } }
+    const newestPodcast = podcastData.reduce((prev, current) => (prev.id > current.id) ? prev : current)
+    const id = newestPodcast.id + 1
+    const newPodcast = { ...req.body, ...{ id } }
     await savePodcast(newPodcast)
     return res.status(200).send('Podcast has been successfully added')
   } catch
@@ -51,13 +49,13 @@ app.post('/podcast/new', async (req, res) => {
 )
 
 app.delete('/podcast/:id', async (req, res) => {
-  const queryParams = req.params
-  const { error } = ValidateInput(queryParams)
+  const { error } = ValidateInput(req.params)
   if (error) return res.status(400).send(error.details[0].message)
   try {
-    const podcastInfo = getPodcastById(queryParams.id)
-    if (podcastInfo !== undefined) {
-      await deletePodcast(queryParams.id)
+    const id = parseInt(req.params.id)
+    const podcastInfo = getPodcastById(id)
+    if (podcastInfo) {
+      await deletePodcast(id)
       return res.status(200).send('Podcast has been successfully removed')
     } else {
       return res.status(404).send('Podcast not found')
@@ -71,7 +69,10 @@ app.delete('/podcast/:id', async (req, res) => {
 app.put('/podcast/:id', async (req, res) => {
   if (getPodcastById(req.params.id) !== undefined) {
     try {
-      await updatePodcasts(req.body, req.params.id)
+      const { error } = validPodcastUpdateFormat(req.body)
+      if (error) return res.status(400).send(`Unable to update, podcast contain illegal field: ${error.message}`)
+      const id = parseInt(req.params.id)
+      await updatePodcasts(req.body, id)
       return res.status(200).send('Podcast has been successfully updated!')
     } catch (err) {
       return res.status(400).send(`Unable to update, podcast contain illegal field: ${err.message}`)
@@ -135,24 +136,18 @@ function getPodcastById (id) {
 
 async function deletePodcast (id) {
   let podcastData = require(FILE_PATH)
-  id = parseInt(id)
   podcastData = podcastData.filter(getPodcast => getPodcast.id !== id)
   return await fs.promises.writeFile(FILE_PATH, JSON.stringify(podcastData))
 }
 
 async function savePodcast (podcast) {
   const podcastData = require(FILE_PATH)
-  const { error } = validPodcastFormat(podcast)
-  if (error) throw error
   podcastData.push(podcast)
   return await fs.promises.writeFile(FILE_PATH, JSON.stringify(podcastData))
 }
 
 async function updatePodcasts (updateDetails, id) {
   let podcastData = require(FILE_PATH)
-  const { error } = validPodcastUpdateFormat(updateDetails)
-  if (error) throw error
-  id = parseInt(id)
   let podcastToUpdate = podcastData.find(getPodcast => getPodcast.id === id)
   podcastToUpdate = { ...podcastToUpdate, ...updateDetails } // assign's new properties and updates existing one's
   podcastData = podcastData.filter(getPodcast => getPodcast.id !== id)
