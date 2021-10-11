@@ -1,31 +1,36 @@
 const fs = require('fs')
-const FILE_PATH = 'podcasts.json'
-const SAVE_PATH = 'podcasts.json'
+const config = require('config')
+const path = require('path')
+const filePath = path.resolve(__dirname, '../', config.filePath)
 
 const getItem = (id) => {
-  const podcastData = require(FILE_PATH)
+  const podcastData = require(filePath)
   id = parseInt(id)
   return podcastData.find(getPodcast => getPodcast.id === id)
 }
-
+const updateItem = async (id, updatedPodcast) => {
+  let podcastData = require(filePath)
+  podcastData = podcastData.filter(getPodcast => getPodcast.id !== id)
+  podcastData.push(updatedPodcast)
+  return await fs.promises.writeFile(filePath, JSON.stringify(podcastData))
+}
 const deleteItem = async (id) => {
-  const podcastData = require(FILE_PATH)
-  const filteredPodcastData = podcastData.filter(getPodcast => getPodcast.id !== id)
-  return await fs.promises.writeFile(SAVE_PATH, JSON.stringify(filteredPodcastData))
+  let podcastData = require(filePath)
+  podcastData = podcastData.filter(getPodcast => getPodcast.id !== id)
+  return await fs.promises.writeFile(filePath, JSON.stringify(podcastData))
 }
 
 const saveItem = async (podcast) => {
-  const podcastData = require(FILE_PATH)
-  console.log('1: ', podcast)
+  const podcastData = require(filePath)
   podcastData.push(podcast)
-  return await fs.promises.writeFile(SAVE_PATH, JSON.stringify(podcastData))
+  return await fs.promises.writeFile(filePath, JSON.stringify(podcastData))
 }
 
 const getMaxItem = () => {
-  const podcastData = require(FILE_PATH)
+  const podcastData = require(filePath)
   return podcastData.reduce((prev, current) => (prev.id > current.id) ? prev : current)
 }
 
 module.exports = {
-  getItem, deleteItem, saveItem, getMaxItem
+  getItem, deleteItem, saveItem, getMaxItem, updateItem
 }
