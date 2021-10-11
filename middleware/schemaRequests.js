@@ -1,6 +1,7 @@
 function validateSchema (schema, paramsToValidate, res, next) {
   try {
-    schema.validate(paramsToValidate)
+    const { error } = schema.validate(paramsToValidate)
+    if (error) throw error
     next()
   } catch (error) {
     console.error(`Error : ${error.stack}`)

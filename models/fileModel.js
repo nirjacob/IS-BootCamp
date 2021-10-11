@@ -1,5 +1,6 @@
 const fs = require('fs')
 const FILE_PATH = 'podcasts.json'
+const SAVE_PATH = 'podcasts.json'
 
 const getItem = (id) => {
   const podcastData = require(FILE_PATH)
@@ -8,18 +9,19 @@ const getItem = (id) => {
 }
 
 const deleteItem = async (id) => {
-  let podcastData = require(FILE_PATH)
-  podcastData = podcastData.filter(getPodcast => getPodcast.id !== id)
-  return await fs.promises.writeFile(FILE_PATH, JSON.stringify(podcastData))
+  const podcastData = require(FILE_PATH)
+  const filteredPodcastData = podcastData.filter(getPodcast => getPodcast.id !== id)
+  return await fs.promises.writeFile(SAVE_PATH, JSON.stringify(filteredPodcastData))
 }
 
 const saveItem = async (podcast) => {
   const podcastData = require(FILE_PATH)
+  console.log('1: ', podcast)
   podcastData.push(podcast)
-  return await fs.promises.writeFile(FILE_PATH, JSON.stringify(podcastData))
+  return await fs.promises.writeFile(SAVE_PATH, JSON.stringify(podcastData))
 }
 
-const getMaxItem = async (id) => {
+const getMaxItem = () => {
   const podcastData = require(FILE_PATH)
   return podcastData.reduce((prev, current) => (prev.id > current.id) ? prev : current)
 }

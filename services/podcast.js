@@ -4,7 +4,7 @@ const getPodcastById = (id) => {
   return getItem(id)
 }
 
-const getMaxPodcastId = async () => {
+const getMaxPodcastId = () => {
   return getMaxItem()
 }
 
