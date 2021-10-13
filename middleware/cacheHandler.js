@@ -1,4 +1,5 @@
 const {getPodcastById} = require('../services/podcast')
+const config = require('config')
 
 class CachedPodcast {
     constructor(podcastInfo, timeStamp) {
@@ -20,7 +21,9 @@ const saveToCache = (podcast) => {
 }
 
 const handleCachedData = (req, res, next) => {
-    handlePodcastsCache(req, res, next)
+    if (config.isCacheEnabled) {
+        handlePodcastsCache(req, res, next)
+    }
 }
 
 const handlePodcastsCache = (req, res, next) => {
