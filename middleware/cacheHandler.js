@@ -34,8 +34,10 @@ const handlePodcastsCache = (req, res, next) => {
             return res.status(200).send(requestedPodcast)
         }
     } else {
-        saveToCache(getPodcastById(id))
-        next()
+        const podcastInfo = getPodcastById(id)
+        if (podcastInfo === undefined) return res.status(404).send('Podcast not found')
+        saveToCache(podcastInfo)
+        return res.status(200).send(podcastInfo)
     }
 }
 
