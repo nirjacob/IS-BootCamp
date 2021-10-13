@@ -6,19 +6,18 @@ const {
   deletePodcastFromDb
 } = require('../services/podcast')
 
-const getPodcast = async (req, res) => {
+const getPodcast = async (req, res, next) => {
   const queryParams = req.params
   try {
     const podcastInfo = getPodcastById(queryParams.id)
     if (podcastInfo === undefined) return res.status(404).send('Podcast not found')
     return res.status(200).send(podcastInfo)
   } catch (err) {
-    console.error(`Error from getting podcast: ${err.stack}`)
-    return res.status(500).send(`Server Error: ${err.message}`)
+    return next(err)
   }
 }
 
-const addNewPodcast = async (req, res) => {
+const addNewPodcast = async (req, res, next) => {
   try {
     const newestPodcast = getMaxPodcastId()
     const id = newestPodcast.id + 1
@@ -27,12 +26,11 @@ const addNewPodcast = async (req, res) => {
     return res.status(200).send('Podcast has been successfully added')
   } catch
   (err) {
-    console.error(`Error from posting podcast: ${err.stack}`)
-    return res.status(500).send(`Adding podcast error: ${err.message}`)
+    return next(err)
   }
 }
 
-const deletePodcast = async (req, res) => {
+const deletePodcast = async (req, res, next) => {
   try {
     const id = parseInt(req.params.id)
     const podcastInfo = getPodcastById(id)
@@ -43,8 +41,7 @@ const deletePodcast = async (req, res) => {
       return res.status(404).send('Podcast not found')
     }
   } catch (err) {
-    console.error(`Error from deleting podcast: ${err.stack}`)
-    return res.status(500).send(`Server Error: ${err.message}`)
+    return next(err)
   }
 }
 const updatePodcast = async (req, res) => {

@@ -4,8 +4,7 @@ function validateSchema (schema, paramsToValidate, res, next) {
     if (error) throw error
     next()
   } catch (error) {
-    console.error(`Error : ${error.stack}`)
-    res.status(400).send(`${error.message}`)
+    next(error)
   }
 }
 
