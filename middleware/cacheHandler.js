@@ -1,47 +1,61 @@
-const {getPodcastById} = require('../services/podcast')
 const config = require('config')
+const urlGetter = require('url')
 
-class CachedPodcast {
-    constructor(podcastInfo, timeStamp) {
-        this.podcastInfo = podcastInfo
-        this.timeStamp = timeStamp
-    }
-
-    isExpired() {
-        return this.timeStamp + cacheMillisecondsToLive < Date.now()
-    }
+const getUrl = (req) => {
+  return urlGetter.format({
+    protocol: req.protocol,
+    host: req.get('host'),
+    pathname: req.originalUrl
+  })
 }
 
-let cacheDataMap = new Map()
-let cacheMinutesToLive = 10
-let cacheMillisecondsToLive = cacheMinutesToLive * 60 * 1000
+class CachedData {
+  constructor (requestUrl, timeStamp, data) {
+    this.url = requestUrl
+    this.timeStamp = timeStamp
+    this.data = data
+  }
 
-const saveToCache = (podcast) => {
-    cacheDataMap.set(podcast.id, new CachedPodcast(podcast, Date.now()))
+  getData () {
+    return this.data
+  }
+
+  isExpired () {
+    return this.timeStamp + cacheMillisecondsToLive < Date.now()
+  }
 }
 
+const cacheDataMap = new Map()
+const cacheMinutesToLive = 10
+const cacheMillisecondsToLive = cacheMinutesToLive * 60 * 1000
+
+const saveToCache = (url, data) => {
+  cacheDataMap.set(url, new CachedData(url, Date.now(), data))
+}
+
+const isInCache = (requestedUrl) => {
+  if (requestedUrl) {
+    return !requestedUrl.isExpired()
+  }
+  return null
+}
 const handleCachedData = (req, res, next) => {
-    if (config.isCacheEnabled) {
-        handlePodcastsCache(req, res, next)
-    }
-}
-
-const handlePodcastsCache = (req, res, next) => {
-    const id = parseInt(req.params.id)
-    const requestedPodcast = cacheDataMap.get(id)
-    if (requestedPodcast) {
-        if (requestedPodcast.isExpired()) {
-            cacheDataMap.delete(id)
-            next()
-        } else {
-            return res.status(200).send(requestedPodcast)
-        }
+  if (config.isCacheEnabled) {
+    const requestedUrl = cacheDataMap.get(getUrl(req))
+    if (isInCache(requestedUrl)) {
+      return res.status(200).send(requestedUrl.getData())
     } else {
-        const podcastInfo = getPodcastById(id)
-        if (podcastInfo === undefined) return res.status(404).send('Podcast not found')
-        saveToCache(podcastInfo)
-        return res.status(200).send(podcastInfo)
+      if (req.method === 'GET') {
+        const returnedResponse = res.send
+        res.send = (body) => {
+          saveToCache(getUrl(req), body)
+          res.send = returnedResponse
+          res.send(body)
+        }
+      }
     }
+  }
+  next()
 }
 
-module.exports = {handleCachedData}
+module.exports = { handleCachedData }
