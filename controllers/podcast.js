@@ -54,7 +54,7 @@ const updatePodcast = async (req, res) => {
       return res.status(400).send(`Unable to update, podcast contain illegal field: ${err.message}`)
     }
   } else {
-    return res.status(409).send('Unable to update, podcast does not exists!')
+    return res.status(404).send('Unable to update, podcast does not exists!')
   }
 }
 
