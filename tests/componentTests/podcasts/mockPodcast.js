@@ -28,14 +28,11 @@ const badFieldsMockPodcast = {
   badField: 1,
   mockField: 'string'
 }
-const mockUpdate = {
-  title: 'podcast update mock test'
-}
 const badMockUpdate = {
   illegalField: 0,
   badField: 1,
   mockField: 'string'
 }
 module.exports = {
-  badFieldsMockPodcast, mockPodcast, mockUpdate, badMockUpdate, mockNewPodcast
+  badFieldsMockPodcast, mockPodcast, badMockUpdate, mockNewPodcast
 }

@@ -7,10 +7,10 @@ const {
 } = require('../services/podcast')
 
 const getPodcast = async (req, res, next) => {
-  const queryParams = req.params
+  const id = parseInt(req.params.id)
   try {
-    const podcastInfo = getPodcastById(queryParams.id)
-    if (podcastInfo === undefined) return res.status(404).send('Podcast not found')
+    const podcastInfo = getPodcastById(id)
+    if (!podcastInfo) return res.status(404).send('Podcast not found')
     return res.status(200).send(podcastInfo)
   } catch (err) {
     next(err)
@@ -45,7 +45,8 @@ const deletePodcast = async (req, res, next) => {
   }
 }
 const updatePodcast = async (req, res) => {
-  if (getPodcastById(req.params.id) !== undefined) {
+  const id = parseInt(req.params.id)
+  if (getPodcastById(id)) {
     try {
       const id = parseInt(req.params.id)
       await updatePodcastDetails(req.body, id)

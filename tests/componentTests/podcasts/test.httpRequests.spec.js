@@ -1,14 +1,21 @@
 const supertest = require('supertest')
 const express = require('express')
-const router = require('../routes/index')
-const { badFieldsMockPodcast, mockPodcast, mockUpdate, badMockUpdate, mockNewPodcast } = require('./mockPodcast.js')
+const router = require('../../../routes')
+const { badFieldsMockPodcast, mockPodcast, badMockUpdate, mockNewPodcast } = require('./mockPodcast.js')
 const bodyParser = require('body-parser')
-
 const app = express()
 
+app.use(router)
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
-app.use(router)
+
+jest.mock('../../../models/fileModel', () => ({
+  getItem: (id) => id === 1132 ? mockPodcast : null,
+  deleteItem: (id) => Promise.resolve(),
+  updateItem: (id, updatedPodcast) => Promise.resolve(),
+  saveItem: (podcast) => Promise.resolve(),
+  getMaxItem: () => Promise.resolve()
+}))
 
 describe('HTTP requests component test', () => {
   describe('`POST` method Succeeds to post new podcast', () => {
@@ -19,7 +26,7 @@ describe('HTTP requests component test', () => {
         .expect(200, 'Podcast has been successfully added')
     })
   })
-  describe('`POST` method Fails to get podcast request', () => {
+  describe('`POST` method Fails to post podcast request', () => {
     it('calls post /podcast/new, should return 500 error', async () => {
       await supertest(app)
         .post('/podcast/new')
@@ -47,10 +54,10 @@ describe('HTTP requests component test', () => {
     })
   })
   describe('`PUT` method Succeeds to update podcast', () => {
-    it('calls put /podcast/1132, should update mockPodcast in database', async () => {
+    it('calls put /podcast/1132, should mock update', async () => {
       await supertest(app)
         .put('/podcast/1132')
-        .send(JSON.parse(JSON.stringify(mockUpdate)))
+      // .send(JSON.parse(JSON.stringify(mockNewPodcast)))
         .expect(200)
     })
   })
@@ -67,14 +74,14 @@ describe('HTTP requests component test', () => {
         .expect(404, 'Unable to update, podcast does not exists!')
     })
   })
-  describe('`DELETE` method Succeeds to post new podcast', () => {
+  describe('`DELETE` method Succeeds to delete podcast', () => {
     it('calls delete /podcast/1133, should delete newly created podcast to database', async () => {
       await supertest(app)
-        .delete('/podcast/1133')
+        .delete('/podcast/1132')
         .expect(200, 'Podcast has been successfully removed')
     })
   })
-  describe('`DELETE` method Fails to get podcast request', () => {
+  describe('`DELETE` method Fails to delete podcast request', () => {
     it('calls delete /podcast/0, should return 500 error', async () => {
       await supertest(app)
         .delete('/podcast/0')
