@@ -13,7 +13,7 @@ const getPodcast = async (req, res, next) => {
     if (podcastInfo === undefined) return res.status(404).send('Podcast not found')
     return res.status(200).send(podcastInfo)
   } catch (err) {
-    return next(err)
+    next(err)
   }
 }
 
