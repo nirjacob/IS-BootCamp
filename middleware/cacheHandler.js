@@ -8,7 +8,7 @@ const isExpired = (timeStamp) => {
 }
 
 const cacheDataMap = new Map()
-const cacheMinutesToLive = 0.1
+const cacheMinutesToLive = 10
 const cacheMillisecondsToLive = cacheMinutesToLive * 60 * 1000
 
 const saveToCache = (url, data) => {
