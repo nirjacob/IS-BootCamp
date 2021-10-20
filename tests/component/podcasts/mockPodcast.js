@@ -23,16 +23,29 @@ const mockNewPodcast = {
   author: 'Ben Greenfield',
   category: 'Health'
 }
-const badFieldsMockPodcast = {
-  illegalField: 0,
-  badField: 1,
-  mockField: 'string'
+const mockIllegalFieldsPodcast = {
+  title2: 'newpodtest24',
+  description341: 'Sept. . O5ne block from the World Trade Center. Security cameras capture the last known images of Dr. Sneha Anne Philip, shopping. The next day, chaos. What happened to Sneha?\nBrought to you by the team behind “Missing in Alaska.”',
+  webUrl: 'https5://www.iheart.com/podcast/1119-missing-on-9-11-83089219/',
+  imageUrl: 'https://megaphone.imgix.net/podcasts/f28bde36-78f8-11ea-b20d-d36a87a0b47d/image/MissingOn911-Logo-FINAL3000x3000.jpg?ixlib=rails-2.1.2&max-w=3000&max-h=3000&fit=crop&auto=format%2Ccompress',
+  language: 'en',
+  numberOfEpisodes: 450,
+  avgEpisodeLength: 15913,
+  author: 'iHeartRa5dio',
+  category: 'True C5rime'
 }
-const badMockUpdate = {
-  illegalField: 0,
-  badField: 1,
-  mockField: 'string'
+const mockExtraFieldsPodcast = {
+  extraField: 'test',
+  title: 'newpodtest24',
+  description341: 'Sept. . O5ne block from the World Trade Center. Security cameras capture the last known images of Dr. Sneha Anne Philip, shopping. The next day, chaos. What happened to Sneha?\nBrought to you by the team behind “Missing in Alaska.”',
+  webUrl: 'https5://www.iheart.com/podcast/1119-missing-on-9-11-83089219/',
+  imageUrl: 'https://megaphone.imgix.net/podcasts/f28bde36-78f8-11ea-b20d-d36a87a0b47d/image/MissingOn911-Logo-FINAL3000x3000.jpg?ixlib=rails-2.1.2&max-w=3000&max-h=3000&fit=crop&auto=format%2Ccompress',
+  language: 'en',
+  numberOfEpisodes: 450,
+  avgEpisodeLength: 15913,
+  author: 'iHeartRa5dio',
+  category: 'True C5rime'
 }
 module.exports = {
-  badFieldsMockPodcast, mockPodcast, badMockUpdate, mockNewPodcast
+  mockIllegalFieldsPodcast, mockPodcast, mockNewPodcast, mockExtraFieldsPodcast
 }
