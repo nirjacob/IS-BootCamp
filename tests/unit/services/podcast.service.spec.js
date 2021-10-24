@@ -5,13 +5,19 @@ const {
   getPodcastById,
   getMaxPodcastId,
   savePodcastToDb,
-  deletePodcastFromDb
+  deletePodcastFromDb,
+  getPodcastByTitleOrAuthor
 } = require('../../../services/podcast')
 
 jest.mock('../../../models/fileModel')
 
 describe('Unit test', () => {
   describe('Services tests', () => {
+    it('should call getItemByTitleOrAuthor function when using getPodcastByTitleOrAuthor service', async () => {
+      const spy = jest.spyOn(fileModelFunctions, 'getItemByTitleOrAuthor').mockImplementation(() => Promise.resolve())
+      await getPodcastByTitleOrAuthor(1)
+      expect(spy).toHaveBeenCalled()
+    })
     it('should call getItem function when using getPodcastByID service', async () => {
       const spy = jest.spyOn(fileModelFunctions, 'getItem').mockImplementation(() => Promise.resolve())
       await getPodcastById(1)

@@ -1,5 +1,8 @@
-const { getItem, deleteItem, saveItem, getMaxItem, updateItem } = require('../models/fileModel')
+const { getItemByTitleOrAuthor, getItem, deleteItem, saveItem, getMaxItem, updateItem } = require('../models/fileModel')
 
+const getPodcastByTitleOrAuthor = async (queryParams) => {
+  return await getItemByTitleOrAuthor(queryParams)
+}
 const getPodcastById = (id) => {
   return getItem(id)
 }
@@ -22,6 +25,7 @@ const updatePodcastDetails = async (updateDetails, id) => {
 }
 
 module.exports = {
+  getPodcastByTitleOrAuthor,
   updatePodcastDetails,
   getPodcastById,
   getMaxPodcastId,
