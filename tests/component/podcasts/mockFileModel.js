@@ -5,6 +5,7 @@ const mockFileModel = {
   updateItem: (id, updatedPodcast) => Promise.resolve(),
   saveItem: (podcast) => Promise.resolve(),
   getMaxItem: () => Promise.resolve(),
-  getItemByTitleOrAuthor: (query) => query === 'ben' ? [] : null
+  getItemByTitleOrAuthor: (query) => query === 'ben' ? [] : null,
+  getBestRatedItems: (query) => query === 10 ? [] : null
 }
 module.exports = mockFileModel

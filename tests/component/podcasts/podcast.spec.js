@@ -12,6 +12,18 @@ const app = require('../../../app')
 jest.mock('../../../models/fileModel', () => require('./mockFileModel.js'))
 
 describe('Podcast component test', () => {
+  describe('Best podcast tests', () => {
+    it('should return 200 when requesting a number of podcasts', async () => {
+      await supertest(app)
+        .get('/podcast/best/10')
+        .expect(200)
+    })
+    it('should return 400 when trying to send string instead of number of best podcasts', async () => {
+      await supertest(app)
+        .get('/podcast/best/xxxxxxxx')
+        .expect(400)
+    })
+  })
   describe('Search podcast tests', () => {
     it('should return 200 when podcast found in search', async () => {
       await supertest(app)
