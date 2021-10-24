@@ -6,7 +6,7 @@ const podcastBestSchema = joi.object(
   })
 const podcastSearchSchema = joi.object(
   {
-    query: joi.string()
+    query: joi.string().required()
   })
 
 const podcastSchema = joi.object().keys(

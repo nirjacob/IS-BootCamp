@@ -4,7 +4,7 @@ const {
   mockPodcast,
   mockNewPodcast,
   mockExtraFieldsPodcast,
-  mockWrongTypesFields
+  mockWrongTypesFields, mockActualBestPodcasts
 } = require('./mockPodcast.js')
 
 const app = require('../../../app')
@@ -15,7 +15,12 @@ describe('Podcast component test', () => {
   describe('Best podcast tests', () => {
     it('should return 200 when requesting a number of podcasts', async () => {
       await supertest(app)
-        .get('/podcast/best/10')
+        .get('/podcast/best/2')
+        .expect(200, mockActualBestPodcasts)
+    })
+    it('should return 200 when requesting all podcasts', async () => {
+      await supertest(app)
+        .get('/podcast/best/99999999')
         .expect(200)
     })
     it('should return 400 when trying to send string instead of number of best podcasts', async () => {
@@ -28,7 +33,7 @@ describe('Podcast component test', () => {
     it('should return 200 when podcast found in search', async () => {
       await supertest(app)
         .get('/podcast/search/ben')
-        .expect(200)
+        .expect(200, mockPodcast)
     })
     it('should return 404 when podcast not found in search', async () => {
       await supertest(app)

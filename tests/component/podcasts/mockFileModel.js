@@ -1,11 +1,12 @@
-const { mockPodcast } = require('./mockPodcast.js')
+const { mockPodcast, mockBestPodcastsReviews, mockBestPodcastData } = require('./mockPodcast.js')
 const mockFileModel = {
   getItem: (id) => id === 1132 ? mockPodcast : null,
   deleteItem: (id) => Promise.resolve(),
   updateItem: (id, updatedPodcast) => Promise.resolve(),
   saveItem: (podcast) => Promise.resolve(),
   getMaxItem: () => Promise.resolve(),
-  getItemByTitleOrAuthor: (query) => query === 'ben' ? [] : null,
-  getBestRatedItems: (query) => query === 10 ? [] : null
+  getItemByTitleOrAuthor: (query) => query === 'ben' ? mockPodcast : null,
+  getReviewsItems: () => mockBestPodcastsReviews,
+  getPodcastsItems: () => mockBestPodcastData
 }
 module.exports = mockFileModel

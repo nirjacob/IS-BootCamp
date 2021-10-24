@@ -4,30 +4,30 @@ const {
   getMaxPodcastId,
   savePodcastToDb,
   deletePodcastFromDb,
-  getPodcastByTitleOrAuthor,
+  getPodcastSearchResults,
   getBestPodcasts
 } = require('../services/podcast')
 
-const bestPodcast = async (req, res, next) => {
-  const numberOfBest = parseInt(req.params.number)
+const getBestPodcast = async (req, res, next) => {
+  const numberOfPodcasts = parseInt(req.params.number)
   try {
-    const podcastsInfo = await getBestPodcasts(numberOfBest)
+    const podcastsInfo = await getBestPodcasts(numberOfPodcasts)
     if (!podcastsInfo) return res.status(404).send('No podcasts to present')
     return res.status(200).send(podcastsInfo)
   } catch
   (err) {
-    next(err)
+    return next(err)
   }
 }
 const searchPodcast = async (req, res, next) => {
   const queryParams = req.params.query
   try {
-    const podcastsInfo = await getPodcastByTitleOrAuthor(queryParams)
+    const podcastsInfo = await getPodcastSearchResults(queryParams)
     if (!podcastsInfo) return res.status(404).send('Podcast not found')
     return res.status(200).send(podcastsInfo)
   } catch
   (err) {
-    next(err)
+    return next(err)
   }
 }
 const getPodcast = async (req, res, next) => {
@@ -37,7 +37,7 @@ const getPodcast = async (req, res, next) => {
     if (!podcastInfo) return res.status(404).send('Podcast not found')
     return res.status(200).send(podcastInfo)
   } catch (err) {
-    next(err)
+    return next(err)
   }
 }
 
@@ -89,5 +89,5 @@ module.exports = {
   addNewPodcast,
   deletePodcast,
   getPodcast,
-  bestPodcast
+  bestPodcast: getBestPodcast
 }
