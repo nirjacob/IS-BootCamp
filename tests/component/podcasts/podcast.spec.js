@@ -1,5 +1,11 @@
 const supertest = require('supertest')
-const { mockIllegalFieldsPodcast, mockPodcast, mockNewPodcast, mockExtraFieldsPodcast } = require('./mockPodcast.js')
+const {
+  mockIllegalFieldsPodcast,
+  mockPodcast,
+  mockNewPodcast,
+  mockExtraFieldsPodcast,
+  mockWrongTypesFields
+} = require('./mockPodcast.js')
 
 const app = require('../../../app')
 
@@ -60,6 +66,12 @@ describe('Podcast component test', () => {
       await supertest(app)
         .put('/podcast/1132')
         .send(mockExtraFieldsPodcast)
+        .expect(400)
+    })
+    it('should return 400 when trying to update podcast with wrong types of fields', async () => {
+      await supertest(app)
+        .put('/podcast/1132')
+        .send(mockWrongTypesFields)
         .expect(400)
     })
     it('should return 404 when trying to update podcast that does not exist', async () => {
