@@ -1,7 +1,7 @@
 function validateSchema (schema, paramsToValidate, res, next) {
   try {
     const { error } = schema.validate(paramsToValidate)
-    if (error) throw error
+    if (error) return res.status(400).send('Bad request, data contains illegal field')
     next()
   } catch (error) {
     next(error)
