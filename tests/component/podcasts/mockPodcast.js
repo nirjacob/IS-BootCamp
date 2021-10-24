@@ -46,6 +46,18 @@ const mockExtraFieldsPodcast = {
   author: 'iHeartRa5dio',
   category: 'True C5rime'
 }
+const mockWrongTypesFields = {
+  title: 'newpodtest24',
+  description341: 'Sept. . O5ne block from the World Trade Center. Security cameras capture the last known images of Dr. Sneha Anne Philip, shopping. The next day, chaos. What happened to Sneha?\nBrought to you by the team behind “Missing in Alaska.”',
+  webUrl: 'https5://www.iheart.com/podcast/1119-missing-on-9-11-83089219/',
+  imageUrl: 'https://megaphone.imgix.net/podcasts/f28bde36-78f8-11ea-b20d-d36a87a0b47d/image/MissingOn911-Logo-FINAL3000x3000.jpg?ixlib=rails-2.1.2&max-w=3000&max-h=3000&fit=crop&auto=format%2Ccompress',
+  language: 'en',
+  numberOfEpisodes: 'test',
+  avgEpisodeLength: 'test',
+  author: 'iHeartRa5dio',
+  category: 'True C5rime'
+}
+
 module.exports = {
-  mockIllegalFieldsPodcast, mockPodcast, mockNewPodcast, mockExtraFieldsPodcast
+  mockIllegalFieldsPodcast, mockPodcast, mockNewPodcast, mockExtraFieldsPodcast, mockWrongTypesFields
 }
