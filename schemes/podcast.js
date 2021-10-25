@@ -1,5 +1,14 @@
 const joi = require('joi')
 
+const podcastBestSchema = joi.object(
+  {
+    number: joi.number().integer().required()
+  })
+const podcastSearchSchema = joi.object(
+  {
+    query: joi.string().required()
+  })
+
 const podcastSchema = joi.object().keys(
   {
     id: joi.number().integer(),
@@ -36,5 +45,5 @@ const idSchema = joi.object(
   })
 
 module.exports = {
-  podcastUpdateSchema, idSchema, podcastSchema
+  podcastSearchSchema, podcastUpdateSchema, idSchema, podcastSchema, podcastBestSchema
 }

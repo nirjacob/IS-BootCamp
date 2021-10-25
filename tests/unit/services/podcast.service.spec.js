@@ -5,13 +5,44 @@ const {
   getPodcastById,
   getMaxPodcastId,
   savePodcastToDb,
-  deletePodcastFromDb
+  deletePodcastFromDb,
+  getPodcastSearchResults,
+  getBestRatedList
 } = require('../../../services/podcast')
+const {
+  mockActualBestPodcasts,
+  mockBestPodcastsReviews,
+  mockBestPodcastData,
+  mockRatingAvgCalculation,
+  mockRatingAvgPodcast
+} = require('./mockPodcast')
 
 jest.mock('../../../models/fileModel')
 
 describe('Unit test', () => {
   describe('Services tests', () => {
+    it('should call getReviewsItems and getPodcastsItems function when using getBestRatedList service', async () => {
+      const spy1 = jest.spyOn(fileModelFunctions, 'getReviewsItems').mockImplementation(() => mockBestPodcastsReviews)
+      const spy2 = jest.spyOn(fileModelFunctions, 'getPodcastsItems').mockImplementation(() => mockBestPodcastData)
+      const mockBestOfThree = await getBestRatedList(3)
+      expect(spy1).toHaveBeenCalled()
+      expect(spy2).toHaveBeenCalled()
+      expect(mockBestOfThree).toStrictEqual(mockActualBestPodcasts)
+    })
+    it('should call getReviewsItems and getPodcastsItems function when using getBestRatedList service', async () => {
+      const spy1 = jest.spyOn(fileModelFunctions, 'getReviewsItems').mockImplementation(() => mockRatingAvgCalculation)
+      const spy2 = jest.spyOn(fileModelFunctions, 'getPodcastsItems').mockImplementation(() => mockBestPodcastData)
+      const mockAvgCalculation = await getBestRatedList(1)
+      expect(spy1).toHaveBeenCalled()
+      expect(spy2).toHaveBeenCalled()
+      expect(mockAvgCalculation).toStrictEqual(mockRatingAvgPodcast)
+    })
+
+    it('should call getItemByTitleOrAuthor function when using getPodcastSearchResults service', async () => {
+      const spy = jest.spyOn(fileModelFunctions, 'getItemByTitleOrAuthor').mockImplementation(() => Promise.resolve())
+      await getPodcastSearchResults(1)
+      expect(spy).toHaveBeenCalled()
+    })
     it('should call getItem function when using getPodcastByID service', async () => {
       const spy = jest.spyOn(fileModelFunctions, 'getItem').mockImplementation(() => Promise.resolve())
       await getPodcastById(1)
