@@ -4,7 +4,8 @@ const {
   mockPodcast,
   mockNewPodcast,
   mockExtraFieldsPodcast,
-  mockWrongTypesFields, mockActualBestPodcasts
+  mockWrongTypesFields,
+  mockActualBestPodcasts
 } = require('./mockPodcast.js')
 
 const app = require('../../../app')

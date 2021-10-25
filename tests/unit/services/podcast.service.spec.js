@@ -22,7 +22,7 @@ jest.mock('../../../models/reviewFileModel')
 
 describe('Unit test', () => {
   describe('Services tests', () => {
-    it('should return the best of 3 out of 5 podcasts and that the correct functions has been called', async () => {
+    it('should return the best of 3 out of 5 podcasts and checks that the correct functions has been called', async () => {
       const spy1 = jest.spyOn(reviewFileModelFunctions, 'getReviewsItems').mockImplementation(() => mockBestPodcastsReviews)
       const spy2 = jest.spyOn(podcastFileModelFunctions, 'getPodcastsItems').mockImplementation(() => mockBestPodcastData)
       const mockBestOfThree = await getBestRatedList(3)
