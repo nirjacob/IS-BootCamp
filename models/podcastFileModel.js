@@ -2,19 +2,13 @@ const fs = require('fs')
 const config = require('config')
 const path = require('path')
 const dbFilePath = path.resolve(__dirname, '../', config.filePath)
-const reviewsFilePath = path.resolve(__dirname, '../', config.reviewsPath)
 
 const getPodcastsItems = async () => {
   const podcastData = require(dbFilePath)
   return await podcastData
 }
 
-const getReviewsItems = async () => {
-  const podcastReviewsData = require(reviewsFilePath)
-  return podcastReviewsData
-}
-
-const getItemByTitleOrAuthor = async (queryParams) => {
+const searchItem = async (queryParams) => {
   const podcastData = require(dbFilePath)
   const searchResult = podcastData.filter(podcast => podcast.title.toLowerCase().includes(queryParams) || podcast.author.toLowerCase().includes(queryParams))
 
@@ -48,19 +42,12 @@ const saveItem = async (podcast) => {
   return await fs.promises.writeFile(dbFilePath, JSON.stringify(podcastData))
 }
 
-const getMaxItem = () => {
-  const podcastData = require(dbFilePath)
-  return podcastData.reduce((prev, current) => (prev.id > current.id) ? prev : current)
-}
-
 module.exports = {
   getItem,
   deleteItem,
   saveItem,
-  getMaxItem,
   updateItem,
-  getItemByTitleOrAuthor,
-  getPodcastsItems,
-  getReviewsItems
+  searchItem,
+  getPodcastsItems
 
 }

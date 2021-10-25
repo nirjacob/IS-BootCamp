@@ -9,16 +9,17 @@ const {
 
 const app = require('../../../app')
 
-jest.mock('../../../models/fileModel', () => require('./mockFileModel.js'))
+jest.mock('../../../models/podcastFileModel', () => require('./mockFileModel.js'))
+jest.mock('../../../models/reviewFileModel', () => require('./mockFileModel.js'))
 
 describe('Podcast component test', () => {
   describe('Best podcast tests', () => {
-    it('should return 200 when requesting a number of podcasts', async () => {
+    it('should return 200 and two best podcasts ', async () => {
       await supertest(app)
         .get('/podcast/best/2')
         .expect(200, mockActualBestPodcasts)
     })
-    it('should return 200 when requesting all podcasts', async () => {
+    it('should return 200 and all podcasts', async () => {
       await supertest(app)
         .get('/podcast/best/99999999')
         .expect(200)
