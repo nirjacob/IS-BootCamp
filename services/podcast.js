@@ -1,11 +1,12 @@
 const {
-  getItemByTitleOrAuthor,
+  searchItem,
   getItem,
   deleteItem,
   saveItem,
-  getMaxItem,
-  updateItem, getPodcastsItems, getReviewsItems
-} = require('../models/fileModel')
+  updateItem,
+  getPodcastsItems
+} = require('../models/podcastFileModel')
+const { getReviewsItems } = require('../models/reviewFileModel')
 
 const getBestRatedList = async (numberOfItems) => {
   const podcastReviewsData = await getReviewsItems()
@@ -13,35 +14,29 @@ const getBestRatedList = async (numberOfItems) => {
   const ratedPodcasts = []
   for (const podcast of podcastData) {
     const reviews = podcastReviewsData.filter(review => review.podcastId === podcast.id)
-    let sum = 0
-    let counter = 0
-    reviews.forEach(review => {
-      sum += review.rating
-      counter++
-    })
-    const podcastReview = { reviews, rating: sum / counter }
-    ratedPodcasts.push(podcastReview)
+    const avgScore = reviews.reduce((sum, review) => {
+      return sum + parseFloat(review.rating)
+    }, 0) / reviews.length
+    const podcastReviews = { review: reviews, rating: avgScore, podcastInfo: podcast }
+    ratedPodcasts.push(podcastReviews)
   }
   const sortedRatedPodcasts = ratedPodcasts.sort((curr, prev) => prev.rating - curr.rating)
-  const bestRatedPodcasts = []
-  const podcastsLength = podcastData.length
-  for (let i = 0; i < Math.min(numberOfItems, podcastsLength); i++) {
-    bestRatedPodcasts.push(podcastData.find(podcast => podcast.id === sortedRatedPodcasts[i].reviews[0].podcastId))
-  }
-  return bestRatedPodcasts
+  const numberOfBestPodcasts = Math.min(numberOfItems, podcastData.length)
+  return sortedRatedPodcasts.map((podcast) => podcast.podcastInfo).slice(0, numberOfBestPodcasts)
 }
 const getBestPodcasts = async (numberOfItems) => {
   return await getBestRatedList(numberOfItems)
 }
 const getPodcastSearchResults = async (queryParams) => {
-  return await getItemByTitleOrAuthor(queryParams)
+  return await searchItem(queryParams)
 }
 const getPodcastById = (id) => {
   return getItem(id)
 }
 
-const getMaxPodcastId = () => {
-  return getMaxItem()
+const getMaxPodcastId = async () => {
+  const podcastData = await getPodcastsItems()
+  return podcastData.reduce((prev, current) => (prev.id > current.id) ? prev : current)
 }
 
 const savePodcastToDb = async (podcast) => {

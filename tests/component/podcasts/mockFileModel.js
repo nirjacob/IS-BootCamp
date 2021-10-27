@@ -4,8 +4,7 @@ const mockFileModel = {
   deleteItem: (id) => Promise.resolve(),
   updateItem: (id, updatedPodcast) => Promise.resolve(),
   saveItem: (podcast) => Promise.resolve(),
-  getMaxItem: () => Promise.resolve(),
-  getItemByTitleOrAuthor: (query) => query === 'ben' ? mockPodcast : null,
+  searchItem: (query) => query === 'ben' ? mockPodcast : null,
   getReviewsItems: () => mockBestPodcastsReviews,
   getPodcastsItems: () => mockBestPodcastData
 }
