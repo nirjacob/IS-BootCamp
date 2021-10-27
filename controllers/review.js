@@ -1,13 +1,11 @@
-const { getMaxReviewId, getReviewById, saveReviewToDb } = require('../services/review')
+const { getReviewById, saveReviewToDb } = require('../services/review')
 const { getPodcastById } = require('../services/podcast')
 
 const addNewReview = async (req, res, next) => {
   try {
     const podcastId = req.body.podcastId
     if (getPodcastById(podcastId)) {
-      const newestReview = await getMaxReviewId()
-      const id = newestReview.id + 1
-      const newReview = { ...req.body, ...{ id } }
+      const newReview = req.body
       await saveReviewToDb(newReview)
       return res.status(200).send('Review has been successfully added')
     } else {

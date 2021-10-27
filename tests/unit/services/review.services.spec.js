@@ -9,9 +9,11 @@ jest.mock('../../../models/reviewFileModel')
 describe('Unit test', () => {
   describe('Services tests', () => {
     it('should call saveItem function when using saveReviewToDb service', async () => {
-      const spy = jest.spyOn(reviewFileModel, 'saveItem').mockImplementation(() => Promise.resolve())
+      const spy1 = jest.spyOn(reviewFileModel, 'saveItem').mockImplementation(() => Promise.resolve())
+      const spy2 = jest.spyOn(reviewFileModel, 'getReviewsItems').mockImplementation(() => mockReviews)
       await saveReviewToDb(mockReview)
-      expect(spy).toHaveBeenCalled()
+      expect(spy1).toHaveBeenCalled()
+      expect(spy2).toHaveBeenCalled()
     })
     it('should return the max review ID from the given mock reviews and call the relevant function', async () => {
       const spy = jest.spyOn(reviewFileModel, 'getReviewsItems').mockImplementation(() => mockReviews)

@@ -9,7 +9,10 @@ const getMaxReviewId = async () => {
   return podcastReviewsData.reduce((prev, current) => (prev.id > current.id) ? prev : current)
 }
 const saveReviewToDb = async (review) => {
-  return saveItem(review)
+  const newestReview = await getMaxReviewId()
+  const id = newestReview.id + 1
+  const newReview = { ...review, ...{ id } }
+  return saveItem(newReview)
 }
 
 module.exports = { getReviewById, getMaxReviewId, saveReviewToDb }
