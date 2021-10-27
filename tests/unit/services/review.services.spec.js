@@ -13,10 +13,11 @@ describe('Unit test', () => {
       await saveReviewToDb(mockReview)
       expect(spy).toHaveBeenCalled()
     })
-    it('should call getReviewsItems function when using getMaxReviewId service', async () => {
+    it('should return the max review ID from the given mock reviews and call the relevant function', async () => {
       const spy = jest.spyOn(reviewFileModel, 'getReviewsItems').mockImplementation(() => mockReviews)
-      await getMaxReviewId()
+      const maxId = await getMaxReviewId()
       expect(spy).toHaveBeenCalled()
+      expect(maxId.id + 1).toBe(4)
     })
     it('should call getItemReview function when using getReviewById service', async () => {
       const spy = jest.spyOn(reviewFileModel, 'getItem').mockImplementation(() => Promise.resolve())
