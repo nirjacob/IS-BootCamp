@@ -4,7 +4,6 @@ const redis = require('redis')
 const cacheDataClient = redis.createClient(config.redis)
 cacheDataClient.connect()
 
-const cacheExpiration = 1200
 const cacheMinutesToLive = 10
 const cacheMillisecondsToLive = cacheMinutesToLive * 60 * 1000
 
@@ -16,8 +15,7 @@ const isExpired = (timeStamp) => {
 }
 
 const saveToCache = async (url, data) => {
-  await cacheDataClient.set(url, formatCacheData(url, Date.now(), data))
-  await cacheDataClient.expire(url, cacheExpiration)
+  await cacheDataClient.set(url, formatCacheData(url, Date.now(), data), 'PX', config.redis.cacheDuration)
 }
 
 const isInCache = (requestedUrl) => {
@@ -31,10 +29,8 @@ const handleCachedData = async (req, res, next) => {
   if (req.method === 'GET' && config.isCacheEnabled) {
     const url = req.url
     const requestedUrl = await cacheDataClient.get(url)
-    console.log('Notcahced')
 
     if (isInCache(requestedUrl)) {
-      console.log('cahced')
       return res.status(200).send(JSON.parse(requestedUrl).data)
     } else {
       const returnedResponse = res.send
