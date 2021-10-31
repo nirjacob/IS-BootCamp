@@ -1,4 +1,11 @@
 const config = require('config')
+const redis = require('redis')
+
+const cacheDataClient = redis.createClient(config.redis)
+cacheDataClient.connect()
+
+const cacheMinutesToLive = 10
+const cacheMillisecondsToLive = cacheMinutesToLive * 60 * 1000
 
 const formatCacheData = (requestUrl, timeStamp, data) => {
   return JSON.stringify({ url: requestUrl, timeStamp: timeStamp, data: data })
@@ -7,12 +14,8 @@ const isExpired = (timeStamp) => {
   return timeStamp + cacheMillisecondsToLive < Date.now()
 }
 
-const cacheDataMap = new Map()
-const cacheMinutesToLive = 10
-const cacheMillisecondsToLive = cacheMinutesToLive * 60 * 1000
-
-const saveToCache = (url, data) => {
-  cacheDataMap.set(url, formatCacheData(url, Date.now(), data))
+const saveToCache = async (url, data) => {
+  await cacheDataClient.set(url, formatCacheData(url, Date.now(), data), 'PX', config.redis.cacheDuration)
 }
 
 const isInCache = (requestedUrl) => {
@@ -22,10 +25,11 @@ const isInCache = (requestedUrl) => {
   return null
 }
 
-const handleCachedData = (req, res, next) => {
+const handleCachedData = async (req, res, next) => {
   if (req.method === 'GET' && config.isCacheEnabled) {
     const url = req.url
-    const requestedUrl = cacheDataMap.get(url)
+    const requestedUrl = await cacheDataClient.get(url)
+
     if (isInCache(requestedUrl)) {
       return res.status(200).send(JSON.parse(requestedUrl).data)
     } else {
@@ -37,7 +41,7 @@ const handleCachedData = (req, res, next) => {
       }
     }
   }
-  next()
+  return next()
 }
 
 module.exports = { handleCachedData }

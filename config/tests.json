@@ -1,7 +1,12 @@
 {
   "host": "localhost",
-  "port": 3000,
+  "port": 6379,
   "filePath": "data/podcasts.json",
   "reviewsPath": "data/reviews.json",
-  "isCacheEnabled": false
+  "isCacheEnabled": false,
+  "redis": {
+    "port": 6379,
+    "host": "localhost",
+    "cacheDuration": 1200
+  }
 }

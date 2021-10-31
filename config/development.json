@@ -3,5 +3,9 @@
   "port": 3000,
   "filePath": "data/podcasts.json",
   "reviewsPath": "data/reviews.json",
-  "isCacheEnabled": true
+  "isCacheEnabled": true,
+  "redis": {
+    "port": 6379,
+    "host": "localhost"
+  }
 }
