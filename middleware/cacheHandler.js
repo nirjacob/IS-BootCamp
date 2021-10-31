@@ -16,12 +16,8 @@ const isExpired = (timeStamp) => {
 }
 
 const saveToCache = async (url, data) => {
-  try {
-    await cacheDataClient.set(url, formatCacheData(url, Date.now(), data), 'EX', config.redis.cacheDuration)
-    return true
-  } catch {
-    return null
-  }
+  await cacheDataClient.set(url, formatCacheData(url, Date.now(), data))
+  await cacheDataClient.expire(url, config.redis.cacheDuration)
 }
 
 const isInCache = (requestedUrl) => {
@@ -37,14 +33,12 @@ const handleCachedData = async (req, res, next) => {
     const requestedUrl = await cacheDataClient.get(url)
 
     if (isInCache(requestedUrl)) {
+      console.log('cached')
       return res.status(200).send(JSON.parse(requestedUrl).data)
     } else {
       const returnedResponse = res.send
       res.send = (body) => {
-        const savedSuccessfully = saveToCache(url, body)
-        if (!savedSuccessfully) {
-          return res.status(404).send('Error saving to cache')
-        }
+        saveToCache(url, body)
         res.send = returnedResponse
         res.send(body)
       }

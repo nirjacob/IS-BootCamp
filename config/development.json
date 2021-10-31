@@ -6,6 +6,7 @@
   "isCacheEnabled": true,
   "redis": {
     "port": 6379,
-    "host": "localhost"
+    "host": "localhost",
+    "cacheDuration": 5
   }
 }
