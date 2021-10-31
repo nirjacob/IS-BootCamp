@@ -10,12 +10,18 @@ const cacheMillisecondsToLive = cacheMinutesToLive * 60 * 1000
 const formatCacheData = (requestUrl, timeStamp, data) => {
   return JSON.stringify({ url: requestUrl, timeStamp: timeStamp, data: data })
 }
+
 const isExpired = (timeStamp) => {
   return timeStamp + cacheMillisecondsToLive < Date.now()
 }
 
 const saveToCache = async (url, data) => {
-  await cacheDataClient.set(url, formatCacheData(url, Date.now(), data), 'PX', config.redis.cacheDuration)
+  try {
+    await cacheDataClient.set(url, formatCacheData(url, Date.now(), data), 'EX', config.redis.cacheDuration)
+    return true
+  } catch {
+    return null
+  }
 }
 
 const isInCache = (requestedUrl) => {
@@ -35,7 +41,10 @@ const handleCachedData = async (req, res, next) => {
     } else {
       const returnedResponse = res.send
       res.send = (body) => {
-        saveToCache(url, body)
+        const savedSuccessfully = saveToCache(url, body)
+        if (!savedSuccessfully) {
+          return res.status(404).send('Error saving to cache')
+        }
         res.send = returnedResponse
         res.send(body)
       }
