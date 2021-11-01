@@ -4,7 +4,7 @@ const { getPodcastById } = require('../services/podcast')
 const addNewReview = async (req, res, next) => {
   try {
     const podcastId = req.body.podcastId
-    if (getPodcastById(podcastId)) {
+    if (await getPodcastById(podcastId)) {
       const newReview = req.body
       await saveReviewToDb(newReview)
       return res.status(200).send('Review has been successfully added')

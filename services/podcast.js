@@ -30,13 +30,8 @@ const getBestPodcasts = async (numberOfItems) => {
 const getPodcastSearchResults = async (queryParams) => {
   return await searchItem(queryParams)
 }
-const getPodcastById = (id) => {
-  return getItem(id)
-}
-
-const getMaxPodcastId = async () => {
-  const podcastData = await getPodcastsItems()
-  return podcastData.reduce((prev, current) => (prev.id > current.id) ? prev : current)
+const getPodcastById = async (id) => {
+  return await JSON.parse(JSON.stringify(await getItem(id)))[0]
 }
 
 const savePodcastToDb = async (podcast) => {
@@ -47,7 +42,7 @@ const deletePodcastFromDb = async (id) => {
 }
 
 const updatePodcastDetails = async (updateDetails, id) => {
-  const podcastToUpdate = getPodcastById(id)
+  const podcastToUpdate = await getPodcastById(id)
   const updatedPodcast = { ...podcastToUpdate, ...updateDetails }
   return await updateItem(podcastToUpdate.id, updatedPodcast)
 }
@@ -56,7 +51,6 @@ module.exports = {
   getPodcastSearchResults,
   updatePodcastDetails,
   getPodcastById,
-  getMaxPodcastId,
   savePodcastToDb,
   deletePodcastFromDb,
   getBestPodcasts,

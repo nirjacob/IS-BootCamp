@@ -1,19 +1,16 @@
-const fs = require('fs')
-const config = require('config')
-const path = require('path')
-const reviewsFilePath = path.resolve(__dirname, '../', config.reviewsPath)
+const mysql = require('../utils/mysql')
 
 const saveItem = async (review) => {
-  const reviewsData = require(reviewsFilePath)
-  reviewsData.push(review)
-  return await fs.promises.writeFile(reviewsFilePath, JSON.stringify(reviewsData))
+  return await mysql.runQuery('INSERT INTO `podcasts`.`reviews` (rating,text,podcastId) VALUES(?,?,?)',
+    [review.rating, review.text, review.podcastId])
 }
+
 const getItem = async (id) => {
-  const podcastReviewsData = require(reviewsFilePath)
-  return podcastReviewsData.filter(podcast => podcast.podcastId === id)
+  return await mysql.runQuery('SELECT * FROM `podcasts`.`reviews` WHERE podcastId=?;', [id])
 }
+
 const getReviewsItems = async () => {
-  const podcastReviewsData = require(reviewsFilePath)
-  return podcastReviewsData
+  return await mysql.runQuery('SELECT * FROM `podcasts`.`reviews`;')
 }
+
 module.exports = { saveItem, getItem, getReviewsItems }

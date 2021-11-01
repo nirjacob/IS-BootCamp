@@ -1,6 +1,6 @@
 const app = require('../../../app')
 const reviewFileModel = require('../../../models/reviewFileModel')
-const { getReviewById, getMaxReviewId, saveReviewToDb } = require('../../../services/review')
+const { getReviewById, saveReviewToDb } = require('../../../services/review')
 const { mockReview, mockReviews } = require('../../../tests/component/reviews/mockPodcast')
 
 jest.mock('../../../models/podcastFileModel')
@@ -15,11 +15,9 @@ describe('Unit test', () => {
       expect(spy1).toHaveBeenCalled()
       expect(spy2).toHaveBeenCalled()
     })
-    it('should return the max review ID from the given mock reviews and call the relevant function', async () => {
+    it('should call getReviewsItems function', async () => {
       const spy = jest.spyOn(reviewFileModel, 'getReviewsItems').mockImplementation(() => mockReviews)
-      const maxId = await getMaxReviewId()
       expect(spy).toHaveBeenCalled()
-      expect(maxId.id + 1).toBe(4)
     })
     it('should call getItemReview function when using getReviewById service', async () => {
       const spy = jest.spyOn(reviewFileModel, 'getItem').mockImplementation(() => Promise.resolve())

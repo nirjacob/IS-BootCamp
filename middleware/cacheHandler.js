@@ -33,7 +33,6 @@ const handleCachedData = async (req, res, next) => {
     const requestedUrl = await cacheDataClient.get(url)
 
     if (isInCache(requestedUrl)) {
-      console.log('cached')
       return res.status(200).send(JSON.parse(requestedUrl).data)
     } else {
       const returnedResponse = res.send

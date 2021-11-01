@@ -1,17 +1,12 @@
-const fs = require('fs')
-const config = require('config')
-const path = require('path')
-const dbFilePath = path.resolve(__dirname, '../', config.filePath)
+const mysql = require('../utils/mysql')
 
 const getPodcastsItems = async () => {
-  const podcastData = require(dbFilePath)
-  return await podcastData
+  return await mysql.runQuery('SELECT * FROM `podcasts`.`podcasts`;')
 }
 
 const searchItem = async (queryParams) => {
-  const podcastData = require(dbFilePath)
-  const searchResult = podcastData.filter(podcast => podcast.title.toLowerCase().includes(queryParams) || podcast.author.toLowerCase().includes(queryParams))
-
+  const query = `%${queryParams}%`
+  const searchResult = await mysql.runQuery('SELECT * FROM `podcasts`.`podcasts` WHERE title OR author LIKE ?;', query)
   if (!searchResult.length) {
     return null
   } else {
@@ -19,27 +14,22 @@ const searchItem = async (queryParams) => {
   }
 }
 
-const getItem = (id) => {
-  const podcastData = require(dbFilePath)
-  id = parseInt(id)
-  return podcastData.find(getPodcast => getPodcast.id === id)
+const getItem = async (id) => {
+  return await mysql.runQuery('SELECT * FROM `podcasts`.`podcasts` WHERE id=?;', [id])
 }
-const updateItem = async (id, updatedPodcast) => {
-  let podcastData = require(dbFilePath)
-  podcastData = podcastData.filter(getPodcast => getPodcast.id !== id)
-  podcastData.push(updatedPodcast)
-  return await fs.promises.writeFile(dbFilePath, JSON.stringify(podcastData))
+
+const updateItem = async (id, podcast) => {
+  return await mysql.runQuery('UPDATE `podcasts`.`podcasts` SET title=?,author=?,description=?,htmlDescription=?,webUrl=?,imageUrl=?,language=?,numberOfEpisodes=?,avgEpisodeLength=?,category=? WHERE id=?;',
+    [podcast.title, podcast.author, podcast.description, podcast.htmlDescription, podcast.webUrl, podcast.imageUrl, podcast.language, podcast.numberOfEpisodes, podcast.avgEpisodeLength, podcast.category, id])
 }
+
 const deleteItem = async (id) => {
-  let podcastData = require(dbFilePath)
-  podcastData = podcastData.filter(getPodcast => getPodcast.id !== id)
-  return await fs.promises.writeFile(dbFilePath, JSON.stringify(podcastData))
+  await mysql.runQuery('DELETE FROM `podcasts`.`reviews` WHERE podcastId=?', id)
+  return await mysql.runQuery('DELETE FROM `podcasts`.`podcasts` WHERE id=?', id)
 }
 
 const saveItem = async (podcast) => {
-  const podcastData = require(dbFilePath)
-  podcastData.push(podcast)
-  return await fs.promises.writeFile(dbFilePath, JSON.stringify(podcastData))
+  return await mysql.runQuery('INSERT INTO `podcasts`.`podcasts` (title,author,description,htmlDescription,webUrl,imageUrl,language,numberOfEpisodes,avgEpisodeLength,category) VALUES(?,?,?,?,?,?,?,?,?,?)', [podcast.title, podcast.author, podcast.description, podcast.htmlDescription, podcast.webUrl, podcast.imageUrl, podcast.language, podcast.numberOfEpisodes, podcast.avgEpisodeLength, podcast.category])
 }
 
 module.exports = {
