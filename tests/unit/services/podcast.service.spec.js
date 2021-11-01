@@ -1,6 +1,7 @@
 const app = require('../../../app')
 const podcastFileModelFunctions = require('../../../models/podcastFileModel')
 const reviewFileModelFunctions = require('../../../models/reviewFileModel')
+
 const {
   updatePodcastDetails,
   getPodcastById,
@@ -9,6 +10,7 @@ const {
   getPodcastSearchResults,
   getBestRatedList
 } = require('../../../services/podcast')
+
 const {
   mockActualBestPodcasts,
   mockBestPodcastsReviews,
@@ -45,7 +47,7 @@ describe('Unit test', () => {
       expect(spy).toHaveBeenCalled()
     })
     it('should call getItem function when using getPodcastByID service', async () => {
-      const spy = jest.spyOn(podcastFileModelFunctions, 'getItem').mockImplementation(() => Promise.resolve())
+      const spy = jest.spyOn(podcastFileModelFunctions, 'getItem').mockImplementation(() => Promise.resolve('podcast'))
       await getPodcastById(1)
       expect(spy).toHaveBeenCalled()
     })

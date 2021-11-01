@@ -31,7 +31,7 @@ const getPodcastSearchResults = async (queryParams) => {
   return await searchItem(queryParams)
 }
 const getPodcastById = async (id) => {
-  return await JSON.parse(JSON.stringify(await getItem(id)))[0]
+  return await getItem(id)
 }
 
 const savePodcastToDb = async (podcast) => {

@@ -15,7 +15,7 @@ const searchItem = async (queryParams) => {
 }
 
 const getItem = async (id) => {
-  return await mysql.runQuery('SELECT * FROM `podcasts`.`podcasts` WHERE id=?;', [id])
+  return await JSON.parse(JSON.stringify(await mysql.runQuery('SELECT * FROM `podcasts`.`podcasts` WHERE id=?;', [id])))[0]
 }
 
 const updateItem = async (id, podcast) => {
