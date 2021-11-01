@@ -1,6 +1,6 @@
 const app = require('../../../app')
-const podcastFileModelFunctions = require('../../../models/podcastFileModel')
-const reviewFileModelFunctions = require('../../../models/reviewFileModel')
+const podcastFileModelFunctions = require('../../../models/podcastDbModel')
+const reviewFileModelFunctions = require('../../../models/reviewDbModel')
 
 const {
   updatePodcastDetails,
@@ -19,8 +19,8 @@ const {
   mockRatingAvgPodcast
 } = require('./mockPodcast')
 
-jest.mock('../../../models/podcastFileModel')
-jest.mock('../../../models/reviewFileModel')
+jest.mock('../../../models/podcastDbModel')
+jest.mock('../../../models/reviewDbModel')
 
 describe('Unit test', () => {
   describe('Services tests', () => {

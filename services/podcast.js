@@ -5,8 +5,8 @@ const {
   saveItem,
   updateItem,
   getPodcastsItems
-} = require('../models/podcastFileModel')
-const { getReviewsItems } = require('../models/reviewFileModel')
+} = require('../models/podcastDbModel')
+const { getReviewsItems } = require('../models/reviewDbModel')
 
 const getBestRatedList = async (numberOfItems) => {
   const podcastReviewsData = await getReviewsItems()

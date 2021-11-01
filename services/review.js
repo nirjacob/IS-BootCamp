@@ -1,5 +1,5 @@
-const { getItem } = require('../models/reviewFileModel')
-const { saveItem } = require('../models/reviewFileModel')
+const { getItem } = require('../models/reviewDbModel')
+const { saveItem } = require('../models/reviewDbModel')
 
 const getReviewById = async (id) => {
   return await getItem(id)

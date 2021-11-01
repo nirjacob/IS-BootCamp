@@ -10,8 +10,8 @@ const {
 
 const app = require('../../../app')
 
-jest.mock('../../../models/podcastFileModel', () => require('./mockFileModel.js'))
-jest.mock('../../../models/reviewFileModel', () => require('./mockFileModel.js'))
+jest.mock('../../../models/podcastDbModel', () => require('./mockDbModel.js'))
+jest.mock('../../../models/reviewDbModel', () => require('./mockDbModel.js'))
 
 describe('Podcast component test', () => {
   describe('Best podcast tests', () => {

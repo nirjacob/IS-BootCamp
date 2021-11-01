@@ -1,10 +1,10 @@
 const app = require('../../../app')
-const reviewFileModel = require('../../../models/reviewFileModel')
+const reviewFileModel = require('../../../models/reviewDbModel')
 const { getReviewById, saveReviewToDb } = require('../../../services/review')
 const { mockReview } = require('../../../tests/component/reviews/mockPodcast')
 
-jest.mock('../../../models/podcastFileModel')
-jest.mock('../../../models/reviewFileModel')
+jest.mock('../../../models/podcastDbModel')
+jest.mock('../../../models/reviewDbModel')
 
 describe('Unit test', () => {
   describe('Services tests', () => {

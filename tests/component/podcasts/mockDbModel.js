@@ -1,5 +1,5 @@
 const { mockPodcast, mockBestPodcastsReviews, mockBestPodcastData } = require('./mockPodcast.js')
-const mockFileModel = {
+const mockDbModel = {
   getItem: (id) => id === 1132 ? mockPodcast : null,
   deleteItem: (id) => Promise.resolve(),
   updateItem: (id, updatedPodcast) => Promise.resolve(),
@@ -8,4 +8,4 @@ const mockFileModel = {
   getReviewsItems: () => mockBestPodcastsReviews,
   getPodcastsItems: () => mockBestPodcastData
 }
-module.exports = mockFileModel
+module.exports = mockDbModel

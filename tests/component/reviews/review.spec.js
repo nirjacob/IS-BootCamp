@@ -9,8 +9,8 @@ const {
   mockNoPodcastIdReview
 } = require('./mockPodcast.js')
 
-jest.mock('../../../models/reviewFileModel', () => require('./mockFileModel'))
-jest.mock('../../../models/podcastFileModel', () => require('../podcasts/mockFileModel.js'))
+jest.mock('../../../models/reviewDbModel', () => require('./mockDbModel'))
+jest.mock('../../../models/podcastDbModel', () => require('../podcasts/mockDbModel.js'))
 
 describe('Review component test', () => {
   describe('Add new review tests', () => {
