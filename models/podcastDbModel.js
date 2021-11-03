@@ -15,17 +15,16 @@ const searchItem = async (queryParams) => {
 }
 
 const getItem = async (id) => {
-  return await JSON.parse(JSON.stringify(await mysql.runQuery('SELECT * FROM `podcasts`.`podcasts` WHERE id=?;', [id])))[0]
+  return (await mysql.runQuery('SELECT * FROM `podcasts`.`podcasts` WHERE id=?;', [id]))[0]
 }
 
 const updateItem = async (id, podcast) => {
-  return await mysql.runQuery('UPDATE `podcasts`.`podcasts` SET title=?,author=?,description=?,htmlDescription=?,webUrl=?,imageUrl=?,language=?,numberOfEpisodes=?,avgEpisodeLength=?,category=? WHERE id=?;',
+  return await mysql.runQuery('UPDATE `podcasts`.`podcasts` SET title=COALESCE(?,title),author=COALESCE(?,author),description=COALESCE(?,description),htmlDescription=COALESCE(?,htmlDescription),webUrl=COALESCE(?,webUrl),imageUrl=COALESCE(?,imageUrl),language=COALESCE(?,language),numberOfEpisodes=COALESCE(?,numberOfEpisodes),avgEpisodeLength=COALESCE(?,avgEpisodeLength),category=COALESCE(?,category) WHERE id=?;',
     [podcast.title, podcast.author, podcast.description, podcast.htmlDescription, podcast.webUrl, podcast.imageUrl, podcast.language, podcast.numberOfEpisodes, podcast.avgEpisodeLength, podcast.category, id])
 }
 
 const deleteItem = async (id) => {
-  await mysql.runQuery('DELETE FROM `podcasts`.`reviews` WHERE podcastId=?', id)
-  return await mysql.runQuery('DELETE FROM `podcasts`.`podcasts` WHERE id=?', id)
+  return await mysql.runQuery('DELETE FROM `podcasts`.`reviews` WHERE podcastId=?', id)
 }
 
 const saveItem = async (podcast) => {

@@ -42,9 +42,7 @@ const deletePodcastFromDb = async (id) => {
 }
 
 const updatePodcastDetails = async (updateDetails, id) => {
-  const podcastToUpdate = await getPodcastById(id)
-  const updatedPodcast = { ...podcastToUpdate, ...updateDetails }
-  return await updateItem(podcastToUpdate.id, updatedPodcast)
+  return await updateItem(id, updateDetails)
 }
 
 module.exports = {

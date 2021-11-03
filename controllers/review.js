@@ -1,19 +1,13 @@
 const { getReviewById, saveReviewToDb } = require('../services/review')
-const { getPodcastById } = require('../services/podcast')
 
 const addNewReview = async (req, res, next) => {
   try {
-    const podcastId = req.body.podcastId
-    if (await getPodcastById(podcastId)) {
-      const newReview = req.body
-      await saveReviewToDb(newReview)
-      return res.status(200).send('Review has been successfully added')
-    } else {
-      return res.status(404).send('Podcast not found!')
-    }
+    const newReview = req.body
+    await saveReviewToDb(newReview)
+    return res.status(200).send('Review has been successfully added')
   } catch
   (err) {
-    return next(err)
+    return res.status(400).send(`Unable to add new review, ${err.message}`)
   }
 }
 

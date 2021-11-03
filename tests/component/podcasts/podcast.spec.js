@@ -105,10 +105,10 @@ describe('Podcast component test', () => {
         .send(mockWrongTypesFields)
         .expect(400)
     })
-    it('should return 404 when trying to update podcast that does not exist', async () => {
+    it('should return 400 when trying to update podcast that does not exist', async () => {
       await supertest(app)
         .put('/podcast/0')
-        .expect(404)
+        .expect(400)
     })
   })
   describe('Delete podcast tests', () => {

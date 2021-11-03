@@ -66,17 +66,13 @@ const deletePodcast = async (req, res, next) => {
   }
 }
 const updatePodcast = async (req, res) => {
-  const id = parseInt(req.params.id)
-  if (await getPodcastById(id)) {
-    try {
-      const id = parseInt(req.params.id)
-      await updatePodcastDetails(req.body, id)
-      return res.status(200).send('Podcast has been successfully updated!')
-    } catch (err) {
-      return res.status(400).send(`Unable to update, podcast contain illegal field: ${err.message}`)
-    }
-  } else {
-    return res.status(404).send('Unable to update, podcast does not exists!')
+  try {
+    const id = parseInt(req.params.id)
+    const updateResponse = await updatePodcastDetails(req.body, id)
+    if (!updateResponse.affectedRows) return res.status(404).send('Podcast not found!')
+    return res.status(200).send('Podcast has been successfully updated!')
+  } catch (err) {
+    return res.status(400).send(`Unable to update, ${err.message}`)
   }
 }
 

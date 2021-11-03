@@ -1,6 +1,6 @@
 const mysql = require('./utils/mysql')
 
-async function migrate () {
+async function createTables () {
   try {
     await mysql.runQuery(`CREATE TABLE \`podcasts\`.\`users\` (
                           \`id\` INT(10) NOT NULL AUTO_INCREMENT,
@@ -32,21 +32,21 @@ async function migrate () {
                           CONSTRAINT \`podcast_fk\`
                            FOREIGN KEY (\`podcastId\`)
                            REFERENCES \`podcasts\`.\`podcasts\` (\`id\`)
-                           ON DELETE NO ACTION
+                           ON DELETE CASCADE
                            ON UPDATE NO ACTION)`)
   } catch (error) {
     console.error(`Error migrating: ${error.message}`)
   }
 }
 
-async function insertDb () {
+const podcastData = () => {
   try {
     const podcastDb = require('./data/podcasts.json')
-    await Promise.all(podcastDb.map(async (podcast) => {
+    Promise.all(podcastDb.map(async (podcast) => {
       return mysql.runQuery('INSERT INTO `podcasts`.`podcasts` (id,title,author,description,htmlDescription,webUrl,imageUrl,language,numberOfEpisodes,avgEpisodeLength,category) VALUES(?,?,?,?,?,?,?,?,?,?,?)', [podcast.id, podcast.title, podcast.author, podcast.description, podcast.htmlDescription, podcast.webUrl, podcast.imageUrl, podcast.language, podcast.numberOfEpisodes, podcast.avgEpisodeLength, podcast.category])
     }))
-    const reviewDb = require('./data/reviews.json')
-    await Promise.all(reviewDb.map(async (review) => {
+    const reviewData = require('./data/reviews.json')
+    Promise.all(reviewData.map(async (review) => {
       return mysql.runQuery('INSERT INTO `podcasts`.`reviews` (rating,id,podcastId,text) VALUES(?,?,?,?)', [review.rating, review.id, review.podcastId, review.text])
     }))
   } catch (error) {
