@@ -1,7 +1,6 @@
 const {
   updatePodcastDetails,
   getPodcastById,
-  getMaxPodcastId,
   savePodcastToDb,
   deletePodcastFromDb,
   getPodcastSearchResults,
@@ -33,7 +32,7 @@ const searchPodcast = async (req, res, next) => {
 const getPodcast = async (req, res, next) => {
   const id = parseInt(req.params.id)
   try {
-    const podcastInfo = getPodcastById(id)
+    const podcastInfo = await getPodcastById(id)
     if (!podcastInfo) return res.status(404).send('Podcast not found')
     return res.status(200).send(podcastInfo)
   } catch (err) {
@@ -43,9 +42,7 @@ const getPodcast = async (req, res, next) => {
 
 const addNewPodcast = async (req, res, next) => {
   try {
-    const newestPodcast = getMaxPodcastId()
-    const id = newestPodcast.id + 1
-    const newPodcast = { ...req.body, ...{ id } }
+    const newPodcast = req.body
     await savePodcastToDb(newPodcast)
     return res.status(200).send('Podcast has been successfully added')
   } catch
@@ -57,7 +54,7 @@ const addNewPodcast = async (req, res, next) => {
 const deletePodcast = async (req, res, next) => {
   try {
     const id = parseInt(req.params.id)
-    const podcastInfo = getPodcastById(id)
+    const podcastInfo = await getPodcastById(id)
     if (podcastInfo) {
       await deletePodcastFromDb(id)
       return res.status(200).send('Podcast has been successfully removed')
@@ -69,17 +66,13 @@ const deletePodcast = async (req, res, next) => {
   }
 }
 const updatePodcast = async (req, res) => {
-  const id = parseInt(req.params.id)
-  if (getPodcastById(id)) {
-    try {
-      const id = parseInt(req.params.id)
-      await updatePodcastDetails(req.body, id)
-      return res.status(200).send('Podcast has been successfully updated!')
-    } catch (err) {
-      return res.status(400).send(`Unable to update, podcast contain illegal field: ${err.message}`)
-    }
-  } else {
-    return res.status(404).send('Unable to update, podcast does not exists!')
+  try {
+    const id = parseInt(req.params.id)
+    const updateResponse = await updatePodcastDetails(req.body, id)
+    if (!updateResponse.affectedRows) return res.status(404).send('Podcast not found!')
+    return res.status(200).send('Podcast has been successfully updated!')
+  } catch (err) {
+    return res.status(400).send(`Unable to update, ${err.message}`)
   }
 }
 

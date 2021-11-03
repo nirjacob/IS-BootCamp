@@ -5,8 +5,8 @@ const {
   saveItem,
   updateItem,
   getPodcastsItems
-} = require('../models/podcastFileModel')
-const { getReviewsItems } = require('../models/reviewFileModel')
+} = require('../models/podcastDbModel')
+const { getReviewsItems } = require('../models/reviewDbModel')
 
 const getBestRatedList = async (numberOfItems) => {
   const podcastReviewsData = await getReviewsItems()
@@ -30,13 +30,8 @@ const getBestPodcasts = async (numberOfItems) => {
 const getPodcastSearchResults = async (queryParams) => {
   return await searchItem(queryParams)
 }
-const getPodcastById = (id) => {
-  return getItem(id)
-}
-
-const getMaxPodcastId = async () => {
-  const podcastData = await getPodcastsItems()
-  return podcastData.reduce((prev, current) => (prev.id > current.id) ? prev : current)
+const getPodcastById = async (id) => {
+  return await getItem(id)
 }
 
 const savePodcastToDb = async (podcast) => {
@@ -47,16 +42,13 @@ const deletePodcastFromDb = async (id) => {
 }
 
 const updatePodcastDetails = async (updateDetails, id) => {
-  const podcastToUpdate = getPodcastById(id)
-  const updatedPodcast = { ...podcastToUpdate, ...updateDetails }
-  return await updateItem(podcastToUpdate.id, updatedPodcast)
+  return await updateItem(id, updateDetails)
 }
 
 module.exports = {
   getPodcastSearchResults,
   updatePodcastDetails,
   getPodcastById,
-  getMaxPodcastId,
   savePodcastToDb,
   deletePodcastFromDb,
   getBestPodcasts,

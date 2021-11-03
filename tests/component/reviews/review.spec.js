@@ -5,12 +5,11 @@ const {
   mockReviews,
   mockIllegalFieldsReview,
   mockExtraFieldsReview,
-  mockMissingFieldsReview,
-  mockNoPodcastIdReview
+  mockMissingFieldsReview
 } = require('./mockPodcast.js')
 
-jest.mock('../../../models/reviewFileModel', () => require('./mockFileModel'))
-jest.mock('../../../models/podcastFileModel', () => require('../podcasts/mockFileModel.js'))
+jest.mock('../../../models/reviewDbModel', () => require('./mockDbModel'))
+jest.mock('../../../models/podcastDbModel', () => require('../podcasts/mockDbModel.js'))
 
 describe('Review component test', () => {
   describe('Add new review tests', () => {
@@ -37,12 +36,6 @@ describe('Review component test', () => {
         .post('/review')
         .send(mockMissingFieldsReview)
         .expect(400)
-    })
-    it('should return 404 when trying to add review for non existed podcast', async () => {
-      await supertest(app)
-        .post('/review')
-        .send(mockNoPodcastIdReview)
-        .expect(404)
     })
   })
   describe('Get podcast review tests', () => {
