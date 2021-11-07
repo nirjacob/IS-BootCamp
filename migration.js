@@ -1,4 +1,5 @@
 const mysql = require('./utils/mysql')
+const reviewData = require('./data/reviews.json')
 
 async function createTables () {
   try {
@@ -48,6 +49,10 @@ const podcastData = () => {
     const reviewData = require('./data/reviews.json')
     Promise.all(reviewData.map(async (review) => {
       return mysql.runQuery('INSERT INTO `podcasts`.`reviews` (rating,id,podcastId,text) VALUES(?,?,?,?)', [review.rating, review.id, review.podcastId, review.text])
+    }))
+    const usersData = require('./data/users.json')
+    Promise.all(usersData.map(async (user) => {
+      return mysql.runQuery('INSERT INTO `podcasts`.`users` (username,password) VALUES(?,?)', [user.username, user.password])
     }))
   } catch (error) {
     console.error(`Error migrating: ${error.message}`)
