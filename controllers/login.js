@@ -1,5 +1,5 @@
 const { getLogin } = require('../models/loginDbModel')
-const { createNewJwt } = require('../middleware/jwtAuthentication')
+const { createNewJwt } = require('../services/authentication')
 
 exports.login = async (req, res, next) => {
   try {

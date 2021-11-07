@@ -1,20 +1,16 @@
-const jwt = require('jsonwebtoken')
 const config = require('config')
+const { verifyJwt } = require('../services/authentication')
 
-const authenticateJwt = (req, res, next) => {
+const authenticateJwt = async (req, res, next) => {
   const reqPath = req.path.toString()
-  if (reqPath !== '/login' && config.isAuthEnabled) {
-    jwt.verify(req.headers.authorization, config.auth.secret, (err, decoded) => {
-      if (err) return res.status(400).send('Failed to authenticate token')
-    })
+  if (reqPath !== config.loginRoute && config.isAuthEnabled) {
+    try {
+      await verifyJwt(req.headers.authorization, config.auth.secret)
+    } catch (error) {
+      return res.status(400).send('Failed to authenticate token')
+    }
   }
   return next()
 }
 
-const createNewJwt = (username) => {
-  return jwt.sign({ username: username }, config.auth.secret, {
-    expiresIn: config.auth.expireIn
-  })
-}
-
-module.exports = { authenticateJwt, createNewJwt }
+module.exports = { authenticateJwt }
