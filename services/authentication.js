@@ -8,7 +8,7 @@ const createNewJwt = (username) => {
 }
 
 const verifyJwt = (authorization, secret) => {
-  return Promise.resolve((reject, resolve) => {
+  return new Promise((resolve, reject) => {
     jwt.verify(authorization, secret, (err, decoded) => {
       if (err) return reject(err)
       return resolve()

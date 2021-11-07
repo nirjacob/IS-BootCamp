@@ -1,6 +1,7 @@
 const mysql = require('../utils/mysql')
 
-const getLogin = async (username, password) => {
-  return await mysql.runQuery('SELECT * FROM `podcasts`.`users` WHERE username=? AND password=?', [username, password])
+const authenticateLogin = async (username, password) => {
+  const authResults = await mysql.runQuery('SELECT * FROM `podcasts`.`users` WHERE username=? AND password=?', [username, password])
+  return authResults.length > 0
 }
-module.exports = { getLogin }
+module.exports = { authenticateLogin }
