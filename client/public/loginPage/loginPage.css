@@ -1,0 +1,99 @@
+@import "https://use.fontawesome.com/releases/v5.5.0/css/all.css";
+
+body {
+    font-family: sans-serif;
+    background: linear-gradient(to right, #11998e 0%, #38ef7d 100%);
+}
+
+.container {
+    margin: 10% 35%;
+    height: 480px;
+    width: 380px;
+    border: 2px solid;
+    border-image-slice: 2;
+    border-image-source: linear-gradient(to right, #11998e 0%, #38ef7d 100%);
+    position: absolute;
+}
+
+.login-box {
+    width: 280px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #000000;
+}
+
+.login-box h1 {
+    display: inline;
+    float: left;
+    font-size: 40px;
+    border-bottom: 4px solid #007250;
+    margin-bottom: 20px;
+    padding: 13px 0;
+}
+
+.text-box {
+    width: 100%;
+    overflow: auto;
+    font-size: 20px;
+    padding: 8px 0;
+    margin: 8px 0;
+    border-bottom: 1px solid #007250;
+}
+
+.text-box i {
+    width: 26px;
+    float: left;
+    text-align: center;
+}
+
+.text-box input {
+    border: none;
+    outline: none;
+    background: none;
+    color: #007250;
+    font-size: 18px;
+    width: 80%;
+    float: left;
+    margin: 0 10px;
+}
+
+.login-button {
+    width: 100%;
+    background: none;
+    border: 2px solid #007250;
+    color: #007250;
+    padding: 5px;
+    font-size: 18px;
+    margin: 12px 0;
+}
+
+.login-button:hover {
+    background: #38ef7d;
+}
+
+@keyframes wiggle {
+    0% {
+        transform: rotate(0deg);
+    }
+    80% {
+        transform: rotate(0deg);
+    }
+    85% {
+        transform: rotate(5deg);
+    }
+    95% {
+        transform: rotate(-5deg);
+    }
+    100% {
+        transform: rotate(0deg);
+    }
+}
+
+.logo {
+    display: inline-block;
+    animation: wiggle 2.5s infinite;
+    height: 10em;
+    margin-left: 25%;
+}
