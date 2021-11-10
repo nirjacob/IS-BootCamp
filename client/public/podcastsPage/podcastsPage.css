@@ -1,0 +1,167 @@
+@import "https://use.fontawesome.com/releases/v5.5.0/css/all.css";
+
+body {
+    background: #093637;
+    font-family: "Monaco", "Courier New", monospace;
+}
+
+.middle-container {
+    margin-top: -10px;
+}
+
+.main-title {
+    color: #11998e;
+    font-size: 1.9rem;
+    display: inline;
+}
+
+.main-title h1 {
+    font-size: 100%;
+    border-image-slice: 1;
+    border-image-source: linear-gradient(to right, #11998EFF 0%, #11998E47 100%);
+    border-bottom: 4px solid;
+    padding: 10px;
+}
+
+.logo {
+    float: left;
+    display: inline;
+    height: 80px;
+    margin-right: 30px;
+    margin-left: 20px;
+    margin-top: -14px;
+    filter: drop-shadow(0px 0px 20px);
+}
+
+.container {
+    text-align: center;
+    color: #11998e;
+}
+
+
+.search-bar:focus {
+    color: rgb(0, 189, 134);
+}
+
+
+.search-button:hover {
+    border-color: transparent;
+    background-color: #00bd86;
+    color: #222831;
+}
+
+.search-bar {
+    border-radius: 5px;
+    outline: none;
+    background-color: transparent;
+    border: 2px solid #11998e;
+    color: rgba(0, 189, 134, 0.2);
+    display: inline-block;
+    font-size: 25px;
+    position: sticky;
+    text-align: center;
+    width: 40%;
+    margin-top: 10px;
+}
+
+.search-button {
+    background-color: transparent;
+    border-radius: 5px;
+    border: 2px solid #11998e;
+    color: #11998e;
+    display: inline;
+    margin-top: 10px;
+    font-size: 20px;
+    text-align: center;
+    padding: 5px 30px 5px 30px;
+}
+
+
+.top-container {
+    border: 5px;
+    display: inline;
+    text-align: left;
+}
+
+.new-podcast-button {
+    background-color: #222831;
+    border: none;
+    height: 0;
+    padding: 0;
+    color: #11998e;
+    position: absolute;
+    top: 20px;
+    right: 60px;
+    filter: drop-shadow(0px 0px 1px);
+}
+
+.new-podcast-button:hover {
+    color: #00bd86;
+    filter: drop-shadow(0px 0px 1px);
+}
+
+.card {
+    display: inline-block;
+    width: 250px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    margin-left: 10px;
+    margin-bottom: 10px;
+    background-color: #393E46;
+    transition: transform 0.5s ease;
+    color: #31aab0;
+}
+
+.card:hover {
+    transform: scale(1.4);
+    cursor: pointer;
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+}
+
+.bottom-container .card-container .card p:hover {
+    max-height: 15em;
+}
+
+.bottom-container .card-container .card p {
+    /* prevent showing very long descriptions*/
+    transition: max-height 0.5s ease;
+    display: block;
+    text-overflow: ellipsis;
+    word-wrap: break-word;
+    overflow: hidden;
+    max-height: 10em;
+}
+
+.bottom-container .card-container {
+    font-size: 10px;
+    padding: 2px 16px;
+}
+
+.bottom-container .card-container p {
+    font-size: 10px;
+}
+
+.card-container img {
+    width: 100%;
+}
+
+.bottom-container p {
+    font-size: 2em;
+}
+
+.tool-tip-text {
+    visibility: hidden;
+    width: 120px;
+    background-color: #222831;
+    color: #00bd86;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px;
+    top: -5px;
+    right: 105%;
+    position: absolute;
+    z-index: 1;
+}
+
+.new-podcast-button:hover .tool-tip-text {
+    visibility: visible;
+}

@@ -1,0 +1,11 @@
+.form-button, .submit-button {
+    font-family: "Monaco", "Courier New", monospace;
+    width: 100%;
+    background: none;
+    border: 2px solid #11998e;
+    color: rgb(17, 153, 142);
+    font-size: 18px;
+    margin: 9px 0;
+    outline: none;
+    border-radius: 5px;
+}
