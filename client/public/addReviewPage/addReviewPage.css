@@ -1,0 +1,69 @@
+@import "https://use.fontawesome.com/releases/v5.5.0/css/all.css";
+
+body {
+    background: #093637;
+    font-family: "Monaco", "Courier New", monospace;
+}
+
+.container {
+    border: 2px solid;
+    border-image: linear-gradient(to left, #11998e 0%, #38ef7d 100%) 1;
+    height: 450px;
+    margin: 10% 35%;
+    position: absolute;
+    width: 380px;
+}
+
+.form-title {
+    font-size: 20px;
+    padding-bottom: 10px;
+    text-align: center;
+}
+
+.box {
+    color: #11998e;
+    left: 50%;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 250px;
+}
+
+::placeholder {
+    color: #11998e;
+    font-family: "Monaco", "Courier New", monospace;
+    opacity: 0.4;
+    text-align: center;
+}
+
+/*Disables default resizing option*/
+textarea {
+    resize: none;
+}
+
+.box .submit-button {
+    margin-left: 22%;
+    width: 150px;
+}
+
+.submit-button:hover {
+    background: rgb(17, 153, 142);
+}
+
+/*large review box*/
+#text {
+    height: 120px;
+}
+
+/*rating stars (not self: https://css-tricks.com/star-ratings/ )*/
+.rating {
+    font-size: 50px;
+    text-align: center;
+    direction: rtl;
+}
+
+.rating > span:hover:before,
+.rating > span:hover ~ span:before {
+    content: "\2605";
+    position: absolute;
+}
