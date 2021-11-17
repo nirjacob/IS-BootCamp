@@ -1,12 +1,20 @@
 {
   "host": "localhost",
   "port": 3000,
+  "dbName": "podcasts",
   "filePath": "data/podcasts.json",
   "reviewsPath": "data/reviews.json",
-  "isCacheEnabled": true,
+  "cacheExpiration": 1200,
+  "isCacheEnabled": false,
   "redis": {
     "port": 6379,
     "host": "localhost",
     "cacheDuration": 5
+  },
+  "db": {
+    "port": 3306,
+    "host": "localhost",
+    "user": "root",
+    "password": ""
   }
 }
