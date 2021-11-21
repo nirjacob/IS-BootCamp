@@ -3,15 +3,15 @@
 body {
     background: #093637;
     font-family: "Monaco", "Courier New", monospace;
+    height: 100%;
 }
 
 .form-container {
-    border: 2px solid;
-    border-image: linear-gradient(to left, #11998e 0%, #38ef7d 100%) 1;
-    height: 650px;
-    margin: 3% 35%;
-    position: absolute;
-    width: 380px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+
 }
 
 .form-title {
@@ -22,12 +22,10 @@ body {
 }
 
 .login-box {
-    color: #11998e;
-    left: 50%;
-    position: absolute;
-    transform: translate(-50%, -50%);
-    top: 50%;
-    width: 250px;
+    border: 2px solid;
+    border-image: linear-gradient(to left, #11998e 0%, #38ef7d 100%) 1;
+    padding: 30px;
+    flex-basis: 25%;
 }
 
 ::placeholder {
@@ -39,8 +37,8 @@ body {
 
 .login-box .submit-button {
     color: #11998e;
-    margin-left: 20%;
-    width: 150px;
+    width: 200px;
+    margin-left: 80px;
 }
 
 .submit-button:hover {
