@@ -3,22 +3,24 @@
 body {
     background: #093637;
     font-family: "Monaco", "Courier New", monospace;
+    height: 100%;
 }
 
 .container {
     display: flex;
-    flex-wrap: wrap;
     justify-content: center;
-    text-align: center;
+    align-items: center;
+    height: 100%;
 }
 
-
 .container-middle {
-    background-color: #132325;
+    background-color: #093637;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5);
-    color: #31aab0;
+    color: #11998e;
     flex-basis: 30%;
-    padding: 15px;
+    padding: 10px 25px;
+    border: 2px solid;
+    border-image: linear-gradient(to left, #11998e 0%, #38ef7d 100%) 1;
 }
 
 .container-middle .form-button {
