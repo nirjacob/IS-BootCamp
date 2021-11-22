@@ -26,7 +26,6 @@ const podcastSchema = joi.object().keys(
 
 const podcastUpdateSchema = joi.object().keys(
   {
-    id: joi.number().integer(),
     title: joi.string(),
     description: joi.string(),
     htmlDescription: joi.string(),
