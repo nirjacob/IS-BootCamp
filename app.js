@@ -5,10 +5,12 @@ const bodyParser = require('body-parser')
 const { handleCachedData } = require('./middleware/cacheHandler')
 const path = require('path')
 const config = require('config')
+const { authenticateJwt } = require('./middleware/jwtAuthentication')
 
 app.use(express.static(path.join(__dirname, 'client', `${config.static}`)))
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
+app.use(authenticateJwt)
 app.use(handleCachedData)
 app.use(router)
 
