@@ -1,0 +1,50 @@
+@import "https://use.fontawesome.com/releases/v5.5.0/css/all.css";
+
+html {
+    height: 100%;
+}
+
+body {
+    background: #093637;
+    font-family: "Monaco", "Courier New", monospace;
+    display: flex;
+    height: inherit;
+}
+
+.form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.form-title {
+    color: #11998e;
+    font-size: 20px;
+    padding-bottom: 10px;
+    text-align: center;
+}
+
+.login-box {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5);
+    border: 2px solid;
+    border-image: linear-gradient(to left, #11998e 0%, #38ef7d 100%) 1;
+    padding: 30px;
+    flex-basis: 25%;
+}
+
+::placeholder {
+    color: #11998e;
+    font-family: "Monaco", "Courier New", monospace;
+    opacity: 0.4;
+    padding: 5px;
+}
+
+.login-box .submit-button {
+    color: #11998e;
+    width: 200px;
+    margin-left: 80px;
+}
+
+.submit-button:hover {
+    background: rgb(17, 153, 142);
+}
