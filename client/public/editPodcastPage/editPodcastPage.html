@@ -13,9 +13,9 @@
         <label class="form-labels">Title</label>
         <input class="form-button" type="text" id="title" value="Title Placeholder">
         <label class="form-labels">Description</label>
-        <input class="form-button" type="text" id="description" value="Description Placeholder">
+        <textarea class="form-button" id="description">Description Placeholder</textarea>
         <label class="form-labels">Html Description</label>
-        <input class="form-button" type="text" id="htmlDescription" value="Html Description Placeholder">
+        <textarea class="form-button" id="htmlDescription">Html Description Placeholder</textarea>
         <label class="form-labels">Web Url</label>
         <input class="form-button" type="text" id="webUrl" value="Web Url Placeholder">
         <label class="form-labels">Image Url</label>
@@ -23,15 +23,15 @@
         <label class="form-labels">Language</label>
         <input class="form-button" type="text" id="language" value="Language Placeholder">
         <label class="form-labels">Number Of Episodes</label>
-        <input class="form-button" type="text" id="numberOfEpisodes" value="1">
+        <input class="form-button" type="number" id="numberOfEpisodes" value="1">
         <label class="form-labels">Avg Episode Length</label>
-        <input class="form-button" type="text" id="avgEpisodeLength" value="1">
+        <input class="form-button" type="number" id="avgEpisodeLength" value="1">
         <label class="form-labels">Author</label>
         <input class="form-button" type="text" id="author" value="Author Placeholder">
         <label class="form-labels">Category</label>
         <input class="form-button" type="text" id="category" value="Category Placeholder">
         <div class="submit-buttons-container">
-            <input class="submit-button" id="edit-btn" type="submit" value="Edit Podcast" onclick="editPodcast()">
+            <input class="submit-button" id="edit-btn" type="submit" value="Edit Podcast" onclick="savePodcast()">
             <input class="submit-button" id="delete-btn" type="submit" value="Delete Podcast">
         </div>
     </div>

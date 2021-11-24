@@ -2,8 +2,8 @@ window.onload = (event) => {
   const deleteButton = document.getElementById('delete-btn')
   deleteButton.parentNode.removeChild(deleteButton)
 }
-const editPodcast = async () => {
-  const editedPodcast = {
+const savePodcast = async () => {
+  const newPodcast = {
     title: document.getElementById('title').value,
     description: document.getElementById('description').value,
     htmlDescription: document.getElementById('htmlDescription').value,
@@ -15,13 +15,16 @@ const editPodcast = async () => {
     author: document.getElementById('author').value,
     category: document.getElementById('category').value
   }
+  // removes empty fields if sent.
+  const formatedPodcast = Object.fromEntries(Object.entries(newPodcast).filter(([_, v]) => (v != null && v !== '')))
+
   const response = await fetch('http://localhost:3000/podcast/1476061', {
     method: 'PUT',
-    body: JSON.stringify(editedPodcast),
+    body: JSON.stringify(formatedPodcast),
     headers: {
       'Content-Type': 'application/json'
     }
   })
-  response.status === 200 ? alert('Podcast Updated Successfully') : alert(`Error updating podcast: ${response.statusText}`)
+  response.status === 200 ? alert('Podcast Saved Successfully') : alert(`Error updating podcast: ${response.statusText}`)
   return response
 }
