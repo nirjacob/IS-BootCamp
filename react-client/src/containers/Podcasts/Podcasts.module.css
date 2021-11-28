@@ -1,0 +1,14 @@
+.podcastCardsContainer {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    font-size: 10px;
+    justify-content: center;
+}
+
+.pageBody {
+    background: #093637;
+    color: #11998e;
+    text-align: center;
+    font-family: "Monaco", "Courier New", monospace;
+}
