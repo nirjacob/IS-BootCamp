@@ -1,0 +1,48 @@
+@import "https://use.fontawesome.com/releases/v5.5.0/css/all.css";
+
+.mainContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    text-align: center;
+}
+
+.leftContainer {
+    background-color: #132325;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5);
+    color: #31aab0;
+    flex-basis: 30%;
+}
+
+.leftContainer .podcastCard p {
+    padding: 0 5px 0 5px;
+}
+
+.leftContainer .podcastCard img {
+    width: 100%;
+}
+
+
+.middleContainer {
+    background-color: #132325;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5);
+    color: #31aab0;
+    flex-basis: 30%;
+    padding: 15px;
+}
+
+.tagsContainer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    justify-content: center;
+}
+
+
+.rightContainer {
+    background-color: #132325;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5);
+    color: #31aab0;
+    flex-basis: 30%;
+
+}
