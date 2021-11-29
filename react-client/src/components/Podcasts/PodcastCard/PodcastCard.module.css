@@ -14,15 +14,15 @@
     transform: scale(1.3);
 }
 
-.podcastCard p:hover {
-    max-height: 15em;
+.podcastCard h2 {
+    height: 3em;
 }
 
 /* prevent podcast-card from showing very long descriptions*/
 .podcastCard p {
-    max-height: 10em;
+    height: 10em;
     overflow: hidden;
-    transition: max-height 0.5s ease;
+    transition: height 0.5s ease;
 }
 
 .podcastCard img {

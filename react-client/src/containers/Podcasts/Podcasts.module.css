@@ -4,11 +4,16 @@
     flex-wrap: wrap;
     font-size: 10px;
     justify-content: center;
+    margin-top: 20px;
 }
 
-.pageBody {
-    background: #093637;
-    color: #11998e;
-    text-align: center;
-    font-family: "Monaco", "Courier New", monospace;
+.titles {
+    border-image-slice: 1;
+    border-image-source: radial-gradient(#11998EFF 0%, #11998E47 100%);
+    border-bottom: 1px solid;
+    font-size: 2.2em;
+    font-weight: bolder;
+    padding: 15px;
+    margin-bottom: 10px;
 }
+
