@@ -1,0 +1,106 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  height: 100%;
+
+  .middleContainer {
+    background-color: #093637;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5);
+    color: #11998e;
+    flex-basis: 30%;
+    margin-top: 3%;
+    padding: 5px 22px;
+    border: 2px solid;
+    border-image: linear-gradient(to left, #11998e 0%, #38ef7d 100%) 1;
+
+    .formButton {
+      background: none;
+      border: 2px solid #11998e;
+      border-radius: 5px;
+      color: rgb(17, 153, 142);
+      font-family: "Monaco", "Courier New", monospace;
+      font-size: 18px;
+      outline: none;
+      width: 100%;
+      padding-left: 5px;
+      margin: 0;
+      color: rgba(49, 170, 176, 0.39);
+    }
+
+    .formTitle {
+      text-align: center;
+      color: #11998e;
+      font-size: 20px;
+    }
+
+    .formLabels {
+      padding-top: 14px;
+      float: left;
+    }
+
+    .deleteBtn {
+      background-color: rgba(255, 0, 0, 0.18);
+      border: 1px solid red;
+      color: rgb(194, 62, 62);
+      flex-basis: 20%;
+      margin-top: 15px;
+      background: none;
+      border-radius: 5px;
+      font-family: "Monaco", "Courier New", monospace;
+      font-size: 18px;
+      outline: none;
+      width: 100%;
+
+      &:hover {
+        background-color: rgb(194, 62, 62);
+        border: 1px solid red;
+        color: black;
+      }
+    }
+
+    .editBtn {
+      background: none;
+      border: 2px solid #11998e;
+      border-radius: 5px;
+      color: rgb(17, 153, 142);
+      font-family: "Monaco", "Courier New", monospace;
+      font-size: 18px;
+      outline: none;
+      width: 100%;
+      margin-top: 15px;
+      flex-basis: 20%;
+
+      &:hover {
+        background-color: #00bd86;
+        color: #222831;
+      }
+    }
+
+    .submitButtonsContainer {
+      display: flex;
+      align-items: center;
+      justify-content: space-evenly;
+    }
+
+  }
+
+}
+
+/*Cancels visited purple color default effect*/
+a:visited {
+  color: inherit;
+  text-decoration: none;
+}
+
+/*Cancels resizing of textarea*/
+textarea {
+  resize: none;
+}
+
+/*Hides arrows from number input box, referenced from: https://www.w3schools.com/howto/howto_css_hide_arrow_number.asp */
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}

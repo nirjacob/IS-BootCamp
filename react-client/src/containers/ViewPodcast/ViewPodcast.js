@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import pageStyles from '../../components/Common/PageStyle/PageStyle.module.scss'
 import style from './ViewPodcast.module.scss'
-import { useLocation } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import Tag from '../../components/Common/Tags/Tag'
 import { getPodcast, getReviews } from '../../services/Podcasts'
 import AddButton from '../../components/Common/AddButton/AddButton'
@@ -60,7 +60,9 @@ const ViewPodcasts = () => {
           <div className={style.formDetails}>{podcast.numberOfEpisodes}</div>
           <div className={style.formLabel}>Average Episode Length</div>
           <div className={style.formDetails}>{podcast.avgEpisodeLength}</div>
-          <input className={style.editBtn} type='submit' value='Edit Podcast' />
+          <Link to={{ pathname: `/podcast/edit/${podcast.id}` }} style={{ textDecoration: 'inherit' }}>
+            <input className={style.editBtn} type='submit' value='Edit Podcast' />
+          </Link>
           <input className={style.deleteBtn} type='submit' value='Delete Podcast' />
         </div>
       </div>
