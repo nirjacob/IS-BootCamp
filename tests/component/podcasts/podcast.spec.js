@@ -15,7 +15,7 @@ jest.mock('../../../models/reviewDbModel', () => require('./mockDbModel.js'))
 
 describe('Podcasts components test', () => {
     describe('Best podcast tests', () => {
-        it('should return 200 and two best podcasts ', async () => {
+        it('should return 200 and two best podcasts', async () => {
             await supertest(app)
                 .get('/podcast/best/2')
                 .expect(200, mockActualBestPodcasts)

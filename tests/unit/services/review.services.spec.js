@@ -1,4 +1,4 @@
-const app = require('../../../app')
+// const app = require('../../../app')
 const reviewDbModel = require('../../../models/reviewDbModel')
 const { getReviewById, saveReviewToDb } = require('../../../services/review')
 const { mockReview } = require('../../../tests/component/reviews/mockPodcast')

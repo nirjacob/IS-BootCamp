@@ -1,35 +1,42 @@
-import React, {useEffect, useState} from "react";
-import style from "./Search.module.css"
-import {searchPodcasts} from "../../../services/Podcasts";
+import React, { useEffect, useState } from 'react'
+import style from './Search.module.scss'
+import { searchPodcasts } from '../../../services/Podcasts'
+import Proptypes from 'prop-types'
 
 const Search = (props) => {
-    const [searchString, setSearchString] = useState('');
+  const [searchString, setSearchString] = useState('')
 
-    useEffect(async () => {
-        async function fetchData() {
-            return await searchPodcasts(searchString)
-        }
+  async function fetchInitialData() {
+    return await props.initialData()
+  }
 
-        try {
-            props.updateSearch(await fetchData())
+  async function updateSearchResults() {
+    try {
+      const results = await searchPodcasts(searchString)
+      props.updateSearch(results)
+    } catch (err) {
+      console.error(`${err}`)
+      searchString === '' ? await fetchInitialData() : props.updateSearch([])
+    }
+  }
 
-        } catch (err) {
-            console.error(`${err}`)
-            searchString === '' ? await props.initialData() : props.updateSearch([])
-        }
-    }, [searchString]);
+  useEffect(updateSearchResults, [searchString])
 
-
-    return (
-        <div>
-            <input className={style.searchBar} type="text" placeholder={'Enter podcast name or author'}
-                   onChange={(e) => setSearchString(e.target.value)}
-            />
-            <div>
-                <button className={style.searchBtn}>Search</button>
-            </div>
-        </div>
-    )
+  return (
+    <div>
+      <input className={style.searchBar} type='text' placeholder={'Enter podcast name or author'}
+             onChange={(e) => setSearchString(e.target.value)}
+      />
+      <div>
+        <button className={style.searchBtn}>Search</button>
+      </div>
+    </div>
+  )
 }
 
-export default Search;
+Search.propTypes = {
+  updateSearch: Proptypes.func,
+  initialData: Proptypes.array
+}
+
+export default Search

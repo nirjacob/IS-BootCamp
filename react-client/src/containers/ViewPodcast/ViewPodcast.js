@@ -1,67 +1,92 @@
-import {useEffect, useState} from "react";
-import pageStyles from "../../components/Common/PageStyle/PageStyle.module.css"
-import style from "./ViewPodcast.module.css"
-import {useLocation} from "react-router-dom"
-import PodcastCard from "../../components/Podcasts/PodcastCard/PodcastCard";
-import Tag from "../../components/Common/Tags/Tag";
-import {getPodcast} from "../../services/Podcasts";
+import { useEffect, useState } from 'react'
+import pageStyles from '../../components/Common/PageStyle/PageStyle.module.scss'
+import style from './ViewPodcast.module.scss'
+import { useLocation } from 'react-router-dom'
+import Tag from '../../components/Common/Tags/Tag'
+import { getPodcast, getReviews } from '../../services/Podcasts'
+import AddButton from '../../components/Common/AddButton/AddButton'
+import ReviewCard from '../../components/Podcasts/ReviewCard/ReviewCard'
+import PodcastCard from '../../components/Podcasts/PodcastCard/PodcastCard'
+import React from 'react'
 
 const ViewPodcasts = () => {
-    const [podcast, setPodcasts] = useState([])
+  const [podcast, setPodcasts] = useState([])
+  const [reviews, setReviews] = useState([])
+  const location = useLocation()
+  const podcastId = location.pathname.replace('/podcast/', '')
 
-    async function fetchData() {
-        try {
-            const podcast = await getPodcast(podcastId)
-            setPodcasts(podcast)
-        } catch (err) {
-            console.error(`${err}`)
-        }
+  async function fetchData() {
+    try {
+      const podcastById = await getPodcast(podcastId)
+      setPodcasts(podcastById)
+      const reviewsByPodcast = await getReviews(podcastId)
+      setReviews(reviewsByPodcast)
+    } catch (err) {
+      console.error(`${err}`)
     }
+  }
 
-    useEffect(() => {
-        document.body.classList.add(pageStyles.body);
-        fetchData()
-        return () => {
-            document.body.classList.remove(pageStyles.body);
-        };
-    }, []);
+  useEffect(() => {
+    document.body.classList.add(pageStyles.body)
+    fetchData()
+    return () => {
+      document.body.classList.remove(pageStyles.body)
+    }
+  }, [])
 
-    const location = useLocation()
-    const podcastId = location.pathname.replace('/podcast/', '')
-
-    return (
-        <div className={style.mainContainer}>
-            <div className={style.leftContainer}>
-
-                {
-                    // renders a modified Podcast Card
-                }
-
-            </div>
-            <div className={style.middleContainer}>
-                <div className={style.tagsContainer}>
-                    <Tag text={podcast.category}/>
-                    <Tag text={podcast.language}/>
-                </div>
-                {/*<div className="form-title">Podcast Title Placeholder</div>*/}
-                {/*<label className="form-details">Author Placeholder</label>*/}
-                {/*<div className="form-labels">Description</div>*/}
-                {/*<div className="form-details">Description</div>*/}
-                {/*<div className="form-labels">Number Of Episodes</div>*/}
-                {/*<div className="form-details">Number Of Episodes</div>*/}
-                {/*<div className="form-labels">Average Episode Length</div>*/}
-                {/*<div className="form-details">Avg Episode Length</div>*/}
-                {/*<input className="submit-button" id="edit-btn" type="submit" value="Edit Podcast">*/}
-                {/*    <input className="submit-button" id="delete-btn" type="submit" value="Delete Podcast">*/}
-
-            </div>
-            <div className={style.rightContainer}>
-
-            </div>
-
+  return (
+    <div className={style.mainContainer}>
+      <div className={style.leftContainer}>
+        <PodcastCard
+          key={podcast.id}
+          style={style.podcastCard}
+          id={podcast.id}
+          title={podcast.title}
+          imageUrl={podcast.imageUrl}
+          description={podcast.description}
+        />
+      </div>
+      <div className={style.middleContainer}>
+        <div className={style.tagsContainer}>
+          <Tag text={podcast.category} />
+          <Tag text={podcast.language} />
         </div>
-    )
+        <div>
+          <div className={style.formTitle}>{podcast.title}</div>
+          <label className={style.formAuthor}>By {podcast.author}</label>
+          <div className={style.formLabel}>Description</div>
+          <div className={style.formDetails}>{podcast.description}</div>
+          <div className={style.formLabel}>Number Of Episodes</div>
+          <div className={style.formDetails}>{podcast.numberOfEpisodes}</div>
+          <div className={style.formLabel}>Average Episode Length</div>
+          <div className={style.formDetails}>{podcast.avgEpisodeLength}</div>
+          <input className={style.editBtn} type='submit' value='Edit Podcast' />
+          <input className={style.deleteBtn} type='submit' value='Delete Podcast' />
+        </div>
+      </div>
+
+      <div className={style.rightContainer}>
+        <AddButton
+          text={'Add New Review'}
+          href={'_blank'}
+        />
+
+        <div className={style.reviewsContainer}>
+          {
+            reviews.map((review) => {
+                return <ReviewCard
+                  key={review.id}
+                  rating={review.rating}
+                  text={review.text}
+                />
+              }
+            )
+          }
+        </div>
+
+      </div>
+    </div>
+  )
 }
 
-
-export default ViewPodcasts;
+export default ViewPodcasts

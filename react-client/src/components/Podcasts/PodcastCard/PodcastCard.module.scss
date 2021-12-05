@@ -1,0 +1,33 @@
+.podcastCard {
+  background-color: #37393b;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  color: #31aab0;
+  margin-left: 15px;
+  margin-bottom: 15px;
+  transition: transform 0.5s ease;
+  width: 250px;
+  /* prevent podcast-card from showing very long descriptions*/
+  p {
+    height: 10em;
+    overflow: hidden;
+    transition: height 0.5s ease;
+  }
+
+  h2 {
+    height: 3em;
+  }
+
+  img {
+    width: 250px;
+  }
+
+  &:hover {
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    transform: scale(1.3);
+  }
+
+}
+
+
+

@@ -2,3 +2,5 @@
 .idea
 /config/tests.json
 /config/development.json
+/react-client/src/scss/
+/react-client/src/webfonts/
