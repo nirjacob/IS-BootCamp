@@ -1,13 +1,22 @@
-import "./AddButton.module.css"
-import style from "./AddButton.module.css"
+import style from './AddButton.module.css'
+import React from 'react'
+import Proptypes from 'prop-types'
 
-const AddButton = (props) => {
-    return (
-        <button className={style.addNewBtn}>
-            <div className={style.toolTip}>{props.text}</div>
-            <a href={props.href}><i className={"far fa-plus-square fa-4x"}></i></a>
-        </button>
-    )
+const AddButton = ({ href, text }) => {
+
+  return (
+    <div>
+      <button className={style.addNewBtn}>
+        <div className={style.toolTip}>{text}</div>
+        <a href={href}><i className={'far fa-plus-square fa-4x'} /> </a>
+      </button>
+    </div>
+  )
 }
 
-export default AddButton;
+AddButton.propTypes = {
+  href: Proptypes.string,
+  text: Proptypes.string
+}
+
+export default AddButton

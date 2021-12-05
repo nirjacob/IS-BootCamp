@@ -39,7 +39,7 @@ describe('Review components test', () => {
         })
     })
     describe('Get podcast review tests', () => {
-        it('should return 200 and reviews when review is fetched with existing ID ', async () => {
+        it('should return 200 and reviews when review is fetched with existing ID', async () => {
             await supertest(app)
                 .get('/review/get-by-podcast/1132')
                 .expect(200, mockReviews)
