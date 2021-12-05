@@ -6,7 +6,7 @@ const getPodcastsItems = async () => {
 
 const searchItem = async (queryParams) => {
   const query = `%${queryParams}%`
-  const searchResult = await mysql.runQuery('SELECT * FROM `podcasts`.`podcasts` WHERE title OR author LIKE ?;', query)
+  const searchResult = await mysql.runQuery('SELECT * FROM `podcasts`.`podcasts` p WHERE p.title LIKE ? OR p.author LIKE ?;', [query, query])
   if (!searchResult.length) {
     return null
   } else {
