@@ -36,7 +36,7 @@ const Search = (props) => {
 
 Search.propTypes = {
   updateSearch: Proptypes.func,
-  initialData: Proptypes.array
+  initialData: Proptypes.func
 }
 
 export default Search

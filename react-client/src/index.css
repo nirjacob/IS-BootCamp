@@ -12,6 +12,7 @@ body {
     background: #093637;
     font-family: "Monaco", "Courier New", monospace;
     height: 100%;
+    color: rgba(0, 241, 255, 0.84);
 }
 
 code {

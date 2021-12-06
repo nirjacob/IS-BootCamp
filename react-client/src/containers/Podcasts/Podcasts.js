@@ -1,8 +1,7 @@
 import React from 'react'
 import styles from './Podcasts.module.scss'
-import pageStyles from '../../components/Common/PageStyle/PageStyle.module.scss'
 import PodcastCard from '../../components/Podcasts/PodcastCard/PodcastCard'
-import { getPodcasts } from '../../services/Podcasts'
+import { getBestPodcasts } from '../../services/Podcasts'
 import { useState, useEffect } from 'react'
 import Search from '../../components/Podcasts/Search/Search'
 import AddButton from '../../components/Common/AddButton/AddButton'
@@ -13,7 +12,7 @@ const Podcasts = () => {
 
   async function setData() {
     try {
-      const podcastsArray = await getPodcasts(50)
+      const podcastsArray = await getBestPodcasts(50)
       setPodcasts(podcastsArray)
     } catch (err) {
       console.error(`Error: ${err}`)
@@ -22,12 +21,7 @@ const Podcasts = () => {
   }
 
   useEffect(() => {
-    document.body.classList.add(pageStyles.body)
     setData()
-    return () => {
-      document.body.classList.remove(pageStyles.body)
-    }
-
   }, [])
 
   return (
@@ -37,7 +31,7 @@ const Podcasts = () => {
       </div>
       <AddButton
         text={'Add New Podcast'}
-        href={'_blank'}
+        href={'new-podcast'}
       />
 
       <Search
