@@ -5,6 +5,23 @@
   text-align: center;
 }
 
+.homeLink {
+  width: 100%;
+  font-weight: bolder;
+}
+
+.topContainer {
+  color: rgba(0, 241, 255, 0.84);
+  border-image-slice: 1;
+  border-image-source: radial-gradient(#11998EFF 0%, #11998E47 100%);
+  border-bottom: 1px solid;
+  font-size: 2.2em;
+  font-weight: bolder;
+  padding: 15px;
+  margin-bottom: 10px;
+  width: 100%;
+}
+
 .leftContainer {
   background-color: #132325;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5);
@@ -56,29 +73,12 @@
     margin-bottom: 15px;
   }
 
-  .deleteBtn {
-    border-radius: 5px;
-    font-family: "Monaco", "Courier New", monospace;
-    font-size: 18px;
-    margin: 9px 10px;
-    outline: none;
-    background-color: rgba(255, 0, 0, 0.18);
-    border: 1px solid red;
-    color: rgb(194, 62, 62);
-    width: 40%;
-
-    &:hover {
-      background-color: rgb(194, 62, 62);
-      border: 1px solid red;
-      color: black;
-    }
-  }
-
   .editBtn {
+    cursor: pointer;
     background: none;
-    border: 2px solid #11998e;
+    border: 2px solid rgba(0, 241, 255, 0.7);
     border-radius: 5px;
-    color: rgb(17, 153, 142);
+    color: rgba(0, 241, 255, 0.7);
     font-family: "Monaco", "Courier New", monospace;
     font-size: 18px;
     margin: 9px 0;
@@ -86,7 +86,7 @@
     width: 40%;
 
     &:hover {
-      background-color: #00bd86;
+      background-color: rgba(0, 241, 255, 1);
       color: #222831;
     }
   }
@@ -98,6 +98,9 @@
     justify-content: center;
   }
 
+  .btnContainer {
+    margin-top: 20px;
+  }
 }
 
 .rightContainer {
@@ -111,6 +114,7 @@
     flex-direction: column;
     gap: 20px;
     padding-top: 5%;
+    color: rgba(0, 241, 255, 1);
   }
 }
 

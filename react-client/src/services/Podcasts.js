@@ -6,3 +6,4 @@ export const getPodcast = (number) => axios.get(`/podcast/${number}`).then(({ da
 export const getReviews = (number) => axios.get(`/review/get-by-podcast/${number}`).then(({ data }) => data)
 export const updatePodcast = (number, podcast) => axios.put(`/podcast/${number}`, podcast).then(({ data }) => data)
 export const deletePodcast = (number) => axios.delete(`/podcast/${number}`).then(({ data }) => data)
+export const addNewReview = (review) => axios.post(`/review/`, review).then(({ data }) => data)

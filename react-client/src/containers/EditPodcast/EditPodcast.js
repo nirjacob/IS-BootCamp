@@ -104,6 +104,9 @@ const EditPodcast = () => {
                    onClick={deleteEditedPodcast} />
           </Link>
         </div>
+        <Link to={{ pathname: `/podcast/${podcastId}` }} style={{ textDecoration: 'inherit' }}>
+          <input className={style.editBtn} value='Cancel' />
+        </Link>
       </div>
     </div>
   )

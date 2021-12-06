@@ -21,7 +21,13 @@ const Star = ({ rating }) => {
   }, [])
 
   return (
-    <span className={style.star}>{stars}</span>
+    <div>
+      {
+        stars.map((star, index) => {
+          return <span key={index} className={style.star}> {star}</span>
+        })
+      }
+    </div>
   )
 }
 
