@@ -1,36 +1,38 @@
 .searchBar {
+  color: rgba(0, 241, 255, 0.84);
   background-color: transparent;
-  border: 2px solid #11998e;
   border-radius: 5px;
-  color: rgba(0, 189, 134, 0.2);
   font-size: 25px;
   margin-top: 10px;
+  margin-bottom: 10px;
   outline: none;
   text-align: center;
-  width: 35%;
+  width: 45%;
+  border: 2px solid rgb(0, 241, 255);
 
   &:focus {
-    color: rgb(0, 189, 134);
+    color: rgba(0, 189, 134, 0.86);
   }
 }
 
 .searchBtn {
+  color: rgba(0, 241, 255, 0.84);
   background-color: transparent;
   border-radius: 5px;
-  border: 2px solid #11998e;
-  color: #11998e;
+  border: 2px solid rgb(0, 241, 255);
   font-size: 20px;
   margin-top: 10px;
   padding: 5px 30px 5px 30px;
 
   &:hover {
+    cursor: pointer;
     border-color: transparent;
-    background-color: #00bd86;
+    background-color: rgba(0, 241, 255, 0.84);
     color: #222831;
   }
 }
 
 ::placeholder {
-  color: #11998e;
-  opacity: 0.5;
+  color: rgb(0, 241, 255);
+  opacity: 0.8;
 }

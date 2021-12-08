@@ -3,19 +3,19 @@
 .addNewBtn {
     background-color: #222831;
     border: none;
-    color: #11998e;
     filter: drop-shadow(0px 0px 1px);
     height: 0;
     padding: 0;
     position: absolute;
     right: 60px;
     top: 15px;
-
+    color: rgba(0, 241, 255, 1);
 }
 
 .addNewBtn:hover {
     color: #00bd86;
     filter: drop-shadow(0px 0px 1px);
+    cursor: pointer;
 }
 
 .addNewBtn:hover .toolTip {

@@ -76,19 +76,3 @@ body {
 }
 
 
-/*Cancels visited purple color default effect*/
-a:visited {
-    color: inherit;
-    text-decoration: none;
-}
-
-/*Cancels resizing of textarea*/
-textarea {
-    resize: none;
-}
-
-/*Hides arrows from number input box, referenced from: https://www.w3schools.com/howto/howto_css_hide_arrow_number.asp */
-input::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-}

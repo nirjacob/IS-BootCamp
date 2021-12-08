@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import pageStyles from '../../components/Common/PageStyle/PageStyle.module.scss'
 import style from './ViewPodcast.module.scss'
-import { useLocation } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import Tag from '../../components/Common/Tags/Tag'
 import { getPodcast, getReviews } from '../../services/Podcasts'
 import AddButton from '../../components/Common/AddButton/AddButton'
@@ -36,6 +36,11 @@ const ViewPodcasts = () => {
 
   return (
     <div className={style.mainContainer}>
+      <Link to={{ pathname: `/podcast/` }} className={style.homeLink} style={{ textDecoration: 'none' }}>
+        <div className={style.topContainer}>
+          The Podcast Experience You Deserve
+        </div>
+      </Link>
       <div className={style.leftContainer}>
         <PodcastCard
           key={podcast.id}
@@ -60,15 +65,18 @@ const ViewPodcasts = () => {
           <div className={style.formDetails}>{podcast.numberOfEpisodes}</div>
           <div className={style.formLabel}>Average Episode Length</div>
           <div className={style.formDetails}>{podcast.avgEpisodeLength}</div>
-          <input className={style.editBtn} type='submit' value='Edit Podcast' />
-          <input className={style.deleteBtn} type='submit' value='Delete Podcast' />
+          <div className={style.btnContainer}>
+            <Link to={{ pathname: `/podcast/edit/${podcast.id}` }} style={{ textDecoration: 'inherit' }}>
+              <input className={style.editBtn} type='submit' value='Edit Podcast' />
+            </Link>
+          </div>
         </div>
       </div>
 
       <div className={style.rightContainer}>
         <AddButton
           text={'Add New Review'}
-          href={'_blank'}
+          href={`new-review/${podcastId}`}
         />
 
         <div className={style.reviewsContainer}>

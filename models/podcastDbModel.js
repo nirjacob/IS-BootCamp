@@ -24,7 +24,7 @@ const updateItem = async (id, podcast) => {
 }
 
 const deleteItem = async (id) => {
-  return await mysql.runQuery('DELETE FROM `podcasts`.`reviews` WHERE podcastId=?', id)
+  return await mysql.runQuery('DELETE FROM `podcasts`.`podcasts` WHERE id=?', id)
 }
 
 const saveItem = async (podcast) => {
