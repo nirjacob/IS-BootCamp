@@ -3,29 +3,35 @@ import style from './Login.module.scss'
 import { useState, useEffect } from 'react'
 import UsernameIcon from '../../components/Common/Login/UsernameIcon/UsernameIcon'
 import PasswordIcon from '../../components/Common/Login/PasswordIcon/PasswordIcon'
-// import { Link } from 'react-router-dom'
+import { submitLogin } from '../../services/Podcasts'
 
 const Login = () => {
-  const [loginInfo, setLoginInfo] = useState('')
-
+  const [loginDetails, setLoginDetails] = useState('')
 
   useEffect(() => {
-
     document.body.style.background = 'linear-gradient(to right, #11998e 0%, #38ef7d 100%)'
     document.body.style.color = '#074d47'
+    return () => {
+      document.body.style.background = '#093637'
+      document.body.style.color = 'rgba(0, 241, 255, 0.84)'
+    }
   }, [])
 
   function handleChange(event) {
     const { name, value } = event.target
-    setLoginInfo(prevValue => {
+    setLoginDetails(prevValue => {
       return {
-        [name]: value,
-        ...prevValue
+        ...prevValue,
+        [name]: value
       }
     })
-    console.log(loginInfo)
   }
 
+  async function submitLoginDetails() {
+    // **WIP** (we need to plan login logic)
+    await submitLogin(loginDetails)
+    // **WIP** (we need to plan login logic)
+  }
 
   return (
     <div className={style.container}>
@@ -34,13 +40,13 @@ const Login = () => {
         <h1>Podcast Web App</h1>
         <div className={style.textBox}>
           <UsernameIcon />
-          <input type='text' placeholder='Username' onChange={handleChange} />
+          <input type='text' name='username' placeholder='Username' onChange={handleChange} />
         </div>
         <div className={style.textBox}>
           <PasswordIcon />
-          <input type='password' placeholder='Password' />
+          <input type='password' name='password' placeholder='Password' onChange={handleChange} />
         </div>
-        <input type='button' className={style.loginButton} value='Login' onChange={handleChange} />
+        <input type='button' className={style.loginButton} value='Login' onClick={submitLoginDetails} />
       </div>
     </div>
   )
