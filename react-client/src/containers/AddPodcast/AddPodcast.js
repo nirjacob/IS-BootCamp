@@ -11,7 +11,6 @@ const AddPodcast = () => {
 
   async function createPodcast() {
     try {
-      console.log(podcast)
       await addNewPodcast(JSON.parse(JSON.stringify(podcast)))
       setReturnUrl('/podcast')
     } catch (err) {
