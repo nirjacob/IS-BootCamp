@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react'
-import pageStyles from '../../components/Common/PageStyle/PageStyle.module.scss'
 import style from './ViewPodcast.module.scss'
 import { Link, useLocation } from 'react-router-dom'
 import Tag from '../../components/Common/Tags/Tag'
@@ -27,11 +26,7 @@ const ViewPodcasts = () => {
   }
 
   useEffect(() => {
-    document.body.classList.add(pageStyles.body)
     fetchData()
-    return () => {
-      document.body.classList.remove(pageStyles.body)
-    }
   }, [])
 
   return (

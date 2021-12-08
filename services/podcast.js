@@ -20,7 +20,8 @@ const getBestRatedList = async (numberOfItems) => {
     const podcastReviews = { review: reviews, rating: avgScore, podcastInfo: podcast }
     ratedPodcasts.push(podcastReviews)
   }
-  const sortedRatedPodcasts = ratedPodcasts.sort((curr, prev) => prev.rating - curr.rating)
+  const filteredPodcasts = ratedPodcasts.filter((pod) => pod.rating)
+  const sortedRatedPodcasts = filteredPodcasts.sort((curr, prev) => prev.rating - curr.rating)
   const numberOfBestPodcasts = Math.min(numberOfItems, podcastData.length)
   return sortedRatedPodcasts.map((podcast) => podcast.podcastInfo).slice(0, numberOfBestPodcasts)
 }

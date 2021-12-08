@@ -1,0 +1,94 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  height: 100%;
+
+  .middleContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #093637;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5);
+    color: #11998e;
+    flex-basis: 30%;
+    margin-top: 3%;
+    padding: 20px 5%;
+    border: 2px solid;
+    border-image: linear-gradient(to left, #11998e 0%, #38ef7d 100%) 1;
+
+    .formButton {
+      background: none;
+      border: 2px solid rgba(0, 241, 255, 0.6);
+      border-radius: 5px;
+      color: rgba(0, 241, 255, 1);
+      font-family: "Monaco", "Courier New", monospace;
+      font-size: 18px;
+      outline: none;
+      width: 100%;
+      padding-left: 5px;
+      margin: 0;
+    }
+
+    .formTitle {
+      color: rgba(0, 241, 255, 1);
+      text-align: center;
+      font-size: 20px;
+    }
+
+    .formLabels {
+      color: rgba(0, 241, 255, 1);
+      padding-top: 14px;
+      float: left;
+    }
+
+    .submitButtonsContainer {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      gap: 20px;
+      margin: 20px 5px;
+    }
+
+    .editBtn {
+      background: none;
+      border: 2px solid rgba(0, 241, 255, 0.7);
+      border-radius: 5px;
+      color: rgba(0, 241, 255, 1);
+      font-family: "Monaco", "Courier New", monospace;
+      font-size: 18px;
+      text-align: center;
+      cursor: pointer;
+      outline: none;
+
+      &:hover {
+        background-color: rgba(0, 241, 255, 1);
+        color: #222831;
+      }
+    }
+
+
+  }
+
+}
+
+/*Cancels visited purple color default effect*/
+a:visited {
+  color: inherit;
+  text-decoration: none;
+}
+
+/*Cancels resizing of textarea*/
+textarea {
+  resize: none;
+  height: 150px;
+}
+
+/*Hides arrows from number input box, referenced from: https://www.w3schools.com/howto/howto_css_hide_arrow_number.asp */
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
