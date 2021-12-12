@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom'
 
 const Login = () => {
   const [loginDetails, setLoginDetails] = useState('')
-  const [loginStatus, setLoginStatus] = useState('')
+  const [isLoginError, setIsLoginError] = useState(false)
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -33,11 +33,10 @@ const Login = () => {
   async function submitLoginDetails() {
     try {
       window.authorization = await submitLogin(loginDetails)
-      setLoginStatus('')
       navigate('/podcast')
     } catch (err) {
+      setIsLoginError(true)
       console.error(err.message)
-      setLoginStatus('Incorrect username or password')
     }
   }
 
@@ -55,7 +54,9 @@ const Login = () => {
           <input type='password' name='password' placeholder='Password' onChange={handleChange} />
         </div>
         <input type='button' className={style.loginButton} value='Login' onClick={submitLoginDetails} />
-        <div className={style.loginStat}>{loginStatus}</div>
+        {
+          isLoginError && <div className={style.loginStat}>Incorrect username or password</div>
+        }
       </div>
     </div>
   )

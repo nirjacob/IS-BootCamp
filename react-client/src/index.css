@@ -1,5 +1,4 @@
 html {
-    height: 100%;
 }
 
 body {
@@ -9,9 +8,8 @@ body {
     sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    background: #093637;
     font-family: "Monaco", "Courier New", monospace;
-    height: 100%;
+    background: #093637;
     color: rgba(0, 241, 255, 0.84);
 }
 

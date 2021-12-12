@@ -6,7 +6,6 @@ import { useState, useEffect } from 'react'
 import Search from '../../components/Podcasts/Search/Search'
 import AddButton from '../../components/Common/AddButton/AddButton'
 
-
 const Podcasts = () => {
   const [podcasts, setPodcasts] = useState([])
 
