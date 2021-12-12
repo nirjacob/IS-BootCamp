@@ -8,6 +8,7 @@ import EditPodcast from './containers/EditPodcast/EditPodcast'
 import AddReview from './containers/AddReview/AddReview'
 import AddPodcast from './containers/AddPodcast/AddPodcast'
 import Login from './containers/Login/Login'
+import './utils/requests'
 
 function App() {
   return (

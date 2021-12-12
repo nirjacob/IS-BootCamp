@@ -4,9 +4,12 @@ import { useState, useEffect } from 'react'
 import UsernameIcon from '../../components/Common/Login/UsernameIcon/UsernameIcon'
 import PasswordIcon from '../../components/Common/Login/PasswordIcon/PasswordIcon'
 import { submitLogin } from '../../services/Podcasts'
+import { useNavigate } from 'react-router-dom'
 
 const Login = () => {
   const [loginDetails, setLoginDetails] = useState('')
+  const [loginStatus, setLoginStatus] = useState('')
+  const navigate = useNavigate()
 
   useEffect(() => {
     document.body.style.background = 'linear-gradient(to right, #11998e 0%, #38ef7d 100%)'
@@ -28,9 +31,14 @@ const Login = () => {
   }
 
   async function submitLoginDetails() {
-    // **WIP** (we need to plan login logic)
-    await submitLogin(loginDetails)
-    // **WIP** (we need to plan login logic)
+    try {
+      window.authorization = await submitLogin(loginDetails)
+      setLoginStatus('')
+      navigate('/podcast')
+    } catch (err) {
+      console.error(err.message)
+      setLoginStatus('Incorrect username or password')
+    }
   }
 
   return (
@@ -47,6 +55,7 @@ const Login = () => {
           <input type='password' name='password' placeholder='Password' onChange={handleChange} />
         </div>
         <input type='button' className={style.loginButton} value='Login' onClick={submitLoginDetails} />
+        <div className={style.loginStat}>{loginStatus}</div>
       </div>
     </div>
   )
