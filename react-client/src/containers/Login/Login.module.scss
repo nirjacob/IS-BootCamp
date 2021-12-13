@@ -1,12 +1,22 @@
+html {
+  height: 100%;
+}
+
+body {
+  height: 100%;
+}
+
 .container {
+  color: #074d47;
+  background: linear-gradient(to right, #11998e 0%, #38ef7d 100%);
   display: flex;
   justify-content: center;
   align-items: center;
-  height: inherit;
-  margin-top: 10%;
+  height: 100%;
+  padding-top: 5%;
 
   .loginContainer {
-    padding: 50px;
+    padding: 30px 50px 50px 50px;
     border: 2px solid;
     border-image-slice: 2;
     border-image-source: linear-gradient(to right, #11998e 0%, #38ef7d 100%);
@@ -20,7 +30,6 @@
     .logo {
       animation: wiggle 2.5s infinite;
       height: 10em;
-      margin-left: 30%;
     }
 
     .textBox {

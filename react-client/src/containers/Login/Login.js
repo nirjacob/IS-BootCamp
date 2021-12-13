@@ -5,6 +5,7 @@ import UsernameIcon from '../../components/Common/Login/UsernameIcon/UsernameIco
 import PasswordIcon from '../../components/Common/Login/PasswordIcon/PasswordIcon'
 import { submitLogin } from '../../services/Podcasts'
 import { useNavigate } from 'react-router-dom'
+import logo from '../../images/podcastLogo.png'
 
 const Login = () => {
   const [loginDetails, setLoginDetails] = useState('')
@@ -12,8 +13,8 @@ const Login = () => {
   const navigate = useNavigate()
 
   useEffect(() => {
-    document.body.style.background = 'linear-gradient(to right, #11998e 0%, #38ef7d 100%)'
-    document.body.style.color = '#074d47'
+    // document.body.style.background = 'linear-gradient(to right, #11998e 0%, #38ef7d 100%)'
+    // document.body.style.color = '#074d47'
     return () => {
       document.body.style.background = '#093637'
       document.body.style.color = 'rgba(0, 241, 255, 0.84)'
@@ -32,7 +33,8 @@ const Login = () => {
 
   async function submitLoginDetails() {
     try {
-      window.authorization = await submitLogin(loginDetails)
+      const jwtLoginToken = await submitLogin(loginDetails)
+      localStorage.setItem('jwtLoginToken', jwtLoginToken)
       navigate('/podcast')
     } catch (err) {
       setIsLoginError(true)
@@ -40,18 +42,26 @@ const Login = () => {
     }
   }
 
+  const handleEnterPress = async (event) => {
+    if (event.key === 'Enter') {
+      await submitLoginDetails()
+    }
+  }
+
   return (
     <div className={style.container}>
       <div className={style.loginContainer}>
-        <img src='../../images/podcastLogo.png' alt='logo' className={style.logo} />
+        <img src={logo} alt='logo' className={style.logo} />
         <h1>Podcast Web App</h1>
         <div className={style.textBox}>
           <UsernameIcon />
-          <input type='text' name='username' placeholder='Username' onChange={handleChange} />
+          <input type='text' name='username' placeholder='Username' onChange={handleChange}
+                 onKeyDown={(e) => handleEnterPress(e)} />
         </div>
         <div className={style.textBox}>
           <PasswordIcon />
-          <input type='password' name='password' placeholder='Password' onChange={handleChange} />
+          <input type='password' name='password' placeholder='Password' onChange={handleChange}
+                 onKeyDown={(e) => handleEnterPress(e)} />
         </div>
         <input type='button' className={style.loginButton} value='Login' onClick={submitLoginDetails} />
         {
