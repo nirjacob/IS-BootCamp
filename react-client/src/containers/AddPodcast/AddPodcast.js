@@ -1,35 +1,29 @@
 import React from 'react'
 import style from './AddPodcast.module.scss'
-import { useEffect, useState } from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import { useState } from 'react'
+import { Link } from 'react-router-dom'
 import { addNewPodcast } from '../../services/Podcasts'
 
 const AddPodcast = () => {
   const [podcast, setPodcast] = useState({})
-  const [returnUrl, setReturnUrl] = useState({})
-  const location = useLocation()
 
   async function createPodcast() {
     try {
-      await addNewPodcast(JSON.parse(JSON.stringify(podcast)))
-      setReturnUrl('/podcast')
+      await addNewPodcast(podcast)
+      window.location.href = '/podcast'
     } catch (err) {
-      setReturnUrl(location.pathname)
       window.alert(`Failed to create podcast please fill all fields`)
       console.error(`${err}`)
     }
   }
 
-  useEffect(() => {
-    setReturnUrl(location.pathname)
-  }, [])
-
   function handleChange(event) {
     const { name, value } = event.target
     setPodcast(prevValue => {
       return {
-        [name]: value,
-        ...prevValue
+        ...prevValue,
+        [name]: value
+
       }
     })
   }
@@ -69,10 +63,8 @@ const AddPodcast = () => {
         <input className={style.formButton} type='text' name='category' onChange={handleChange}
                placeholder={podcast.category} />
         <div className={style.submitButtonsContainer}>
-          <Link to={{ pathname: `${returnUrl}` }} style={{ textDecoration: 'none' }} onClick={createPodcast}>
-            <input className={style.editBtn}
-                   value='Create Podcast' />
-          </Link>
+          <input className={style.editBtn} onClick={createPodcast}
+                 value='Create Podcast' />
           <Link to={{ pathname: `/podcast` }} style={{ textDecoration: 'none' }}>
             <input className={style.editBtn} value='Cancel' />
           </Link>

@@ -13,6 +13,7 @@ const EditPodcast = () => {
     try {
       await deletePodcast(podcastId)
     } catch (err) {
+      window.alert(`Unable to delete podcast ${err}`)
       console.error(`${err}`)
     }
   }
@@ -21,26 +22,19 @@ const EditPodcast = () => {
     try {
       await updatePodcast(podcastId, podcast)
     } catch (err) {
+      window.alert(`Unable to update podcast ${err}`)
       console.error(`${err}`)
     }
   }
 
+  useEffect(() => {
+    console.log(podcast)
+  }, [podcast])
+
   async function setData() {
     try {
       const podcastById = await getPodcast(podcastId)
-      setPodcast({
-        title: podcastById.title,
-        author: podcastById.author,
-        description: podcastById.description,
-        htmlDescription: podcastById.htmlDescription,
-        webUrl: podcastById.webUrl,
-        imageUrl: podcastById.imageUrl,
-        language: podcastById.language,
-        numberOfEpisodes: podcastById.numberOfEpisodes,
-        avgEpisodeLength: podcastById.avgEpisodeLength,
-        category: podcastById.category
-      })
-
+      setPodcast(podcastById)
     } catch (err) {
       console.error(`${err}`)
     }

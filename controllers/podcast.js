@@ -13,8 +13,7 @@ const getBestPodcast = async (req, res, next) => {
     const podcastsInfo = await getBestPodcasts(numberOfPodcasts)
     if (!podcastsInfo) return res.status(404).send('No podcasts to present')
     return res.status(200).send(podcastsInfo)
-  } catch
-    (err) {
+  } catch (err) {
     return next(err)
   }
 }
@@ -24,8 +23,7 @@ const searchPodcast = async (req, res, next) => {
     const podcastsInfo = await getPodcastSearchResults(queryParams)
     if (!podcastsInfo) return res.status(404).send('Podcasts not found')
     return res.status(200).send(podcastsInfo)
-  } catch
-    (err) {
+  } catch (err) {
     return next(err)
   }
 }
@@ -45,8 +43,7 @@ const addNewPodcast = async (req, res, next) => {
     const newPodcast = req.body
     await savePodcastToDb(newPodcast)
     return res.status(200).send('Podcasts has been successfully added')
-  } catch
-    (err) {
+  } catch (err) {
     return next(err)
   }
 }
