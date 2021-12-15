@@ -44,10 +44,10 @@ const AddReview = () => {
           <textarea className={style.formButton} id='text' placeholder='Write a review'
                     onChange={e => setText(e.target.value)} />
           <Link to={{ pathname: `/podcast/${podcastId}` }} style={{ textDecoration: 'inherit' }}>
-            <input className={style.submitButton} placeholder='Add Review' onClick={ratePodcast} />
+            <button className={style.submitButton} onClick={ratePodcast}>Add Review</button>
           </Link>
           <Link to={{ pathname: `/podcast/${podcastId}` }} style={{ textDecoration: 'inherit' }}>
-            <input className={style.submitButton} placeholder='Cancel' />
+            <button className={style.submitButton}>Cancel</button>
           </Link>
         </form>
 

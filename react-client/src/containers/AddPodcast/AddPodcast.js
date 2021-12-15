@@ -63,10 +63,11 @@ const AddPodcast = () => {
         <input className={style.formButton} type='text' name='category' onChange={handleChange}
                placeholder={podcast.category} />
         <div className={style.submitButtonsContainer}>
-          <input className={style.editBtn} onClick={createPodcast}
-                 value='Create Podcast' />
+          <button className={style.editBtn} onClick={createPodcast}
+          >Create Podcast
+          </button>
           <Link to={{ pathname: `/podcast` }} style={{ textDecoration: 'none' }}>
-            <input className={style.editBtn} value='Cancel' />
+            <button className={style.editBtn}>Cancel</button>
           </Link>
         </div>
       </div>

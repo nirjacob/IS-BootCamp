@@ -27,10 +27,6 @@ const EditPodcast = () => {
     }
   }
 
-  useEffect(() => {
-    console.log(podcast)
-  }, [podcast])
-
   async function setData() {
     try {
       const podcastById = await getPodcast(podcastId)
@@ -90,16 +86,18 @@ const EditPodcast = () => {
                placeholder={podcast.category} />
         <div className={style.submitButtonsContainer}>
           <Link to={{ pathname: `/podcast/${podcastId}` }} style={{ textDecoration: 'inherit' }}>
-            <input className={style.editBtn} type='submit'
-                   value='Edit Podcast' onClick={updateEditedPodcast} />
+            <button className={style.editBtn} type='submit'
+                    onClick={updateEditedPodcast}>Edit Podcast
+            </button>
           </Link>
           <Link to={{ pathname: '/' }} style={{ textDecoration: 'inherit' }}>
-            <input className={style.deleteBtn} type='submit' value='Delete Podcast'
-                   onClick={deleteEditedPodcast} />
+            <button className={style.deleteBtn} type='submit'
+                    onClick={deleteEditedPodcast}>Delete Podcast
+            </button>
           </Link>
         </div>
         <Link to={{ pathname: `/podcast/${podcastId}` }} style={{ textDecoration: 'inherit' }}>
-          <input className={style.editBtn} value='Cancel' />
+          <button className={style.editBtn}>Cancel</button>
         </Link>
       </div>
     </div>
