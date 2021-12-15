@@ -1,11 +1,13 @@
 import React from 'react'
 import style from './AddPodcast.module.scss'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { addNewPodcast } from '../../services/Podcasts'
+import { useNavigate } from 'react-router'
 
 const AddPodcast = () => {
   const [podcast, setPodcast] = useState({})
+  const navigate = useNavigate()
 
   async function createPodcast() {
     try {
@@ -27,6 +29,12 @@ const AddPodcast = () => {
       }
     })
   }
+
+  useEffect(() => {
+    if (!localStorage.getItem('jwtLoginToken')) {
+      navigate('/login')
+    }
+  }, [])
 
   return (
     <div className={style.container}>

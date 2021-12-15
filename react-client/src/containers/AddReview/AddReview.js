@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import style from './AddReview.module.scss'
 import { useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { addNewReview } from '../../services/Podcasts'
+import { useNavigate } from 'react-router'
 
 const AddReview = () => {
   const location = useLocation()
@@ -10,6 +11,13 @@ const AddReview = () => {
   const [ratingStars, setRatingStars] = useState(0)
   const [rating, setRating] = useState({})
   const [text, setText] = useState({})
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    if (!localStorage.getItem('jwtLoginToken')) {
+      navigate('/login')
+    }
+  }, [])
 
   async function setStars(event) {
     const selectedRating = parseInt(event.target.id.replace('star', ''))
