@@ -7,6 +7,8 @@ import ViewPodcast from './containers/ViewPodcast/ViewPodcast'
 import EditPodcast from './containers/EditPodcast/EditPodcast'
 import AddReview from './containers/AddReview/AddReview'
 import AddPodcast from './containers/AddPodcast/AddPodcast'
+import Login from './containers/Login/Login'
+import './utils/requests'
 
 function App() {
   return (
@@ -19,6 +21,7 @@ function App() {
           <Route path='/podcast/edit/*' element={<EditPodcast />} />
           <Route path='/podcast/new-podcast' element={<AddPodcast />} />
           <Route path='/podcast/new-review/*' element={<AddReview />} />
+          <Route path='/login' element={<Login />} />
         </Routes>
       </Router>
     </div>
