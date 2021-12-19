@@ -19,6 +19,10 @@
     border: 2px solid;
     border-image: linear-gradient(to left, #11998e 0%, #38ef7d 100%) 1;
 
+    textarea {
+      height: 350px;
+    }
+
     .formButton {
       background: none;
       border: 2px solid rgba(0, 241, 255, 0.6);
@@ -88,7 +92,7 @@
       align-items: center;
       justify-content: space-around;
       gap: 20px;
-      margin: 10px 5px;
+      margin: 20px 5px;
     }
 
   }
@@ -104,7 +108,6 @@ a:visited {
 /*Cancels resizing of textarea*/
 textarea {
   resize: none;
-  height: 150px;
 }
 
 /*Hides arrows from number input box, referenced from: https://www.w3schools.com/howto/howto_css_hide_arrow_number.asp */

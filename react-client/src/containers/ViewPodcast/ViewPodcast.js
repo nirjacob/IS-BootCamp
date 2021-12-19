@@ -7,15 +7,18 @@ import AddButton from '../../components/Common/AddButton/AddButton'
 import ReviewCard from '../../components/Podcasts/ReviewCard/ReviewCard'
 import PodcastCard from '../../components/Podcasts/PodcastCard/PodcastCard'
 import React from 'react'
+import LoginBtn from '../../components/Common/Login/LoginBtn/LoginBtn'
 
 const ViewPodcasts = () => {
   const [podcast, setPodcasts] = useState([])
   const [reviews, setReviews] = useState([])
   const location = useLocation()
   const podcastId = location.pathname.replace('/podcast/', '')
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
 
   async function fetchData() {
     try {
+      setIsLoggedIn(!!localStorage.getItem('jwtLoginToken'))
       const podcastById = await getPodcast(podcastId)
       setPodcasts(podcastById)
       const reviewsByPodcast = await getReviews(podcastId)
@@ -62,18 +65,23 @@ const ViewPodcasts = () => {
           <div className={style.formDetails}>{podcast.avgEpisodeLength}</div>
           <div className={style.btnContainer}>
             <Link to={{ pathname: `/podcast/edit/${podcast.id}` }} style={{ textDecoration: 'inherit' }}>
-              <input className={style.editBtn} type='submit' value='Edit Podcast' />
+              {isLoggedIn && <input className={style.editBtn} type='submit' value='Edit Podcast' />}
             </Link>
           </div>
         </div>
       </div>
 
       <div className={style.rightContainer}>
-        <AddButton
+        <LoginBtn
+          text={isLoggedIn ? 'Logout' : 'Login'}
+        />
+
+        {!isLoggedIn && <AddButton
           text={'Add New Review'}
           href={`new-review/${podcastId}`}
         />
-
+        }
+        
         <div className={style.reviewsContainer}>
           {
             reviews.map((review) => {

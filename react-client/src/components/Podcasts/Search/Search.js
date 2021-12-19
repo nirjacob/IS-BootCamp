@@ -28,7 +28,6 @@ const Search = (props) => {
              onChange={(e) => setSearchString(e.target.value)}
       />
       <div>
-        <button className={style.searchBtn}>Search</button>
       </div>
     </div>
   )
