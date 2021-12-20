@@ -6,15 +6,42 @@
   "reviewsPath": "data/reviews.json",
   "cacheExpiration": 1200,
   "isCacheEnabled": false,
+  "static": "react-client/src",
   "redis": {
     "port": 6379,
     "host": "localhost",
     "cacheDuration": 5
   },
-  "db": {
-    "port": 3306,
+  "Db": {
     "host": "localhost",
+    "port": 3306,
     "user": "root",
-    "password": ""
+    "pass": ""
+  },
+  "auth": {
+    "secret": "IS-BOOTCAMP",
+    "expireIn": 1500,
+    "protectedUrls": [
+      {
+        "method": "POST",
+        "path": "/review"
+      },
+      {
+        "method": "POST",
+        "path": "/podcast/new"
+      },
+      {
+        "method": "PUT",
+        "path": "/podcast/"
+      },
+      {
+        "method": "DELETE",
+        "path": "/podcast/"
+      }
+    ],
+    "isAuthEnabled": true
   }
 }
+
+
+
