@@ -62,7 +62,7 @@ const ViewPodcasts = () => {
           <div className={style.formLabel}>Number Of Episodes</div>
           <div className={style.formDetails}>{podcast.numberOfEpisodes}</div>
           <div className={style.formLabel}>Average Episode Length</div>
-          <div className={style.formDetails}>{podcast.avgEpisodeLength}</div>
+          <div className={style.formDetails}>{`${parseInt(podcast.avgEpisodeLength / 60)}m`}</div>
           <div className={style.btnContainer}>
             <Link to={{ pathname: `/podcast/edit/${podcast.id}` }} style={{ textDecoration: 'inherit' }}>
               {isLoggedIn && <input className={style.editBtn} type='submit' value='Edit Podcast' />}

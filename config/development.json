@@ -5,13 +5,25 @@
   "filePath": "data/podcasts.json",
   "reviewsPath": "data/reviews.json",
   "cacheExpiration": 1200,
-  "isCacheEnabled": false,
+  "isCacheEnabled": true,
   "static": "react-client/src",
   "redis": {
     "port": 6379,
     "host": "localhost",
     "cacheDuration": 5
   },
+  "cache": [
+    {
+      "requestUrl": "/podcast/:id",
+      "method": "DELETE",
+      "cacheToClear": "/podcast/:id"
+    },
+    {
+      "requestUrl": "/podcast/:id",
+      "method": "PUT",
+      "cacheToClear": "/podcast/:id"
+    }
+  ],
   "Db": {
     "host": "localhost",
     "port": 3306,
@@ -24,7 +36,7 @@
     "protectedUrls": [
       {
         "method": "POST",
-        "path": "/review"
+        "path": "/review/:id(\\d+)"
       },
       {
         "method": "POST",
@@ -32,11 +44,11 @@
       },
       {
         "method": "PUT",
-        "path": "/podcast/"
+        "path": "/podcast/:id(\\d+)"
       },
       {
         "method": "DELETE",
-        "path": "/podcast/"
+        "path": "/podcast/:id(\\d+)"
       }
     ],
     "isAuthEnabled": true

@@ -1,14 +1,11 @@
 const config = require('config')
-const { verifyJwt } = require('../services/authentication')
+const { verifyJwt, isProtectedPath } = require('../services/authentication')
 
 const authenticateJwt = async (req, res, next) => {
   const reqPath = req.path.toString()
   const reqMethod = req.method.toString()
 
-  const isProtectedUrl = config.auth.protectedUrls.find((request) => {
-    return (reqPath.startsWith(request.path) && (reqMethod === request.method))
-  })
-  if (isProtectedUrl && config.auth.isAuthEnabled) {
+  if (isProtectedPath(reqMethod, reqPath) && config.auth.isAuthEnabled) {
     try {
       await verifyJwt(req.headers.authorization, config.auth.secret)
     } catch (error) {

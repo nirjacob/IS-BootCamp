@@ -19,7 +19,7 @@ const {
 } = require('../controllers/podcast')
 
 router.get('/best/:number', urlParamsSchemeValidator(podcastBestSchema), bestPodcast)
-router.get('/search/:query', urlParamsSchemeValidator(podcastSearchSchema), searchPodcast)
+router.get('/search/item/:query', urlParamsSchemeValidator(podcastSearchSchema), searchPodcast)
 router.get('/:id', urlParamsSchemeValidator(idSchema), getPodcast)
 router.delete('/:id', urlParamsSchemeValidator(idSchema), deletePodcast)
 router.put('/:id', requestSchemeValidator(podcastUpdateSchema), updatePodcast)
