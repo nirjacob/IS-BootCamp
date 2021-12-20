@@ -36,7 +36,7 @@
     "protectedUrls": [
       {
         "method": "POST",
-        "path": "/review/:id"
+        "path": "/review/:id(\\d+)"
       },
       {
         "method": "POST",
@@ -44,11 +44,11 @@
       },
       {
         "method": "PUT",
-        "path": "/podcast/:id"
+        "path": "/podcast/:id(\\d+)"
       },
       {
         "method": "DELETE",
-        "path": "/podcast/:id"
+        "path": "/podcast/:id(\\d+)"
       }
     ],
     "isAuthEnabled": true
