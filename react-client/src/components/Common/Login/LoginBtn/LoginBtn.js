@@ -3,29 +3,29 @@ import React from 'react'
 import Proptypes from 'prop-types'
 import { useNavigate } from 'react-router'
 
-const LoginBtn = ({ text }) => {
+const LoginBtn = ({ isLoggedIn }) => {
   const navigate = useNavigate()
 
   const btnClicked = () => {
-    if (text === 'Logout') {
+    if (isLoggedIn) {
       localStorage.clear()
       window.location.reload()
     } else {
       navigate('/login')
     }
   }
-  
+
   return (
     <div className={style.btnWrapper}>
       <button className={style.btn} onClick={btnClicked}>
-        {text}
+        {isLoggedIn ? 'Logout' : 'Login'}
       </button>
     </div>
   )
 }
 
 LoginBtn.propTypes = {
-  text: Proptypes.string
+  isLoggedIn: Proptypes.bool
 }
 
 export default LoginBtn

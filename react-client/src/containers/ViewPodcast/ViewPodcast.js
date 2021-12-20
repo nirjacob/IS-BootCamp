@@ -73,7 +73,7 @@ const ViewPodcasts = () => {
 
       <div className={style.rightContainer}>
         <LoginBtn
-          text={isLoggedIn ? 'Logout' : 'Login'}
+          isLoggedIn={isLoggedIn}
         />
 
         {!isLoggedIn && <AddButton
@@ -81,7 +81,7 @@ const ViewPodcasts = () => {
           href={`new-review/${podcastId}`}
         />
         }
-        
+
         <div className={style.reviewsContainer}>
           {
             reviews.map((review) => {
