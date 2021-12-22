@@ -1,21 +1,13 @@
 const config = require('config')
-const redis = require('redis')
-const { isInCache, formatCacheData, clearOutdatedCache } = require('../services/cache')
-
-const cacheDataClient = redis.createClient(config.redis)
-cacheDataClient.connect()
-
-const saveToCache = async (url, data) => {
-  await cacheDataClient.set(url, formatCacheData(url, Date.now(), data))
-  await cacheDataClient.expire(url, config.redis.cacheDuration)
-}
+const { isInCache, saveToCache, getCacheData, clearOutdatedCache } = require('../services/cache')
 
 const handleRequestsData = async (req, res, next) => {
   const { url, method } = req
+
   if (config.isCacheEnabled) {
-    clearOutdatedCache(url, method, cacheDataClient)
+    clearOutdatedCache(url, method)
     if (req.method === 'GET') {
-      const requestedUrl = await cacheDataClient.get(url)
+      const requestedUrl = await getCacheData(url)
       if (isInCache(requestedUrl)) {
         return res.status(200).send(JSON.parse(requestedUrl).data)
       } else {
@@ -33,4 +25,4 @@ const handleRequestsData = async (req, res, next) => {
   return next()
 }
 
-module.exports = { handleCachedData: handleRequestsData }
+module.exports = { handleRequestsData }

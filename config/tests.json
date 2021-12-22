@@ -14,14 +14,16 @@
   },
   "cache": [
     {
-      "requestUrl": "/podcast/:id",
       "method": "DELETE",
-      "cacheToClear": "/podcast/:id"
+      "cacheToClear": [
+        "/podcast/best/50"
+      ]
     },
     {
-      "requestUrl": "/podcast/:id",
       "method": "PUT",
-      "cacheToClear": "/podcast/:id"
+      "cacheToClear": [
+        "/podcast/best/50"
+      ]
     }
   ],
   "Db": {
@@ -32,7 +34,7 @@
   },
   "auth": {
     "secret": "IS-BOOTCAMP",
-    "expireIn": 1500,
+    "expireIn": 15000,
     "protectedUrls": [
       {
         "method": "POST",
