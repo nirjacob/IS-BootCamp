@@ -11,7 +11,7 @@
 }
 
 .topContainer {
-  color: rgba(0, 241, 255, 0.84);
+  color: rgb(0, 241, 255);
   border-image-slice: 1;
   border-image-source: radial-gradient(#11998EFF 0%, #11998E47 100%);
   border-bottom: 1px solid;
@@ -29,7 +29,17 @@
   flex-basis: 30%;
 
   .podcastCard {
+    h2 {
+      margin-top: 5px;
+      margin-bottom: 0;
+    }
+
+    h4 {
+      margin: 0;
+    }
+
     p {
+      margin-top: 5px;
       padding: 0 5px 0 5px;
     }
 
@@ -47,7 +57,7 @@
   padding: 15px;
 
   .formTitle {
-    color: rgba(0, 241, 255, 0.84);
+    color: rgb(0, 241, 255);
     font-size: 40px;
     font-weight: bold;
     margin-bottom: 10px;
@@ -91,6 +101,7 @@
   }
 
   .tagsContainer {
+    text-transform: capitalize;
     display: flex;
     flex-wrap: wrap;
     gap: 5px;
@@ -112,7 +123,7 @@
     display: flex;
     flex-direction: column;
     gap: 20px;
-    padding-top: 5%;
+    padding-top: 5px;
     color: rgba(0, 241, 255, 1);
   }
 }

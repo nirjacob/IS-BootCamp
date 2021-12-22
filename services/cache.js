@@ -33,13 +33,9 @@ const isInCache = (requestedUrl) => {
 }
 
 const clearOutdatedCache = (url, method) => {
-  const matchingReqPath = config.cache.find((cachedReq) => {
-    return pathToRegexp(cachedReq.requestUrl).exec(url)
-  })
-
-  config.cache.map((req) => {
-    if (matchingReqPath && req.method === method) {
-      req.cacheToClear.map((cachedUrl) => cacheDataClient.del(cachedUrl))
+  config.cache.map((cachedReq) => {
+    if (pathToRegexp(cachedReq.requestUrl).exec(url) && cachedReq.method === method) {
+      cachedReq.cacheToClear.map((cachedUrl) => cacheDataClient.del(cachedUrl))
       if (cacheDataClient.get(url)) cacheDataClient.del(url)
     }
   })
