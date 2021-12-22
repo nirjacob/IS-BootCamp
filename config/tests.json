@@ -4,35 +4,39 @@
   "dbName": "podcasts",
   "filePath": "data/podcasts.json",
   "reviewsPath": "data/reviews.json",
-  "cacheExpiration": 1200,
-  "isCacheEnabled": true,
   "static": "react-client/src",
   "redis": {
     "port": 6379,
     "host": "localhost",
     "cacheDuration": 5
   },
-  "cache": [
-    {
-      "requestUrl": "/podcast/:id(\\d+)",
-      "method": "DELETE",
-      "cacheToClear": [
-        "/podcast/best/50"
-      ]
-    },
-    {
-      "requestUrl": "/podcast/:id(\\d+)",
-      "method": "PUT",
-      "cacheToClear": [
-        "/podcast/best/50"
-      ]
-    }
-  ],
+  "cache": {
+    "cacheExpiration": 1200,
+    "isCacheEnabled": true,
+    "cacheClearMap": [
+      {
+        "requestUrl": "/podcast/:id(\\d+)",
+        "method": "DELETE",
+        "cacheToClear": [
+          "/podcast/best/50",
+          "/podcast/:id"
+        ]
+      },
+      {
+        "requestUrl": "/podcast/:id(\\d+)",
+        "method": "PUT",
+        "cacheToClear": [
+          "/podcast/best/50",
+          "/podcast/:id"
+        ]
+      }
+    ]
+  },
   "Db": {
     "host": "localhost",
     "port": 3306,
     "user": "root",
-    "pass": ""
+    "pass": "Newquickgod123"
   },
   "auth": {
     "secret": "IS-BOOTCAMP",

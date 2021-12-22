@@ -10,7 +10,7 @@ cacheDataClient.connect()
 
 const saveToCache = async (url, data) => {
   await cacheDataClient.set(url, formatCacheData(url, Date.now(), data))
-  await cacheDataClient.expire(url, config.redis.cacheDuration)
+  await cacheDataClient.expire(url, config.cache.cacheExpiration)
 }
 
 const formatCacheData = (requestUrl, timeStamp, data) => {
@@ -33,10 +33,16 @@ const isInCache = (requestedUrl) => {
 }
 
 const clearOutdatedCache = (url, method) => {
-  config.cache.map((cachedReq) => {
-    if (pathToRegexp(cachedReq.requestUrl).exec(url) && cachedReq.method === method) {
-      cachedReq.cacheToClear.map((cachedUrl) => cacheDataClient.del(cachedUrl))
-      if (cacheDataClient.get(url)) cacheDataClient.del(url)
+  config.cache.cacheClearMap.map((cachedReq) => {
+    const urlRegExp = pathToRegexp(cachedReq.requestUrl).exec(url)
+    if (urlRegExp && cachedReq.method === method) {
+      const podcastId = urlRegExp[1]
+      cachedReq.cacheToClear.map((cachedUrl) => {
+        const keys = []
+        pathToRegexp(cachedUrl, keys)
+        const urlToDelete = keys.length === 0 ? cachedUrl : cachedUrl.replace(`:${keys[0].name}`, podcastId)
+        if (cacheDataClient.get(urlToDelete)) cacheDataClient.del(urlToDelete)
+      })
     }
   })
 }
