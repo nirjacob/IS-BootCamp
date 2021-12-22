@@ -32,18 +32,24 @@ const isInCache = (requestedUrl) => {
   return null
 }
 
+
 const clearOutdatedCache = (url, method) => {
   config.cache.cacheClearMap.map((cachedReq) => {
-    const urlRegExp = pathToRegexp(cachedReq.requestUrl).exec(url)
-    if (urlRegExp && cachedReq.method === method) {
-      const podcastId = urlRegExp[1]
-      cachedReq.cacheToClear.map((cachedUrl) => {
-        const keys = []
-        pathToRegexp(cachedUrl, keys)
-        const urlToDelete = keys.length === 0 ? cachedUrl : cachedUrl.replace(`:${keys[0].name}`, podcastId)
-        if (cacheDataClient.get(urlToDelete)) cacheDataClient.del(urlToDelete)
-      })
+      const keys = []
+      const urlRegExp = pathToRegexp(cachedReq.requestUrl, keys).exec(url)
+      if (urlRegExp && cachedReq.method === method) {
+        cachedReq.cacheToClear.map((cachedUrl) => {
+          const keys = []
+          pathToRegexp(cachedUrl, keys)
+          let urlToDelete = cachedUrl
+          keys.map((key, index) => {
+            urlToDelete = urlToDelete.replace(`:${key.name}`, urlRegExp[index + 1])
+          })
+          cacheDataClient.del(urlToDelete)
+        })
+      }
     }
-  })
+  )
 }
+
 module.exports = { isInCache, saveToCache, clearOutdatedCache, getCacheData }
