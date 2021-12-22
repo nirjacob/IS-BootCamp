@@ -1,5 +1,6 @@
 const config = require('config')
 const redis = require('redis')
+const { pathToRegexp } = require('path-to-regexp')
 
 const cacheMinutesToLive = 10
 const cacheMillisecondsToLive = cacheMinutesToLive * 60 * 1000
@@ -32,10 +33,14 @@ const isInCache = (requestedUrl) => {
 }
 
 const clearOutdatedCache = (url, method) => {
+  const matchingReqPath = config.cache.find((cachedReq) => {
+    return pathToRegexp(cachedReq.requestUrl).exec(url)
+  })
+
   config.cache.map((req) => {
-    if (req.method === method && isInCache(url)) {
+    if (matchingReqPath && req.method === method) {
       req.cacheToClear.map((cachedUrl) => cacheDataClient.del(cachedUrl))
-      cacheDataClient.del(url)
+      if (cacheDataClient.get(url)) cacheDataClient.del(url)
     }
   })
 }
