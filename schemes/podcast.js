@@ -2,7 +2,7 @@ const joi = require('joi')
 
 const podcastBestSchema = joi.object(
   {
-    number: joi.number().integer().required()
+    number: joi.number().integer()
   })
 const podcastSearchSchema = joi.object(
   {

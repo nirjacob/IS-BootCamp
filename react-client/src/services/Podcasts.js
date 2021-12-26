@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-export const getBestPodcasts = (number) => axios.get(`/podcast/best/${number}`).then(({ data }) => data)
+export const getBestPodcasts = () => axios.get(`/podcast/best`).then(({ data }) => data)
 export const searchPodcasts = (string) => axios.get(`/podcast/search/item/${string}`).then(({ data }) => data)
 export const getPodcast = (number) => axios.get(`/podcast/${number}`).then(({ data }) => data)
 export const getReviews = (number) => axios.get(`/review/get-by-podcast/${number}`).then(({ data }) => data)

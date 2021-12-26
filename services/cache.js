@@ -38,11 +38,11 @@ const clearOutdatedCache = (url, method) => {
       const keys = []
       const urlRegExp = pathToRegexp(cachedReq.requestUrl, keys).exec(url)
       if (urlRegExp && cachedReq.method === method) {
-        cachedReq.cacheToClear.map((cachedUrl) => {
+        cachedReq.cacheToClear.forEach((cachedUrl) => {
           const keys = []
           pathToRegexp(cachedUrl, keys)
           let urlToDelete = cachedUrl
-          keys.map((key, index) => {
+          keys.forEach((key, index) => {
             urlToDelete = urlToDelete.replace(`:${key.name}`, urlRegExp[index + 1])
           })
           cacheDataClient.del(urlToDelete)

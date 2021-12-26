@@ -76,13 +76,12 @@ const ViewPodcasts = () => {
           isLoggedIn={isLoggedIn}
         />
 
-        {!isLoggedIn && <AddButton
-          text={'Add New Review'}
-          href={`new-review/${podcastId}`}
-        />
-        }
-
         <div className={style.reviewsContainer}>
+          {!isLoggedIn && <AddButton customStyle={style.addReviewBtn}
+                                     text={'Add New Review'}
+                                     href={`new-review/${podcastId}`}
+          />
+          }
           {
             reviews.map((review) => {
                 return <ReviewCard

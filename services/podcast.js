@@ -8,7 +8,7 @@ const {
 } = require('../models/podcastDbModel')
 const { getReviewsItems } = require('../models/reviewDbModel')
 
-const getBestRatedList = async (numberOfItems) => {
+const getBestRatedList = async () => {
   const podcastReviewsData = await getReviewsItems()
   const podcastData = await getPodcastsItems()
   const ratedPodcasts = []
@@ -22,11 +22,10 @@ const getBestRatedList = async (numberOfItems) => {
   }
   const filteredPodcasts = ratedPodcasts.filter((pod) => pod.rating)
   const sortedRatedPodcasts = filteredPodcasts.sort((curr, prev) => prev.rating - curr.rating)
-  const numberOfBestPodcasts = Math.min(numberOfItems, podcastData.length)
-  return sortedRatedPodcasts.map((podcast) => podcast.podcastInfo).slice(0, numberOfBestPodcasts)
+  return sortedRatedPodcasts.map((podcast) => podcast.podcastInfo)
 }
-const getBestPodcasts = async (numberOfItems) => {
-  return await getBestRatedList(numberOfItems)
+const getBestPodcasts = async () => {
+  return await getBestRatedList()
 }
 const getPodcastSearchResults = async (queryParams) => {
   return await searchItem(queryParams)

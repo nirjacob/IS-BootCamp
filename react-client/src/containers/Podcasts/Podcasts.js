@@ -16,7 +16,7 @@ const Podcasts = () => {
     try {
       setIsLoggedIn(!!localStorage.getItem('jwtLoginToken'))
       setIsLoading(true)
-      const podcastsArray = await getBestPodcasts(50)
+      const podcastsArray = await getBestPodcasts()
       setPodcasts(podcastsArray)
       setIsLoading(false)
     } catch (err) {
@@ -39,6 +39,7 @@ const Podcasts = () => {
       />
 
       {isLoggedIn && <AddButton
+        customStyle={styles.addBtn}
         text={'Add New Podcast'}
         href={'new-podcast'}
       />}

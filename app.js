@@ -7,7 +7,10 @@ const path = require('path')
 const config = require('config')
 const { authenticateJwt } = require('./middleware/jwtAuthentication')
 
-app.use(express.static(path.join(__dirname, 'client', `${config.static}`)))
+app.get('/', function(req, res) {
+  res.sendFile(path.join(__dirname, config.static, 'index.html'))
+})
+app.use(express.static(path.join(__dirname, config.static)))
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 app.use(authenticateJwt)

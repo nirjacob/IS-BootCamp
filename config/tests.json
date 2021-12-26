@@ -18,7 +18,7 @@
         "requestUrl": "/podcast/:id(\\d+)",
         "method": "DELETE",
         "cacheToClear": [
-          "/podcast/best/50",
+          "/podcast/best",
           "/podcast/:id"
         ]
       },
@@ -26,7 +26,7 @@
         "requestUrl": "/podcast/:id(\\d+)",
         "method": "PUT",
         "cacheToClear": [
-          "/podcast/best/50",
+          "/podcast/best",
           "/podcast/:id"
         ]
       }
