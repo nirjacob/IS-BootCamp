@@ -4,8 +4,8 @@ const { pathToRegexp } = require('path-to-regexp')
 
 const cacheMinutesToLive = 10
 const cacheMillisecondsToLive = cacheMinutesToLive * 60 * 1000
-
-const cacheDataClient = redis.createClient(config.redis)
+const url = `redis://${config.redis.host}:${config.redis.port}`
+const cacheDataClient = redis.createClient({ url })
 cacheDataClient.connect()
 
 const saveToCache = async (url, data) => {

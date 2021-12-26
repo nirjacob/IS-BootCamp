@@ -1,5 +1,5 @@
 {
-  "host": "localhost",
+  "host": "host.docker.internal",
   "port": 3000,
   "dbName": "podcasts",
   "filePath": "data/podcasts.json",
@@ -7,7 +7,7 @@
   "static": "react-client/build",
   "redis": {
     "port": 6379,
-    "host": "localhost",
+    "host": "host.docker.internal",
     "cacheDuration": 5
   },
   "cache": {
@@ -33,7 +33,7 @@
     ]
   },
   "Db": {
-    "host": "localhost",
+    "host": "host.docker.internal",
     "port": 3306,
     "user": "root",
     "pass": "Newquickgod123"
