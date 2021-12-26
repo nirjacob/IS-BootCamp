@@ -8,6 +8,7 @@ import ReviewCard from '../../components/Podcasts/ReviewCard/ReviewCard'
 import PodcastCard from '../../components/Podcasts/PodcastCard/PodcastCard'
 import React from 'react'
 import LoginBtn from '../../components/Common/Login/LoginBtn/LoginBtn'
+import AvgRating from '../../components/ViewPodcast/AvgRating/AvgRating'
 
 const ViewPodcasts = () => {
   const [podcast, setPodcasts] = useState([])
@@ -15,6 +16,7 @@ const ViewPodcasts = () => {
   const location = useLocation()
   const podcastId = location.pathname.replace('/podcast/', '')
   const [isLoggedIn, setIsLoggedIn] = useState(false)
+  const [reviewsLoaded, setReviewsLoaded] = useState(false)
 
   async function fetchData() {
     try {
@@ -23,6 +25,7 @@ const ViewPodcasts = () => {
       setPodcasts(podcastById)
       const reviewsByPodcast = await getReviews(podcastId)
       setReviews(reviewsByPodcast)
+      setReviewsLoaded(true)
     } catch (err) {
       console.error(`${err}`)
     }
@@ -77,10 +80,14 @@ const ViewPodcasts = () => {
         />
 
         <div className={style.reviewsContainer}>
-          {!isLoggedIn && <AddButton customStyle={style.addReviewBtn}
-                                     text={'Add New Review'}
-                                     href={`new-review/${podcastId}`}
-          />
+          {
+            !isLoggedIn && <AddButton customStyle={style.addReviewBtn}
+                                      text={'Add New Review'}
+                                      href={`new-review/${podcastId}`}
+            />
+          }
+          {
+            reviewsLoaded && <AvgRating allReviews={reviews} />
           }
           {
             reviews.map((review) => {
