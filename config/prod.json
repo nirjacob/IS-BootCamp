@@ -15,28 +15,34 @@
     "isCacheEnabled": true,
     "cacheClearMap": [
       {
-        "requestUrl": "/api/podcast/:id(\\d+)",
+        "requestUrl": "/api/podcast/:id",
         "method": "DELETE",
         "cacheToClear": [
+          "/api/podcast/:id",
           "/api/podcast/best",
-          "/api/podcast/:id"
+          "/api/podcast/search/item/:query"
         ]
       },
       {
-        "requestUrl": "/api/podcast/:id(\\d+)",
+        "requestUrl": "/api/podcast/:id",
         "method": "PUT",
         "cacheToClear": [
-          "/api/podcast/best",
-          "/api/podcast/:id"
+          "/api/podcast/:id",
+          "/api/podcast/best"
         ]
       },
       {
         "requestUrl": "/api/review",
         "method": "POST",
         "cacheToClear": [
-          "/api/podcast/best",
-          "/api/podcast/:id",
           "/api/review/get-by-podcast/:id"
+        ]
+      },
+      {
+        "requestUrl": "/api/podcast/new",
+        "method": "POST",
+        "cacheToClear": [
+          "/api/podcast/search/item/:query"
         ]
       }
     ]
@@ -45,7 +51,8 @@
     "host": "localhost",
     "port": 3306,
     "user": "root",
-    "pass": "Newquickgod123"
+    "name": "podcasts",
+    "pass": ""
   },
   "auth": {
     "secret": "IS-BOOTCAMP",
@@ -76,6 +83,3 @@
     "bucket": "appcloud-bi"
   }
 }
-
-
-

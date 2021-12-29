@@ -4,7 +4,7 @@
   "dbName": "podcasts",
   "filePath": "data/podcasts.json",
   "reviewsPath": "data/reviews.json",
-  "static": "react-client/build",
+  "static": "react-client/src",
   "redis": {
     "port": 6379,
     "host": "localhost",
@@ -52,7 +52,7 @@
     "port": 3306,
     "user": "root",
     "name": "podcasts",
-    "pass": "Newquickgod123"
+    "pass": ""
   },
   "auth": {
     "secret": "IS-BOOTCAMP",
