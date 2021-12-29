@@ -3,13 +3,14 @@ import React from 'react'
 import Proptypes from 'prop-types'
 import { useNavigate } from 'react-router'
 
-const LoginBtn = ({ isLoggedIn }) => {
+const LoginBtn = ({ isLoggedIn, setIsLoggedIn }) => {
   const navigate = useNavigate()
 
   const btnClicked = () => {
     if (isLoggedIn) {
       localStorage.clear()
-      window.location.reload()
+      setIsLoggedIn(false)
+      navigate(window.location)
     } else {
       navigate('/login')
     }
@@ -25,7 +26,8 @@ const LoginBtn = ({ isLoggedIn }) => {
 }
 
 LoginBtn.propTypes = {
-  isLoggedIn: Proptypes.bool
+  isLoggedIn: Proptypes.bool,
+  setIsLoggedIn: Proptypes.func
 }
 
 export default LoginBtn

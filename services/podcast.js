@@ -4,6 +4,7 @@ const {
   deleteItem,
   saveItem,
   updateItem,
+  saveItemToS3,
   getPodcastsItems
 } = require('../models/podcastDbModel')
 const { getReviewsItems } = require('../models/reviewDbModel')
@@ -23,6 +24,12 @@ const getBestRatedList = async () => {
   const filteredPodcasts = ratedPodcasts.filter((pod) => pod.rating)
   const sortedRatedPodcasts = filteredPodcasts.sort((curr, prev) => prev.rating - curr.rating)
   return sortedRatedPodcasts.map((podcast) => podcast.podcastInfo)
+}
+
+const savePodcastsToS3 = async () => {
+  const bestPodcasts = await getBestRatedList()
+  const topTenPodcasts = bestPodcasts.slice(0, 10)
+  await saveItemToS3(topTenPodcasts)
 }
 const getBestPodcasts = async () => {
   return await getBestRatedList()
@@ -52,5 +59,6 @@ module.exports = {
   savePodcastToDb,
   deletePodcastFromDb,
   getBestPodcasts,
+  savePodcastsToS3,
   getBestRatedList
 }

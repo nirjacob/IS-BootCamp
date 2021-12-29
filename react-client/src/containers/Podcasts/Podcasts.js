@@ -35,6 +35,7 @@ const Podcasts = () => {
         The Podcast Experience You Deserve
       </div>
       <LoginBtn
+        setIsLoggedIn={setIsLoggedIn}
         isLoggedIn={isLoggedIn}
       />
 

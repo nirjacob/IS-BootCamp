@@ -9,7 +9,8 @@ const AvgRating = ({ allReviews }) => {
   const calculateAvg = async () => {
     let totalRating = 0
     allReviews.map((review) => totalRating += review.rating)
-    setAvgRating((totalRating / allReviews.length).toFixed(1))
+    const rating = (totalRating / allReviews.length)
+    setAvgRating(rating === 10 ? rating : rating.toFixed(1))
   }
 
   async function setData() {
@@ -28,11 +29,11 @@ const AvgRating = ({ allReviews }) => {
   return (
     <div>
       {
-        <div key={1} className={style.avgRateStar}>
+        <div className={style.avgRateStar}>
           {'\u2605'}</div>
       }
       {
-        <div key={1} className={style.avgRate}>
+        <div className={style.avgRate}>
           {`${avgRating}`}/10</div>
       }
 

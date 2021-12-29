@@ -37,7 +37,7 @@ const ViewPodcasts = () => {
 
   return (
     <div className={style.mainContainer}>
-      <Link to={{ pathname: `/podcast/` }} className={style.homeLink} style={{ textDecoration: 'none' }}>
+      <Link to={{ pathname: `/podcasts` }} className={style.homeLink} style={{ textDecoration: 'none' }}>
         <div className={style.topContainer}>
           The Podcast Experience You Deserve
         </div>
@@ -76,6 +76,7 @@ const ViewPodcasts = () => {
 
       <div className={style.rightContainer}>
         <LoginBtn
+          setIsLoggedIn={setIsLoggedIn}
           isLoggedIn={isLoggedIn}
         />
 

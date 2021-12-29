@@ -14,15 +14,18 @@ const {
   addNewPodcast,
   deletePodcast,
   getPodcast,
+  saveTopTenPodcasts,
   searchPodcast,
   bestPodcast
 } = require('../controllers/podcast')
 
 router.get('/best', urlParamsSchemeValidator(podcastBestSchema), bestPodcast)
-router.get('/search/item/:query', urlParamsSchemeValidator(podcastSearchSchema), searchPodcast)
+router.get('/save-top-ten-to-s3', saveTopTenPodcasts)
+router.get('/search/item/:query?', urlParamsSchemeValidator(podcastSearchSchema), searchPodcast)
 router.get('/:id', urlParamsSchemeValidator(idSchema), getPodcast)
 router.delete('/:id', urlParamsSchemeValidator(idSchema), deletePodcast)
 router.put('/:id', requestSchemeValidator(podcastUpdateSchema), updatePodcast)
 router.post('/new', requestSchemeValidator(podcastSchema), addNewPodcast)
 
 module.exports = router
+

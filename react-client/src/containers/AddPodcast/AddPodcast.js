@@ -10,7 +10,7 @@ const AddPodcast = () => {
   async function createPodcast() {
     try {
       await addNewPodcast(podcast)
-      window.location.href = '/podcast'
+      window.location.href = '/podcasts'
     } catch (err) {
       window.alert(`Failed to create podcast please fill all fields`)
       console.error(`${err}`)
@@ -66,7 +66,7 @@ const AddPodcast = () => {
           <button className={style.editBtn} onClick={createPodcast}
           >Create Podcast
           </button>
-          <Link to={{ pathname: `/podcast` }} style={{ textDecoration: 'none' }}>
+          <Link to={{ pathname: `/podcasts` }} style={{ textDecoration: 'none' }}>
             <button className={style.editBtn}>Cancel</button>
           </Link>
         </div>

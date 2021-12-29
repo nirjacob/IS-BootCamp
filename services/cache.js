@@ -32,24 +32,23 @@ const isInCache = (requestedUrl) => {
   return null
 }
 
+const clearOutdatedCache = async (url, method) => {
+  config.cache.cacheClearMap.find((element) => {
+    const regexp = pathToRegexp(element.requestUrl).exec(url)
+    if (regexp && method === element.method) {
+      element.cacheToClear.forEach(async (outdatedCache) => {
+        const keys = await cacheDataClient.keys('*')
 
-const clearOutdatedCache = (url, method) => {
-  config.cache.cacheClearMap.map((cachedReq) => {
-      const keys = []
-      const urlRegExp = pathToRegexp(cachedReq.requestUrl, keys).exec(url)
-      if (urlRegExp && cachedReq.method === method) {
-        cachedReq.cacheToClear.forEach((cachedUrl) => {
-          const keys = []
-          pathToRegexp(cachedUrl, keys)
-          let urlToDelete = cachedUrl
-          keys.forEach((key, index) => {
-            urlToDelete = urlToDelete.replace(`:${key.name}`, urlRegExp[index + 1])
-          })
-          cacheDataClient.del(urlToDelete)
+        keys.forEach((key) => {
+          const regexp = pathToRegexp(outdatedCache).exec(key)
+          if (regexp) {
+            cacheDataClient.del(key)
+          }
         })
-      }
+      })
     }
-  )
+  })
 }
+
 
 module.exports = { isInCache, saveToCache, clearOutdatedCache, getCacheData }

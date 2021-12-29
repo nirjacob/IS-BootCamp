@@ -1,4 +1,18 @@
 const mysql = require('../utils/mysql')
+const { PutObjectCommand, S3Client } = require('@aws-sdk/client-s3')
+
+const config = require('config')
+
+const saveItemToS3 = async (item) => {
+  const s3Client = new S3Client({})
+  const params = {
+    ACL: 'public-read',
+    Bucket: config.s3.bucket,
+    Key: config.s3.bucketPath,
+    Body: JSON.stringify(item)
+  }
+  return await s3Client.send(new PutObjectCommand(params))
+}
 
 const getPodcastsItems = async () => {
   return await mysql.runQuery('SELECT * FROM `podcasts`.`podcasts`;')
@@ -33,6 +47,7 @@ const saveItem = async (podcast) => {
 
 module.exports = {
   getItem,
+  saveItemToS3,
   deleteItem,
   saveItem,
   updateItem,

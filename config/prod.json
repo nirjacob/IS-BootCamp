@@ -15,19 +15,28 @@
     "isCacheEnabled": true,
     "cacheClearMap": [
       {
-        "requestUrl": "/podcast/:id(\\d+)",
+        "requestUrl": "/api/podcast/:id(\\d+)",
         "method": "DELETE",
         "cacheToClear": [
-          "/podcast/best",
-          "/podcast/:id"
+          "/api/podcast/best",
+          "/api/podcast/:id"
         ]
       },
       {
-        "requestUrl": "/podcast/:id(\\d+)",
+        "requestUrl": "/api/podcast/:id(\\d+)",
         "method": "PUT",
         "cacheToClear": [
-          "/podcast/best",
-          "/podcast/:id"
+          "/api/podcast/best",
+          "/api/podcast/:id"
+        ]
+      },
+      {
+        "requestUrl": "/api/review",
+        "method": "POST",
+        "cacheToClear": [
+          "/api/podcast/best",
+          "/api/podcast/:id",
+          "/api/review/get-by-podcast/:id"
         ]
       }
     ]
@@ -44,22 +53,27 @@
     "protectedUrls": [
       {
         "method": "POST",
-        "path": "/review/:id(\\d+)"
+        "path": "/api/review/:id(\\d+)"
       },
       {
         "method": "POST",
-        "path": "/podcast/new"
+        "path": "/api/podcast/new"
       },
       {
         "method": "PUT",
-        "path": "/podcast/:id(\\d+)"
+        "path": "/api/podcast/:id(\\d+)"
       },
       {
         "method": "DELETE",
-        "path": "/podcast/:id(\\d+)"
+        "path": "/api/podcast/:id(\\d+)"
       }
     ],
     "isAuthEnabled": true
+  },
+  "s3": {
+    "region": "us-east-1",
+    "bucketPath": "aura_bootcamp/nir/data",
+    "bucket": "appcloud-bi"
   }
 }
 

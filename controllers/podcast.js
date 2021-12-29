@@ -4,9 +4,18 @@ const {
   savePodcastToDb,
   deletePodcastFromDb,
   getPodcastSearchResults,
-  getBestPodcasts
+  getBestPodcasts,
+  savePodcastsToS3
 } = require('../services/podcast')
 
+const saveTopTenPodcasts = async (req, res, next) => {
+  try {
+    await savePodcastsToS3()
+    return res.status(200).send()
+  } catch (err) {
+    return next(err)
+  }
+}
 const getBestPodcast = async (req, res, next) => {
   try {
     const podcastsInfo = await getBestPodcasts()
@@ -15,6 +24,7 @@ const getBestPodcast = async (req, res, next) => {
   } catch (err) {
     return next(err)
   }
+
 }
 const searchPodcast = async (req, res, next) => {
   const queryParams = req.params.query
@@ -78,5 +88,6 @@ module.exports = {
   addNewPodcast,
   deletePodcast,
   getPodcast,
+  saveTopTenPodcasts,
   bestPodcast: getBestPodcast
 }
