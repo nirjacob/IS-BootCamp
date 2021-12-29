@@ -3,17 +3,15 @@
   justify-content: center;
   align-items: center;
   text-align: center;
-  height: 100%;
 
   .middleContainer {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
     background-color: #093637;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5);
     color: #11998e;
-    flex-basis: 30%;
+    flex-basis: 50%;
     margin-top: 3%;
     padding: 20px 5%;
     border: 2px solid;
@@ -42,6 +40,7 @@
       color: rgba(0, 241, 255, 1);
       padding-top: 14px;
       float: left;
+      align-self: flex-start;
     }
 
     .submitButtonsContainer {
@@ -57,6 +56,7 @@
       background: none;
       border: 2px solid rgba(0, 241, 255, 0.7);
       border-radius: 5px;
+      padding: 0 15px;
       color: rgba(0, 241, 255, 1);
       font-family: "Monaco", "Courier New", monospace;
       font-size: 18px;

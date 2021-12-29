@@ -4,18 +4,27 @@ const {
   savePodcastToDb,
   deletePodcastFromDb,
   getPodcastSearchResults,
-  getBestPodcasts
+  getBestPodcasts,
+  savePodcastsToS3
 } = require('../services/podcast')
 
-const getBestPodcast = async (req, res, next) => {
-  const numberOfPodcasts = parseInt(req.params.number)
+const saveTopTenPodcasts = async (req, res, next) => {
   try {
-    const podcastsInfo = await getBestPodcasts(numberOfPodcasts)
+    await savePodcastsToS3()
+    return res.status(200).send()
+  } catch (err) {
+    return next(err)
+  }
+}
+const getBestPodcast = async (req, res, next) => {
+  try {
+    const podcastsInfo = await getBestPodcasts()
     if (!podcastsInfo) return res.status(404).send('No podcasts to present')
     return res.status(200).send(podcastsInfo)
   } catch (err) {
     return next(err)
   }
+
 }
 const searchPodcast = async (req, res, next) => {
   const queryParams = req.params.query
@@ -79,5 +88,6 @@ module.exports = {
   addNewPodcast,
   deletePodcast,
   getPodcast,
+  saveTopTenPodcasts,
   bestPodcast: getBestPodcast
 }

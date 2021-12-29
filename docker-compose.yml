@@ -1,0 +1,35 @@
+version: '3'
+  services:
+    web:
+      build: .
+      ports:
+        - "3001:3001"
+      environment:
+        NODE_ENV: 'docker'
+        MYSQL_DATABASE: 'db'
+        MYSQL_USER: 'root'
+        MYSQL_PASSWORD: 'Newquickgod123'
+        MYSQL_ROOT_PASSWORD: 'Newquickgod123'
+      depends_on:
+        - db
+        - redis
+    db:
+      image: mysql:5.7
+      restart: always
+      environment:
+        MYSQL_DATABASE: 'db'
+        MYSQL_USER: 'root'
+        MYSQL_PASSWORD: 'Newquickgod123'
+        MYSQL_ROOT_PASSWORD: 'Newquickgod123'
+      ports:
+        - '3306:3306'
+      volumes:
+      # - ./migration/mysql:/docker-entrypoint-initdb.d
+      # - ./mysql-volume:/var/lib/mysql
+    redis:
+      image: "redis:alpine"
+      ports:
+        - "6379:6379"
+      volumes:
+      #  - ../data/redis:/data
+      restart: always

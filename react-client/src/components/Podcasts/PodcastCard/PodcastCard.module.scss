@@ -1,20 +1,45 @@
 .podcastCard {
-  background-color: #37393b;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  color: #31aab0;
+  background-color: rgb(23, 40, 40);
+  box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.6);
+  color: rgba(49, 170, 176, 0.25);
   margin-left: 15px;
   margin-bottom: 15px;
-  transition: transform 0.5s ease;
+  padding-bottom: 1px;
+  transition: transform 0.5s ease, color 1s ease, box-shadow 0.5s ease;
+
   width: 250px;
+
   /* prevent podcast-card from showing very long descriptions*/
   p {
-    height: 10em;
+    font-size: 13px;
     overflow: hidden;
-    transition: height 0.5s ease;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3; /* number of lines to show */
+    line-clamp: 3;
+    -webkit-box-orient: vertical;
+    padding: 0 10px;
+  }
+
+  .titlesBorder {
+    padding-top: 5px;
+    border-top: 1px solid rgba(0, 241, 255, 0.1);
+  }
+
+  h4 {
+    color: rgba(0, 241, 255, 0.8);
+    height: 1em;
   }
 
   h2 {
-    height: 3em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    height: auto;
+    margin-top: 5px;
+    padding: 0 10px;
+    margin-bottom: -20px;
+    color: rgb(0, 241, 255);
   }
 
   img {
@@ -22,9 +47,9 @@
   }
 
   &:hover {
-    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
     cursor: pointer;
     transform: scale(1.3);
+    color: rgb(0, 241, 255);
   }
 
 }

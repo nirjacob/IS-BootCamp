@@ -4,17 +4,69 @@
   "dbName": "podcasts",
   "filePath": "data/podcasts.json",
   "reviewsPath": "data/reviews.json",
-  "cacheExpiration": 1200,
-  "isCacheEnabled": false,
+  "static": "react-client/src",
   "redis": {
     "port": 6379,
     "host": "localhost",
     "cacheDuration": 5
   },
-  "db": {
-    "port": 3306,
+  "cache": {
+    "cacheExpiration": 1200,
+    "isCacheEnabled": true,
+    "cacheClearMap": [
+      {
+        "requestUrl": "/api/podcast/:id(\\d+)",
+        "method": "DELETE",
+        "cacheToClear": [
+          "/api/podcast/best",
+          "/api/podcast/:id"
+        ]
+      },
+      {
+        "requestUrl": "/api/podcast/:id(\\d+)",
+        "method": "PUT",
+        "cacheToClear": [
+          "/api/podcast/best",
+          "/api/podcast/:id"
+        ]
+      }
+    ]
+  },
+  "Db": {
     "host": "localhost",
+    "port": 3306,
     "user": "root",
-    "password": ""
+    "pass": "Newquickgod123"
+  },
+  "auth": {
+    "secret": "IS-BOOTCAMP",
+    "expireIn": 15000,
+    "protectedUrls": [
+      {
+        "method": "POST",
+        "path": "/api/review/:id(\\d+)"
+      },
+      {
+        "method": "POST",
+        "path": "/api/podcast/new"
+      },
+      {
+        "method": "PUT",
+        "path": "/api/podcast/:id(\\d+)"
+      },
+      {
+        "method": "DELETE",
+        "path": "/api/podcast/:id(\\d+)"
+      }
+    ],
+    "isAuthEnabled": true
+  },
+  "s3": {
+    "region": "us-east-1",
+    "bucketPath": "aura_bootcamp/nir/data",
+    "bucket": "appcloud-bi"
   }
 }
+
+
+

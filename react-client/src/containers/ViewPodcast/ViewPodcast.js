@@ -7,19 +7,25 @@ import AddButton from '../../components/Common/AddButton/AddButton'
 import ReviewCard from '../../components/Podcasts/ReviewCard/ReviewCard'
 import PodcastCard from '../../components/Podcasts/PodcastCard/PodcastCard'
 import React from 'react'
+import LoginBtn from '../../components/Common/Login/LoginBtn/LoginBtn'
+import AvgRating from '../../components/ViewPodcast/AvgRating/AvgRating'
 
 const ViewPodcasts = () => {
   const [podcast, setPodcasts] = useState([])
   const [reviews, setReviews] = useState([])
   const location = useLocation()
   const podcastId = location.pathname.replace('/podcast/', '')
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
+  const [reviewsLoaded, setReviewsLoaded] = useState(false)
 
   async function fetchData() {
     try {
+      setIsLoggedIn(!!localStorage.getItem('jwtLoginToken'))
       const podcastById = await getPodcast(podcastId)
       setPodcasts(podcastById)
       const reviewsByPodcast = await getReviews(podcastId)
       setReviews(reviewsByPodcast)
+      setReviewsLoaded(true)
     } catch (err) {
       console.error(`${err}`)
     }
@@ -31,7 +37,7 @@ const ViewPodcasts = () => {
 
   return (
     <div className={style.mainContainer}>
-      <Link to={{ pathname: `/podcast/` }} className={style.homeLink} style={{ textDecoration: 'none' }}>
+      <Link to={{ pathname: `/podcasts` }} className={style.homeLink} style={{ textDecoration: 'none' }}>
         <div className={style.topContainer}>
           The Podcast Experience You Deserve
         </div>
@@ -59,22 +65,31 @@ const ViewPodcasts = () => {
           <div className={style.formLabel}>Number Of Episodes</div>
           <div className={style.formDetails}>{podcast.numberOfEpisodes}</div>
           <div className={style.formLabel}>Average Episode Length</div>
-          <div className={style.formDetails}>{podcast.avgEpisodeLength}</div>
+          <div className={style.formDetails}>{`${parseInt(podcast.avgEpisodeLength / 60)}m`}</div>
           <div className={style.btnContainer}>
             <Link to={{ pathname: `/podcast/edit/${podcast.id}` }} style={{ textDecoration: 'inherit' }}>
-              <input className={style.editBtn} type='submit' value='Edit Podcast' />
+              {isLoggedIn && <input className={style.editBtn} type='submit' value='Edit Podcast' />}
             </Link>
           </div>
         </div>
       </div>
 
       <div className={style.rightContainer}>
-        <AddButton
-          text={'Add New Review'}
-          href={`new-review/${podcastId}`}
+        <LoginBtn
+          setIsLoggedIn={setIsLoggedIn}
+          isLoggedIn={isLoggedIn}
         />
 
         <div className={style.reviewsContainer}>
+          {
+            !isLoggedIn && <AddButton customStyle={style.addReviewBtn}
+                                      text={'Add New Review'}
+                                      href={`new-review/${podcastId}`}
+            />
+          }
+          {
+            reviewsLoaded && <AvgRating allReviews={reviews} />
+          }
           {
             reviews.map((review) => {
                 return <ReviewCard

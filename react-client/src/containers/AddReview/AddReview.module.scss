@@ -2,7 +2,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: inherit;
 
   .box {
     display: flex;
@@ -37,6 +36,8 @@
     }
 
     .submitButton {
+      padding-left: 10%;
+      padding-right: 10%;
       background: none;
       border: 2px solid rgba(0, 241, 255, 0.7);
       border-radius: 5px;

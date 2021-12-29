@@ -10,7 +10,7 @@ const AddPodcast = () => {
   async function createPodcast() {
     try {
       await addNewPodcast(podcast)
-      window.location.href = '/podcast'
+      window.location.href = '/podcasts'
     } catch (err) {
       window.alert(`Failed to create podcast please fill all fields`)
       console.error(`${err}`)
@@ -63,10 +63,11 @@ const AddPodcast = () => {
         <input className={style.formButton} type='text' name='category' onChange={handleChange}
                placeholder={podcast.category} />
         <div className={style.submitButtonsContainer}>
-          <input className={style.editBtn} onClick={createPodcast}
-                 value='Create Podcast' />
-          <Link to={{ pathname: `/podcast` }} style={{ textDecoration: 'none' }}>
-            <input className={style.editBtn} value='Cancel' />
+          <button className={style.editBtn} onClick={createPodcast}
+          >Create Podcast
+          </button>
+          <Link to={{ pathname: `/podcasts` }} style={{ textDecoration: 'none' }}>
+            <button className={style.editBtn}>Cancel</button>
           </Link>
         </div>
       </div>

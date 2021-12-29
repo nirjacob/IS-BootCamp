@@ -1,20 +1,20 @@
 const mockPodcast = {
-  id: 1132,
-  title: 'podcast update mock test',
-  description: "Free fitness, nutrition, biohacking, fat loss, anti-aging and cutting-edge health advice from BenGreenfieldFitness.com! Tune in to the latest research, interviews with exercise, diet and medical professionals, and an entertaining mash-up of ancestral wisdom and modern science, along with Q&A's and mind-body-spirit optimizing content from America's top personal trainer.",
-  htmlDescription: "<p>Free fitness, nutrition, biohacking, fat loss, anti-aging and cutting-edge health advice from BenGreenfieldFitness.com! Tune in to the latest research, interviews with exercise, diet and medical professionals, and an entertaining mash-up of ancestral wisdom and modern science, along with Q&amp;A's and mind-body-spirit optimizing content from America's top personal trainer.</p>",
-  webUrl: 'https://bengreenfieldfitness.com',
-  imageUrl: 'https://ssl-static.libsyn.com/p/assets/e/0/7/9/e0790c69b0534a14/BGF_Podcast_Logo-2.png',
+  author: 'The Economist',
+  avgEpisodeLength: 1282,
+  category: 'News',
+  description: 'The Economist was founded in 1843 "to throw white light on the subjects within its range". For more from The Economist visit http://shop.economist.com/collections/audio',
+  htmlDescription: '<p>The Economist was founded in 1843 "to throw white light on the subjects within its range". For more from The Economist visit http://shop.economist.com/collections/audio</p>',
+  id: 155320,
+  imageUrl: 'https://thumborcdn.acast.com/HqDY5A_RSsX5C6Y5bjY_BZMNHi4=/1500x1500/https://mediacdn.acast.com/assets/ec380acc-fe13-46a0-991f-a1e508d126f8/-jdz19rgm-radio_pp_rgb_1_.png',
   language: 'en',
-  numberOfEpisodes: 1039,
-  avgEpisodeLength: 4042,
-  author: 'Ben Greenfield',
-  category: 'Health'
+  numberOfEpisodes: 2398,
+  title: 'Economist Radio',
+  webUrl: 'http://www.economist.com'
 }
 const mockNewPodcast = {
   title: 'podcast update mock test',
-  description: "Free fitness, nutrition, biohacking, fat loss, anti-aging and cutting-edge health advice from BenGreenfieldFitness.com! Tune in to the latest research, interviews with exercise, diet and medical professionals, and an entertaining mash-up of ancestral wisdom and modern science, along with Q&A's and mind-body-spirit optimizing content from America's top personal trainer.",
-  htmlDescription: "<p>Free fitness, nutrition, biohacking, fat loss, anti-aging and cutting-edge health advice from BenGreenfieldFitness.com! Tune in to the latest research, interviews with exercise, diet and medical professionals, and an entertaining mash-up of ancestral wisdom and modern science, along with Q&amp;A's and mind-body-spirit optimizing content from America's top personal trainer.</p>",
+  description: 'Free fitness, nutrition, biohacking, fat loss, anti-aging and cutting-edge health advice from BenGreenfieldFitness.com! Tune in to the latest research, interviews with exercise, diet and medical professionals, and an entertaining mash-up of ancestral wisdom and modern science, along with Q&A\'s and mind-body-spirit optimizing content from America\'s top personal trainer.',
+  htmlDescription: '<p>Free fitness, nutrition, biohacking, fat loss, anti-aging and cutting-edge health advice from BenGreenfieldFitness.com! Tune in to the latest research, interviews with exercise, diet and medical professionals, and an entertaining mash-up of ancestral wisdom and modern science, along with Q&amp;A\'s and mind-body-spirit optimizing content from America\'s top personal trainer.</p>',
   webUrl: 'https://bengreenfieldfitness.com',
   imageUrl: 'https://ssl-static.libsyn.com/p/assets/e/0/7/9/e0790c69b0534a14/BGF_Podcast_Logo-2.png',
   language: 'en',
@@ -60,8 +60,8 @@ const mockWrongTypesFields = {
 const mockBestPodcastData = [{
   id: 1132,
   title: 'podcast #1',
-  description: "Free fitness, nutrition, biohacking, fat loss, anti-aging and cutting-edge health advice from BenGreenfieldFitness.com! Tune in to the latest research, interviews with exercise, diet and medical professionals, and an entertaining mash-up of ancestral wisdom and modern science, along with Q&A's and mind-body-spirit optimizing content from America's top personal trainer.",
-  htmlDescription: "<p>Free fitness, nutrition, biohacking, fat loss, anti-aging and cutting-edge health advice from BenGreenfieldFitness.com! Tune in to the latest research, interviews with exercise, diet and medical professionals, and an entertaining mash-up of ancestral wisdom and modern science, along with Q&amp;A's and mind-body-spirit optimizing content from America's top personal trainer.</p>",
+  description: 'Free fitness, nutrition, biohacking, fat loss, anti-aging and cutting-edge health advice from BenGreenfieldFitness.com! Tune in to the latest research, interviews with exercise, diet and medical professionals, and an entertaining mash-up of ancestral wisdom and modern science, along with Q&A\'s and mind-body-spirit optimizing content from America\'s top personal trainer.',
+  htmlDescription: '<p>Free fitness, nutrition, biohacking, fat loss, anti-aging and cutting-edge health advice from BenGreenfieldFitness.com! Tune in to the latest research, interviews with exercise, diet and medical professionals, and an entertaining mash-up of ancestral wisdom and modern science, along with Q&amp;A\'s and mind-body-spirit optimizing content from America\'s top personal trainer.</p>',
   webUrl: 'https://bengreenfieldfitness.com',
   imageUrl: 'https://ssl-static.libsyn.com/p/assets/e/0/7/9/e0790c69b0534a14/BGF_Podcast_Logo-2.png',
   language: 'en',
@@ -70,45 +70,45 @@ const mockBestPodcastData = [{
   author: 'Ben Greenfield',
   category: 'Health'
 },
-{
-  id: 1133,
-  title: 'podcast #2',
-  description: "Free fitness, nutrition, biohacking, fat loss, anti-aging and cutting-edge health advice from BenGreenfieldFitness.com! Tune in to the latest research, interviews with exercise, diet and medical professionals, and an entertaining mash-up of ancestral wisdom and modern science, along with Q&A's and mind-body-spirit optimizing content from America's top personal trainer.",
-  htmlDescription: "<p>Free fitness, nutrition, biohacking, fat loss, anti-aging and cutting-edge health advice from BenGreenfieldFitness.com! Tune in to the latest research, interviews with exercise, diet and medical professionals, and an entertaining mash-up of ancestral wisdom and modern science, along with Q&amp;A's and mind-body-spirit optimizing content from America's top personal trainer.</p>",
-  webUrl: 'https://bengreenfieldfitness.com',
-  imageUrl: 'https://ssl-static.libsyn.com/p/assets/e/0/7/9/e0790c69b0534a14/BGF_Podcast_Logo-2.png',
-  language: 'en',
-  numberOfEpisodes: 1039,
-  avgEpisodeLength: 4042,
-  author: 'Ben Greenfield',
-  category: 'Health'
-},
-{
-  id: 1134,
-  title: 'podcast #3',
-  description: "Free fitness, nutrition, biohacking, fat loss, anti-aging and cutting-edge health advice from BenGreenfieldFitness.com! Tune in to the latest research, interviews with exercise, diet and medical professionals, and an entertaining mash-up of ancestral wisdom and modern science, along with Q&A's and mind-body-spirit optimizing content from America's top personal trainer.",
-  htmlDescription: "<p>Free fitness, nutrition, biohacking, fat loss, anti-aging and cutting-edge health advice from BenGreenfieldFitness.com! Tune in to the latest research, interviews with exercise, diet and medical professionals, and an entertaining mash-up of ancestral wisdom and modern science, along with Q&amp;A's and mind-body-spirit optimizing content from America's top personal trainer.</p>",
-  webUrl: 'https://bengreenfieldfitness.com',
-  imageUrl: 'https://ssl-static.libsyn.com/p/assets/e/0/7/9/e0790c69b0534a14/BGF_Podcast_Logo-2.png',
-  language: 'en',
-  numberOfEpisodes: 1039,
-  avgEpisodeLength: 4042,
-  author: 'Ben Greenfield',
-  category: 'Health'
-},
-{
-  id: 1135,
-  title: 'podcast #4',
-  description: "Free fitness, nutrition, biohacking, fat loss, anti-aging and cutting-edge health advice from BenGreenfieldFitness.com! Tune in to the latest research, interviews with exercise, diet and medical professionals, and an entertaining mash-up of ancestral wisdom and modern science, along with Q&A's and mind-body-spirit optimizing content from America's top personal trainer.",
-  htmlDescription: "<p>Free fitness, nutrition, biohacking, fat loss, anti-aging and cutting-edge health advice from BenGreenfieldFitness.com! Tune in to the latest research, interviews with exercise, diet and medical professionals, and an entertaining mash-up of ancestral wisdom and modern science, along with Q&amp;A's and mind-body-spirit optimizing content from America's top personal trainer.</p>",
-  webUrl: 'https://bengreenfieldfitness.com',
-  imageUrl: 'https://ssl-static.libsyn.com/p/assets/e/0/7/9/e0790c69b0534a14/BGF_Podcast_Logo-2.png',
-  language: 'en',
-  numberOfEpisodes: 1039,
-  avgEpisodeLength: 4042,
-  author: 'Ben Greenfield',
-  category: 'Health'
-}
+  {
+    id: 1133,
+    title: 'podcast #2',
+    description: 'Free fitness, nutrition, biohacking, fat loss, anti-aging and cutting-edge health advice from BenGreenfieldFitness.com! Tune in to the latest research, interviews with exercise, diet and medical professionals, and an entertaining mash-up of ancestral wisdom and modern science, along with Q&A\'s and mind-body-spirit optimizing content from America\'s top personal trainer.',
+    htmlDescription: '<p>Free fitness, nutrition, biohacking, fat loss, anti-aging and cutting-edge health advice from BenGreenfieldFitness.com! Tune in to the latest research, interviews with exercise, diet and medical professionals, and an entertaining mash-up of ancestral wisdom and modern science, along with Q&amp;A\'s and mind-body-spirit optimizing content from America\'s top personal trainer.</p>',
+    webUrl: 'https://bengreenfieldfitness.com',
+    imageUrl: 'https://ssl-static.libsyn.com/p/assets/e/0/7/9/e0790c69b0534a14/BGF_Podcast_Logo-2.png',
+    language: 'en',
+    numberOfEpisodes: 1039,
+    avgEpisodeLength: 4042,
+    author: 'Ben Greenfield',
+    category: 'Health'
+  },
+  {
+    id: 1134,
+    title: 'podcast #3',
+    description: 'Free fitness, nutrition, biohacking, fat loss, anti-aging and cutting-edge health advice from BenGreenfieldFitness.com! Tune in to the latest research, interviews with exercise, diet and medical professionals, and an entertaining mash-up of ancestral wisdom and modern science, along with Q&A\'s and mind-body-spirit optimizing content from America\'s top personal trainer.',
+    htmlDescription: '<p>Free fitness, nutrition, biohacking, fat loss, anti-aging and cutting-edge health advice from BenGreenfieldFitness.com! Tune in to the latest research, interviews with exercise, diet and medical professionals, and an entertaining mash-up of ancestral wisdom and modern science, along with Q&amp;A\'s and mind-body-spirit optimizing content from America\'s top personal trainer.</p>',
+    webUrl: 'https://bengreenfieldfitness.com',
+    imageUrl: 'https://ssl-static.libsyn.com/p/assets/e/0/7/9/e0790c69b0534a14/BGF_Podcast_Logo-2.png',
+    language: 'en',
+    numberOfEpisodes: 1039,
+    avgEpisodeLength: 4042,
+    author: 'Ben Greenfield',
+    category: 'Health'
+  },
+  {
+    id: 1135,
+    title: 'podcast #4',
+    description: 'Free fitness, nutrition, biohacking, fat loss, anti-aging and cutting-edge health advice from BenGreenfieldFitness.com! Tune in to the latest research, interviews with exercise, diet and medical professionals, and an entertaining mash-up of ancestral wisdom and modern science, along with Q&A\'s and mind-body-spirit optimizing content from America\'s top personal trainer.',
+    htmlDescription: '<p>Free fitness, nutrition, biohacking, fat loss, anti-aging and cutting-edge health advice from BenGreenfieldFitness.com! Tune in to the latest research, interviews with exercise, diet and medical professionals, and an entertaining mash-up of ancestral wisdom and modern science, along with Q&amp;A\'s and mind-body-spirit optimizing content from America\'s top personal trainer.</p>',
+    webUrl: 'https://bengreenfieldfitness.com',
+    imageUrl: 'https://ssl-static.libsyn.com/p/assets/e/0/7/9/e0790c69b0534a14/BGF_Podcast_Logo-2.png',
+    language: 'en',
+    numberOfEpisodes: 1039,
+    avgEpisodeLength: 4042,
+    author: 'Ben Greenfield',
+    category: 'Health'
+  }
 ]
 
 const mockBestPodcastsReviews = [
@@ -146,8 +146,8 @@ const mockBestPodcastsReviews = [
 const mockActualBestPodcasts = [{
   id: 1132,
   title: 'podcast #1',
-  description: "Free fitness, nutrition, biohacking, fat loss, anti-aging and cutting-edge health advice from BenGreenfieldFitness.com! Tune in to the latest research, interviews with exercise, diet and medical professionals, and an entertaining mash-up of ancestral wisdom and modern science, along with Q&A's and mind-body-spirit optimizing content from America's top personal trainer.",
-  htmlDescription: "<p>Free fitness, nutrition, biohacking, fat loss, anti-aging and cutting-edge health advice from BenGreenfieldFitness.com! Tune in to the latest research, interviews with exercise, diet and medical professionals, and an entertaining mash-up of ancestral wisdom and modern science, along with Q&amp;A's and mind-body-spirit optimizing content from America's top personal trainer.</p>",
+  description: 'Free fitness, nutrition, biohacking, fat loss, anti-aging and cutting-edge health advice from BenGreenfieldFitness.com! Tune in to the latest research, interviews with exercise, diet and medical professionals, and an entertaining mash-up of ancestral wisdom and modern science, along with Q&A\'s and mind-body-spirit optimizing content from America\'s top personal trainer.',
+  htmlDescription: '<p>Free fitness, nutrition, biohacking, fat loss, anti-aging and cutting-edge health advice from BenGreenfieldFitness.com! Tune in to the latest research, interviews with exercise, diet and medical professionals, and an entertaining mash-up of ancestral wisdom and modern science, along with Q&amp;A\'s and mind-body-spirit optimizing content from America\'s top personal trainer.</p>',
   webUrl: 'https://bengreenfieldfitness.com',
   imageUrl: 'https://ssl-static.libsyn.com/p/assets/e/0/7/9/e0790c69b0534a14/BGF_Podcast_Logo-2.png',
   language: 'en',
@@ -156,19 +156,19 @@ const mockActualBestPodcasts = [{
   author: 'Ben Greenfield',
   category: 'Health'
 },
-{
-  id: 1133,
-  title: 'podcast #2',
-  description: "Free fitness, nutrition, biohacking, fat loss, anti-aging and cutting-edge health advice from BenGreenfieldFitness.com! Tune in to the latest research, interviews with exercise, diet and medical professionals, and an entertaining mash-up of ancestral wisdom and modern science, along with Q&A's and mind-body-spirit optimizing content from America's top personal trainer.",
-  htmlDescription: "<p>Free fitness, nutrition, biohacking, fat loss, anti-aging and cutting-edge health advice from BenGreenfieldFitness.com! Tune in to the latest research, interviews with exercise, diet and medical professionals, and an entertaining mash-up of ancestral wisdom and modern science, along with Q&amp;A's and mind-body-spirit optimizing content from America's top personal trainer.</p>",
-  webUrl: 'https://bengreenfieldfitness.com',
-  imageUrl: 'https://ssl-static.libsyn.com/p/assets/e/0/7/9/e0790c69b0534a14/BGF_Podcast_Logo-2.png',
-  language: 'en',
-  numberOfEpisodes: 1039,
-  avgEpisodeLength: 4042,
-  author: 'Ben Greenfield',
-  category: 'Health'
-}]
+  {
+    id: 1133,
+    title: 'podcast #2',
+    description: 'Free fitness, nutrition, biohacking, fat loss, anti-aging and cutting-edge health advice from BenGreenfieldFitness.com! Tune in to the latest research, interviews with exercise, diet and medical professionals, and an entertaining mash-up of ancestral wisdom and modern science, along with Q&A\'s and mind-body-spirit optimizing content from America\'s top personal trainer.',
+    htmlDescription: '<p>Free fitness, nutrition, biohacking, fat loss, anti-aging and cutting-edge health advice from BenGreenfieldFitness.com! Tune in to the latest research, interviews with exercise, diet and medical professionals, and an entertaining mash-up of ancestral wisdom and modern science, along with Q&amp;A\'s and mind-body-spirit optimizing content from America\'s top personal trainer.</p>',
+    webUrl: 'https://bengreenfieldfitness.com',
+    imageUrl: 'https://ssl-static.libsyn.com/p/assets/e/0/7/9/e0790c69b0534a14/BGF_Podcast_Logo-2.png',
+    language: 'en',
+    numberOfEpisodes: 1039,
+    avgEpisodeLength: 4042,
+    author: 'Ben Greenfield',
+    category: 'Health'
+  }]
 
 module.exports = {
   mockIllegalFieldsPodcast,

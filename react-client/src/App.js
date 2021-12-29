@@ -15,9 +15,9 @@ function App() {
     <div className='App'>
       <Router>
         <Routes>
-          <Route path='/podcast' element={<Podcasts />} />
+          <Route path='/podcasts' element={<Podcasts />} />
           <Route path='/podcast/*' element={<ViewPodcast />} />
-          <Route path='/' element={<Navigate to='/podcast' />} />
+          <Route path='/' element={<Navigate to='/podcasts' />} />
           <Route path='/podcast/edit/*' element={<EditPodcast />} />
           <Route path='/podcast/new-podcast' element={<AddPodcast />} />
           <Route path='/podcast/new-review/*' element={<AddReview />} />

@@ -26,7 +26,7 @@ const Login = () => {
     try {
       const jwtLoginToken = await submitLogin(loginDetails)
       localStorage.setItem('jwtLoginToken', jwtLoginToken)
-      navigate('/podcast')
+      navigate('/podcasts')
     } catch (err) {
       setIsLoginError(true)
       console.error(err.message)

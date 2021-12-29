@@ -5,14 +5,20 @@ import { getBestPodcasts } from '../../services/Podcasts'
 import { useState, useEffect } from 'react'
 import Search from '../../components/Podcasts/Search/Search'
 import AddButton from '../../components/Common/AddButton/AddButton'
+import LoginBtn from '../../components/Common/Login/LoginBtn/LoginBtn'
 
 const Podcasts = () => {
   const [podcasts, setPodcasts] = useState([])
+  const [isLoading, setIsLoading] = useState(false)
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
 
   async function setData() {
     try {
-      const podcastsArray = await getBestPodcasts(50)
+      setIsLoggedIn(!!localStorage.getItem('jwtLoginToken'))
+      setIsLoading(true)
+      const podcastsArray = await getBestPodcasts()
       setPodcasts(podcastsArray)
+      setIsLoading(false)
     } catch (err) {
       console.error(`Error: ${err}`)
       setPodcasts([])
@@ -28,10 +34,16 @@ const Podcasts = () => {
       <div className={styles.titles}>
         The Podcast Experience You Deserve
       </div>
-      <AddButton
+      <LoginBtn
+        setIsLoggedIn={setIsLoggedIn}
+        isLoggedIn={isLoggedIn}
+      />
+
+      {isLoggedIn && <AddButton
+        customStyle={styles.addBtn}
         text={'Add New Podcast'}
         href={'new-podcast'}
-      />
+      />}
 
       <Search
         updateSearch={setPodcasts}
@@ -45,12 +57,14 @@ const Podcasts = () => {
               key={podcast.id}
               id={podcast.id}
               title={podcast.title}
+              author={podcast.author}
               imageUrl={podcast.imageUrl}
               description={podcast.description}
             />
           })
         }
-        <h1>{podcasts.length === 0 ? 'Podcast Not Found :(' : ''}</h1>
+        <h1>{(podcasts.length === 0 && !isLoading) ? 'Podcast Not Found :(' : ''}</h1>
+        <h1>{isLoading ? 'Loading Podcasts...' : ''}</h1>
       </div>
     </div>
   )
